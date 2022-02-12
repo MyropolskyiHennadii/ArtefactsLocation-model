@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>myropolskyi.locations</groupId>
-    <artifactId>ArtefactsLocations-model</artifactId>
-    <version>1.0.1</version>
+    <artifactId>ArtefactsLocation-model</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,11 +16,12 @@
         <log4j2.version>2.17.1</log4j2.version>
         <hibernate.version>5.4.16.Final</hibernate.version>
         <fasterxml.version>2.12.0-rc1</fasterxml.version>
-        <mavencompiler.version>3.8.1</mavencompiler.version>
+        <mavencompiler.version>3.9.0</mavencompiler.version>
         <json.version>20210307</json.version>
     </properties>
 
     <dependencies>
+
         <!--        logger-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -48,7 +50,6 @@
 
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
@@ -60,6 +61,7 @@
                     <source>${java.version}</source>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
