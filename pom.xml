@@ -61,7 +61,32 @@
                     <source>${java.version}</source>
                 </configuration>
             </plugin>
-
+            <!--for verify-->
+            <!--<plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.5.3</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <formats>
+                        <format>XML</format>
+                        <format>HTML</format>
+                    </formats>
+                    <connectionTimeout>60000</connectionTimeout>
+                    &lt;!&ndash; Disable .Net contents&ndash;&gt;
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <nugetconfAnalyzerEnabled>false</nugetconfAnalyzerEnabled>
+                    <nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+-->
         </plugins>
     </build>
 
