@@ -24,12 +24,12 @@ public class ArtefactsCategory {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
     @JsonBackReference//important to prevent infinite loop of references
-    private locations.myropolskyi.model.Artefact artefact;//foreign key in database
+    private Artefact artefact;//foreign key in database
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category_artefact")
     @JsonBackReference//important to prevent infinite loop of references
-    private locations.myropolskyi.model.Category category;//foreign key in database
+    private Category category;//foreign key in database
 
     public ArtefactsCategory() {
     }

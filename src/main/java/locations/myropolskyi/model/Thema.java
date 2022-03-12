@@ -22,9 +22,9 @@ public class Thema {
     @Column
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
-    @OneToMany(targetEntity = locations.myropolskyi.model.Category.class, mappedBy = "thema", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Category.class, mappedBy = "thema", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<locations.myropolskyi.model.Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
+    private Set<Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
 
     public Thema() {
     }

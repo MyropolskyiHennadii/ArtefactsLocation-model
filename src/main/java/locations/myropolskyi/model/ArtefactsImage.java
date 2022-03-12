@@ -26,7 +26,7 @@ public class ArtefactsImage {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
     @JsonBackReference//important to prevent infinite loop of references
-    private locations.myropolskyi.model.Artefact artefact;//foreign key in database
+    private Artefact artefact;//foreign key in database
 
     public ArtefactsImage(String path_to_image, int updated, int deleted, Artefact artefact) {
         this.path_to_image = path_to_image;
