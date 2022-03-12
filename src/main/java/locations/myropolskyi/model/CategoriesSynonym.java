@@ -30,7 +30,7 @@ public class CategoriesSynonym {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category")
     @JsonBackReference//important to prevent infinite loop of references
-    private Category category;//foreign key in database
+    private locations.myropolskyi.model.Category category;//foreign key in database
 
     public CategoriesSynonym() {
     }

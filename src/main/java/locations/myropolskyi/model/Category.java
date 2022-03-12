@@ -35,13 +35,13 @@ public class Category{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "thema")
     @JsonBackReference//important to prevent infinite loop of references
-    private Thema thema;//foreign key in database
+    private locations.myropolskyi.model.Thema thema;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity= CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity= locations.myropolskyi.model.CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     //@OneToMany(targetEntity= CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<CategoriesSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
+    private Set<locations.myropolskyi.model.CategoriesSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     public Category() {
     }

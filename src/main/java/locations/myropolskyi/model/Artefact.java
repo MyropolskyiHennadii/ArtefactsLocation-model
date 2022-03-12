@@ -32,34 +32,34 @@ public class Artefact {
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = locations.myropolskyi.model.ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
+    private Set<locations.myropolskyi.model.ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = locations.myropolskyi.model.ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
+    private Set<locations.myropolskyi.model.ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = locations.myropolskyi.model.ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
+    private Set<locations.myropolskyi.model.ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = locations.myropolskyi.model.ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<ArtefactsCategory> categories = new HashSet<>();// foreign key in database. One Artefact = many categories
+    private Set<locations.myropolskyi.model.ArtefactsCategory> categories = new HashSet<>();// foreign key in database. One Artefact = many categories
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToOne(targetEntity = ArtefactsLocation.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = locations.myropolskyi.model.ArtefactsLocation.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
     private ArtefactsLocation artefactsLocation;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToOne(targetEntity = ArtefactsImage.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = locations.myropolskyi.model.ArtefactsImage.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private ArtefactsImage artefactsImage;//foreign key in database
+    private locations.myropolskyi.model.ArtefactsImage artefactsImage;//foreign key in database
 
     public Artefact() {
     }
