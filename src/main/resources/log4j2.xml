@@ -6,8 +6,8 @@
         </Console>
         <RollingFile
                 name="locations.model"
-                fileName="${LOG_DIR}/ArtefactsModel.log"
-                filePattern="${LOG_DIR}/ArtefactsModel.%d{dd-MMM}.log.gz"
+                fileName="${sys:catalina.home}/ArtefactsModel.log"
+                filePattern="${sys:catalina.home}}/ArtefactsModel.%d{dd-MMM}.log.gz"
                 ignoreExceptions="false">
             <PatternLayout>
                 <Pattern>Locations-model> %d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
