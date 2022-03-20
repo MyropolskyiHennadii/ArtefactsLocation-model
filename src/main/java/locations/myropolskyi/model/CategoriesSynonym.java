@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -122,5 +123,18 @@ public class CategoriesSynonym {
         } else {
             return getCategory().getId_category();
         }
+    }
+
+
+    /**
+     * composes json-representation for CategoriesSynonym-exemplar
+     */
+    public JSONObject composeJsonObjectForCategorieSynonym(){
+        JSONObject jsonSynonym = new JSONObject();
+        jsonSynonym.put("id_category_synonym", id_category_synonym);
+        jsonSynonym.put("lang", lang);
+        jsonSynonym.put("lang_name", lang_name);
+        jsonSynonym.put("web_reference_wiki", web_reference_wiki);
+        return jsonSynonym;
     }
 }

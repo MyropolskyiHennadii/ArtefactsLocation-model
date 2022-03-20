@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -93,6 +94,18 @@ public class ArtefactsSynonym {
 
     public void setArtefact(Artefact artefact) {
         this.artefact = artefact;
+    }
+
+    /**
+     * composes json-representation for ArtefactSynonym-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonSynonym = new JSONObject();
+        jsonSynonym.put("id_artefacts_synonyms", id_artefacts_synonyms);
+        jsonSynonym.put("lang", lang);
+        jsonSynonym.put("lang_name", lang_name);
+        jsonSynonym.put("web_reference_wiki", web_reference_wiki);
+        return jsonSynonym;
     }
 
     @Override

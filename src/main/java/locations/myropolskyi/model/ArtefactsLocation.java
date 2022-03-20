@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -119,5 +120,16 @@ public class ArtefactsLocation {
     @Override
     public int hashCode() {
         return id_artefacts_locations;
+    }
+
+    /**
+     * composes json-representation for ArtefactsLocation-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonLocation = new JSONObject();
+        jsonLocation.put("id_artefacts_locations", id_artefacts_locations);
+        jsonLocation.put("longitude", longitude);
+        jsonLocation.put("latitude", latitude);
+        return jsonLocation;
     }
 }

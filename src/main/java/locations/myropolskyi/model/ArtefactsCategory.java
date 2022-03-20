@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -97,5 +98,15 @@ public class ArtefactsCategory {
     @Override
     public int hashCode() {
         return getId_artefacts_categories();
+    }
+
+    /**
+     * composes json-representation for ArtefactsCategory-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonArtefactsCategory = new JSONObject();
+        jsonArtefactsCategory.put("id_artefacts_categories", id_artefacts_categories);
+        jsonArtefactsCategory.put("category", category.composeJsonObject());
+        return jsonArtefactsCategory;
     }
 }

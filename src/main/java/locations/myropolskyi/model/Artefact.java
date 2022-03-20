@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -161,6 +162,44 @@ public class Artefact {
 
     public void setArtefactsImage(ArtefactsImage artefactsImage) {
         this.artefactsImage = artefactsImage;
+    }
+
+    /**
+     * composes json-representation for Artefact-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonArtefact = new JSONObject();
+        jsonArtefact.put("id_artefacts", id_artefacts);
+        jsonArtefact.put("artefacts_name", artefacts_name);
+        jsonArtefact.put("web_reference_wiki", web_reference_wiki);
+        jsonArtefact.put("page_language", page_language);
+        jsonArtefact.put("artefactsLocation", artefactsLocation.composeJsonObject());
+        jsonArtefact.put("artefactsImage", artefactsImage.composeJsonObject());
+        //authors
+        JSONArray authorsJson = new JSONArray();
+        for (ArtefactsAuthor author: getAuthors()) {
+            authorsJson.put(author.composeJsonObject());
+        }
+        jsonArtefact.put("authors", authorsJson);
+        //events
+        JSONArray eventsJson = new JSONArray();
+        for (ArtefactsEvent event: getEvents()) {
+            eventsJson.put(event.composeJsonObject());
+        }
+        jsonArtefact.put("events", eventsJson);
+        //synonyms
+        JSONArray synonymsJson = new JSONArray();
+        for (ArtefactsSynonym synonym: getSynonyms()) {
+            synonymsJson.put(synonym.composeJsonObject());
+        }
+        jsonArtefact.put("synonyms", synonymsJson);
+        //categories
+        JSONArray categoriesJson = new JSONArray();
+        for (ArtefactsCategory artefactsCategory: getCategories()) {
+            categoriesJson.put(artefactsCategory.composeJsonObject());
+        }
+        jsonArtefact.put("categories", categoriesJson);
+        return jsonArtefact;
     }
 
     /**

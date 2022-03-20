@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -106,6 +107,18 @@ public class ArtefactsEvent {
 
     public int getId_temporary() {
         return id_temporary;
+    }
+
+    /**
+     * composes json-representation for Artefact-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonEvent = new JSONObject();
+        jsonEvent.put("id_events_artefacts", id_events_artefacts);
+        jsonEvent.put("event", event);
+        jsonEvent.put("event_begin", event_begin);
+        jsonEvent.put("event_end", event_end);
+        return jsonEvent;
     }
 
     @Override

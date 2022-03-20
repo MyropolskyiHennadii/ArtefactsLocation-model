@@ -3,6 +3,7 @@ package locations.myropolskyi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -94,5 +95,15 @@ public class ArtefactsImage {
     @Override
     public int hashCode() {
         return path_to_image.length();
+    }
+
+    /**
+     * composes json-representation for ArtefactsLocation-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonImage = new JSONObject();
+        jsonImage.put("id_image", id_image);
+        jsonImage.put("path_to_image", path_to_image);
+        return jsonImage;
     }
 }
