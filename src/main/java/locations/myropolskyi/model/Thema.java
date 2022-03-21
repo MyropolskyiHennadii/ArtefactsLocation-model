@@ -13,8 +13,6 @@ import java.util.Set;
 @Table(name = "themas")
 public class Thema {
 
-    private static final Logger logger = LogManager.getLogger(Thema.class);
-
     @Id
     private String thema_name;
     @Column

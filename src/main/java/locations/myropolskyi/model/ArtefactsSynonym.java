@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "artefacts_synonyms")
 public class ArtefactsSynonym {
-    private static final Logger logger = LogManager.getLogger(ArtefactsSynonym.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

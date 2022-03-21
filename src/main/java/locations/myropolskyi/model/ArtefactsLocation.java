@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Table(name = "artefacts_locations")
 public class ArtefactsLocation {
 
-    private static final Logger logger = LogManager.getLogger(ArtefactsLocation.class);
     private static int counter;//for comparing objects created with id_artefacts_locations = 0
 
     @Id

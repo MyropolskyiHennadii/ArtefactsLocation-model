@@ -16,8 +16,6 @@ import java.util.Set;
 @Table(name = "categories")
 public class Category{
 
-    private static final Logger logger = LogManager.getLogger(Category.class);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_category;
@@ -159,7 +157,7 @@ public class Category{
         //synonyms
         JSONArray synonymsJson = new JSONArray();
         for (CategoriesSynonym synonym: getSynonyms()) {
-            synonymsJson.put(synonym.composeJsonObjectForCategorieSynonym());
+            synonymsJson.put(synonym.composeJsonObject());
         }
         jsonCategory.put("synonyms", synonymsJson);
         return jsonCategory;

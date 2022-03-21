@@ -11,8 +11,6 @@ import javax.persistence.*;
 @Table(name = "artefacts_images")
 public class ArtefactsImage {
 
-    private static final Logger logger = LogManager.getLogger(ArtefactsImage.class);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_image;

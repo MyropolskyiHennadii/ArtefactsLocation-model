@@ -12,8 +12,6 @@ import javax.persistence.*;
 @Table(name = "artefacts_categories")
 public class ArtefactsCategory {
 
-    private static final Logger logger = LogManager.getLogger(ArtefactsCategory.class);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_artefacts_categories;

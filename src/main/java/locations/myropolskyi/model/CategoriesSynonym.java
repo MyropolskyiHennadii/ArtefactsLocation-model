@@ -12,8 +12,6 @@ import javax.persistence.*;
 @Table(name = "categories_synonyms")
 public class CategoriesSynonym {
 
-    private static final Logger logger = LogManager.getLogger(ArtefactsSynonym.class);
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_category_synonym;
@@ -129,7 +127,7 @@ public class CategoriesSynonym {
     /**
      * composes json-representation for CategoriesSynonym-exemplar
      */
-    public JSONObject composeJsonObjectForCategorieSynonym(){
+    public JSONObject composeJsonObject(){
         JSONObject jsonSynonym = new JSONObject();
         jsonSynonym.put("id_category_synonym", id_category_synonym);
         jsonSynonym.put("lang", lang);
