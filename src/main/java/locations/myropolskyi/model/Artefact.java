@@ -1,6 +1,7 @@
 package locations.myropolskyi.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import locations.myropolskyi.modelexceptions.ComposeJsonException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
@@ -173,8 +174,17 @@ public class Artefact {
         jsonArtefact.put("artefacts_name", artefacts_name);
         jsonArtefact.put("web_reference_wiki", web_reference_wiki);
         jsonArtefact.put("page_language", page_language);
+        //impossible, but:
+        if(artefactsLocation == null){
+            logger.warn("Empty location. Artefact's id={}", id_artefacts);
+            throw new ComposeJsonException("Empty location. Artefact's id=" + id_artefacts);
+        }
         jsonArtefact.put("artefactsLocation", artefactsLocation.composeJsonObject());
-        jsonArtefact.put("artefactsImage", artefactsImage.composeJsonObject());
+        if(artefactsImage != null){
+            jsonArtefact.put("artefactsImage", artefactsImage.composeJsonObject());
+        } else {
+            jsonArtefact.put("artefactsImage", "");
+        }
         //authors
         JSONArray authorsJson = new JSONArray();
         for (ArtefactsAuthor author: getAuthors()) {
