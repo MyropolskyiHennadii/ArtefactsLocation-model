@@ -1,8 +1,8 @@
 package locations.myropolskyi.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -62,6 +62,20 @@ public class Thema {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    /**
+     * composes json-representation for Thema-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonThema = new JSONObject();
+        jsonThema.put("thema_name", thema_name);
+        //categories
+        JSONArray categoriesJson = new JSONArray();
+        for (Category category: getCategories()) {
+            categoriesJson.put(category.composeJsonObject());
+        }
+        return jsonThema;
     }
 
     @Override
