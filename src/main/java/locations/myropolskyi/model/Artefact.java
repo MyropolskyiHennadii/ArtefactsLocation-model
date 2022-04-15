@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "artefacts")
 public class Artefact {
 
-    private static final Logger logger = LogManager.getLogger(Artefact.class);
+    private static final Logger LOG = LogManager.getLogger(Artefact.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -176,7 +176,7 @@ public class Artefact {
         jsonArtefact.put("page_language", page_language);
         //impossible, but:
         if(artefactsLocation == null){
-            logger.warn("Empty location. Artefact's id={}", id_artefacts);
+            LOG.warn("Empty location. Artefact's id={}", id_artefacts);
             throw new ComposeJsonException("Empty location. Artefact's id=" + id_artefacts);
         }
         jsonArtefact.put("artefactsLocation", artefactsLocation.composeJsonObject());
@@ -229,7 +229,7 @@ public class Artefact {
                 return null;
             }
         } catch (JSONException e) {
-            logger.error("Impossible to parse json-coordinates {} for artefact {}", jsonString, this);
+            LOG.error("Impossible to parse json-coordinates {} for artefact {}", jsonString, this);
             return null;
         }
     }
