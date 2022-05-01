@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
  * class for static service functions
  */
 public class ModelToJsonTransformations {
+    private ModelToJsonTransformations() {
+    }
 
     private static final Logger LOG = LogManager.getLogger(ModelToJsonTransformations.class);
 
