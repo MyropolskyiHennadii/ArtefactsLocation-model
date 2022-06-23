@@ -1,4 +1,4 @@
-package locations.myropolskyi.modelexceptions;
+package myropolskyi.locations.modelexceptions;
 
 import org.json.JSONException;
 

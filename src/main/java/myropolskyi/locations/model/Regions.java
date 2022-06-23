@@ -1,4 +1,4 @@
-package locations.myropolskyi.model;
+package myropolskyi.locations.model;
 import org.json.JSONObject;
 import javax.persistence.*;
 

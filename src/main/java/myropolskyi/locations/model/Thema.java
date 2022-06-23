@@ -1,4 +1,4 @@
-package locations.myropolskyi.model;
+package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.json.JSONArray;
