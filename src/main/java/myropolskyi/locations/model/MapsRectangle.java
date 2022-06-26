@@ -8,11 +8,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "regions")
-public class Regions {
+public class MapsRectangle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idregion;
+
+    /*to which "real region" belongs this rectangle*/
     @Column
     private String region_name;
     @Column
@@ -24,7 +26,15 @@ public class Regions {
     @Column
     private Double right_top_latitude;
 
-    public Regions() {
+    public MapsRectangle() {
+    }
+
+    public MapsRectangle(String region_name, Double left_bottom_longitude, Double left_bottom_latitude, Double right_top_longitude, Double right_top_latitude) {
+        this.region_name = region_name;
+        this.left_bottom_longitude = left_bottom_longitude;
+        this.left_bottom_latitude = left_bottom_latitude;
+        this.right_top_longitude = right_top_longitude;
+        this.right_top_latitude = right_top_latitude;
     }
 
     public Long getIdregion() {
@@ -105,8 +115,8 @@ public class Regions {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Regions regions = (Regions) o;
-        return idregion.equals(regions.idregion);
+        MapsRectangle mapsRectangle = (MapsRectangle) o;
+        return idregion.equals(mapsRectangle.idregion);
     }
 
     @Override
