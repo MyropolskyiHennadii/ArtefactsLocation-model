@@ -12,7 +12,7 @@ public class MapsRectangle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idregion;
+    private int idregion;
 
     /*to which "real region" belongs this rectangle*/
     @Column
@@ -37,11 +37,11 @@ public class MapsRectangle {
         this.right_top_latitude = right_top_latitude;
     }
 
-    public Long getIdregion() {
+    public int getIdregion() {
         return idregion;
     }
 
-    public void setIdregion(Long idregion) {
+    public void setIdregion(int idregion) {
         this.idregion = idregion;
     }
 
@@ -101,7 +101,7 @@ public class MapsRectangle {
 
     @Override
     public String toString() {
-        return "Regions{" +
+        return "MapsRectangle{" +
                 "idregion=" + idregion +
                 ", region_name='" + region_name + '\'' +
                 ", left_bottom_longitude=" + left_bottom_longitude +
@@ -116,7 +116,7 @@ public class MapsRectangle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MapsRectangle mapsRectangle = (MapsRectangle) o;
-        return idregion.equals(mapsRectangle.idregion);
+        return idregion == mapsRectangle.idregion;
     }
 
     @Override
