@@ -8,7 +8,7 @@ import javax.persistence.*;
 //Category's synonym in different languages
 @Entity
 @Table(name = "categories_synonyms")
-public class CategoriesSynonym {
+public class CategoriesSynonym implements LocationsJsonRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

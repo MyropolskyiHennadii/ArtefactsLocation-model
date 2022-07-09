@@ -8,7 +8,7 @@ import javax.persistence.*;
 //Artefact's synonym in different languages
 @Entity
 @Table(name = "artefacts_synonyms")
-public class ArtefactsSynonym {
+public class ArtefactsSynonym implements LocationsJsonRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

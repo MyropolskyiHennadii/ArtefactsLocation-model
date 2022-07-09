@@ -12,7 +12,7 @@ import java.util.Set;
 //Category of thema
 @Entity
 @Table(name = "categories")
-public class Category{
+public class Category implements LocationsJsonRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

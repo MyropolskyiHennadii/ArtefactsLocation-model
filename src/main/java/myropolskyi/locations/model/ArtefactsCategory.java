@@ -8,7 +8,7 @@ import javax.persistence.*;
 //Artefact's category
 @Entity
 @Table(name = "artefacts_categories")
-public class ArtefactsCategory {
+public class ArtefactsCategory implements LocationsJsonRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

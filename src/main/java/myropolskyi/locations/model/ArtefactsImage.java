@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "artefacts_images")
-public class ArtefactsImage {
+public class ArtefactsImage implements LocationsJsonRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

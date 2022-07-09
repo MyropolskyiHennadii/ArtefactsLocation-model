@@ -8,7 +8,7 @@ import javax.persistence.*;
 //Location of Artefact
 @Entity
 @Table(name = "artefacts_locations")
-public class ArtefactsLocation {
+public class ArtefactsLocation implements LocationsJsonRepresentable {
 
     private static int counter;//for comparing objects created with id_artefacts_locations = 0
 

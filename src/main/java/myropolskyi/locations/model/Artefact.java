@@ -15,7 +15,7 @@ import java.util.Set;
 //main class of artefacts
 @Entity
 @Table(name = "artefacts")
-public class Artefact {
+public class Artefact implements LocationsJsonRepresentable {
 
     private static final Logger LOG = LogManager.getLogger(Artefact.class);
 

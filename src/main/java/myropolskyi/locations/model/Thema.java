@@ -11,7 +11,7 @@ import java.util.Set;
 //Themas of record
 @Entity
 @Table(name = "themas")
-public class Thema {
+public class Thema implements LocationsJsonRepresentable {
 
     @Id
     private String thema_name;
