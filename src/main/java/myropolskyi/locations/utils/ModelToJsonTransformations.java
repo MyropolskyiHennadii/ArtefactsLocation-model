@@ -29,11 +29,12 @@ public class ModelToJsonTransformations {
         final JSONArray artefactsJson = new JSONArray();
         artefacts.stream()
                 //remain categories only for defined thema
-                .peek(a -> a.setCategories(
-                        a.getCategories().stream()
-                                .filter(b -> b.getCategory().getThema().getThema_name().equals(thema))
-                                .collect(Collectors.toSet())
-                ))
+                .map(a -> {
+                    a.setCategories(
+                            a.getCategories().stream()
+                                    .filter(b -> b.getCategory().getThema().getThema_name().equals(thema))
+                                    .collect(Collectors.toSet())); return a;
+                })
                 .filter(a -> !a.getCategories().isEmpty())//not empty set of categories
                 .map(a -> artefactsJson.put(a.composeJsonObject()))//add json-Artefact to JsonArray
                 .count();//just to terminate stream
@@ -43,6 +44,7 @@ public class ModelToJsonTransformations {
 
     /**
      * forms JSON array with used in Artefacts collection categories (only categories ID)
+     *
      * @param artefacts
      * @return
      */

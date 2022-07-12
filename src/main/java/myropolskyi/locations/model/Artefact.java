@@ -170,6 +170,7 @@ public class Artefact implements LocationsJsonRepresentable {
      */
     public JSONObject composeJsonObject(){
         JSONObject jsonArtefact = new JSONObject();
+        LOG.trace("Compose Artefact with id {}", id_artefacts);
         jsonArtefact.put("id_artefacts", id_artefacts);
         jsonArtefact.put("artefacts_name", artefacts_name);
         jsonArtefact.put("web_reference_wiki", web_reference_wiki);
