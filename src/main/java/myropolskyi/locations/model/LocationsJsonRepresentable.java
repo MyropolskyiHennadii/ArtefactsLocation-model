@@ -4,5 +4,18 @@ import org.json.JSONObject;
 
 public interface LocationsJsonRepresentable {
 
-    public JSONObject composeJsonObject();
+    /**
+     * composes json from class exemplar
+     *
+     * @return
+     */
+    JSONObject composeJsonObject();
+
+    /**
+     * decomposes json to class exemplar
+     *
+     * @param json
+     * @return
+     */
+    LocationsJsonRepresentable decomposeJsonObject(JSONObject json);
 }

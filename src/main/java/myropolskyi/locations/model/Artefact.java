@@ -168,7 +168,7 @@ public class Artefact implements LocationsJsonRepresentable {
     /**
      * composes json-representation for Artefact-exemplar
      */
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonArtefact = new JSONObject();
         LOG.trace("Compose Artefact with id: {}", id_artefacts);
         jsonArtefact.put("id_artefacts", id_artefacts);
@@ -176,41 +176,82 @@ public class Artefact implements LocationsJsonRepresentable {
         jsonArtefact.put("web_reference_wiki", web_reference_wiki);
         jsonArtefact.put("page_language", page_language);
         //impossible, but:
-        if(artefactsLocation == null){
+        if (artefactsLocation == null) {
             LOG.warn("Empty location. Artefact's id={}", id_artefacts);
             throw new ComposeJsonException("Empty location. Artefact's id=" + id_artefacts);
         }
         jsonArtefact.put("artefactsLocation", artefactsLocation.composeJsonObject());
-        if(artefactsImage != null){
+        if (artefactsImage != null) {
             jsonArtefact.put("artefactsImage", artefactsImage.composeJsonObject());
         } else {
             jsonArtefact.put("artefactsImage", "");
         }
         //authors
         JSONArray authorsJson = new JSONArray();
-        for (ArtefactsAuthor author: getAuthors()) {
+        for (ArtefactsAuthor author : getAuthors()) {
             authorsJson.put(author.composeJsonObject());
         }
         jsonArtefact.put("authors", authorsJson);
         //events
         JSONArray eventsJson = new JSONArray();
-        for (ArtefactsEvent event: getEvents()) {
+        for (ArtefactsEvent event : getEvents()) {
             eventsJson.put(event.composeJsonObject());
         }
         jsonArtefact.put("events", eventsJson);
         //synonyms
         JSONArray synonymsJson = new JSONArray();
-        for (ArtefactsSynonym synonym: getSynonyms()) {
+        for (ArtefactsSynonym synonym : getSynonyms()) {
             synonymsJson.put(synonym.composeJsonObject());
         }
         jsonArtefact.put("synonyms", synonymsJson);
         //categories
         JSONArray categoriesJson = new JSONArray();
-        for (ArtefactsCategory artefactsCategory: getCategories()) {
+        for (ArtefactsCategory artefactsCategory : getCategories()) {
             categoriesJson.put(artefactsCategory.composeJsonObject());
         }
         jsonArtefact.put("categories", categoriesJson);
         return jsonArtefact;
+    }
+
+    @Override
+    public Artefact decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_artefacts = Integer.parseInt(json.getString("id_artefacts"));
+        this.artefacts_name = json.getString("artefacts_name");
+        this.web_reference_wiki = json.getString("web_reference_wiki");
+        this.page_language = json.getString("page_language");
+
+        this.artefactsLocation = (ArtefactsLocation) new ArtefactsLocation().decomposeJsonObject((JSONObject) json.get("artefactsLocation"));
+        this.artefactsImage = (ArtefactsImage) new ArtefactsImage().decomposeJsonObject((JSONObject) json.get("artefactsImage"));
+        //authors
+        JSONArray authorsJson = json.getJSONArray("authors");
+        Set<ArtefactsAuthor> artefactsAuthors = new HashSet<>();
+        for (int i = 0; i < authorsJson.length(); i++) {
+            artefactsAuthors.add((ArtefactsAuthor) new ArtefactsAuthor().decomposeJsonObject(authorsJson.getJSONObject(i)));
+        }
+        setAuthors(artefactsAuthors);
+        //events
+        JSONArray eventsJson = json.getJSONArray("events");
+        Set<ArtefactsEvent> artefactsEvents = new HashSet<>();
+        for (int i = 0; i < eventsJson.length(); i++) {
+            artefactsEvents.add((ArtefactsEvent) new ArtefactsEvent().decomposeJsonObject(eventsJson.getJSONObject(i)));
+        }
+        setEvents(artefactsEvents);
+        //synonyms
+        JSONArray synonymsJson = json.getJSONArray("synonyms");
+        Set<ArtefactsSynonym> artefactsSynonyms = new HashSet<>();
+        for (int i = 0; i < synonymsJson.length(); i++) {
+            artefactsSynonyms.add((ArtefactsSynonym) new ArtefactsSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
+        }
+        setSynonyms(artefactsSynonyms);
+        //categories
+        JSONArray categoriesJson = json.getJSONArray("categories");
+        Set<ArtefactsCategory> artefactsCategories = new HashSet<>();
+        for (int i = 0; i < categoriesJson.length(); i++) {
+            artefactsCategories.add((ArtefactsCategory) new ArtefactsCategory().decomposeJsonObject(categoriesJson.getJSONObject(i)));
+        }
+        setCategories(artefactsCategories);
+
+        return this;
     }
 
     /**
@@ -237,12 +278,13 @@ public class Artefact implements LocationsJsonRepresentable {
 
     /**
      * check and correct duplicated records in events
+     *
      * @param events
      * @return
      */
-    public Set<ArtefactsEvent> checkAndCorrectDuplicatedEvent(Set<ArtefactsEvent> events){
+    public Set<ArtefactsEvent> checkAndCorrectDuplicatedEvent(Set<ArtefactsEvent> events) {
         Set<ArtefactsEvent> checkingEvents = new HashSet<>();
-        for (ArtefactsEvent event: events) {
+        for (ArtefactsEvent event : events) {
             ArtefactsEvent newEvent = new ArtefactsEvent(event.getEvent(), event.getEvent_begin(), event.getEvent_end(), event.getArtefact());
             newEvent.setUpdated(0);
             checkingEvents.add(newEvent);
@@ -252,12 +294,13 @@ public class Artefact implements LocationsJsonRepresentable {
 
     /**
      * check and correct duplicated authors
+     *
      * @param authors
      * @return
      */
     public Set<ArtefactsAuthor> checkAndCorrectDuplicatedAuthors(Set<ArtefactsAuthor> authors) {
         Set<ArtefactsAuthor> checkingAuthors = new HashSet<>();
-        for (ArtefactsAuthor author: authors) {
+        for (ArtefactsAuthor author : authors) {
             ArtefactsAuthor newAuthor = new ArtefactsAuthor(author.getAuthor_name(), author.getArtefact());
             newAuthor.setUpdated(0);
             checkingAuthors.add(newAuthor);
