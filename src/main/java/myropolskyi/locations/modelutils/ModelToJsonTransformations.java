@@ -1,4 +1,4 @@
-package myropolskyi.locations.locationsutils;
+package myropolskyi.locations.modelutils;
 
 import myropolskyi.locations.model.Artefact;
 import org.apache.logging.log4j.LogManager;
