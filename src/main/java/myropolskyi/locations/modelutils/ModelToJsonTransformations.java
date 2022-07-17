@@ -27,7 +27,7 @@ public class ModelToJsonTransformations {
     public static JSONArray getJsonFromArtefactsCollection(Collection<Artefact> artefacts, String thema) {
 //TODO how to do the first query with сategories filter?
         final JSONArray artefactsJson = new JSONArray();
-        artefacts.stream()
+        long count = artefacts.stream()
                 //remain categories only for defined thema
                 .map(a -> {
                     a.setCategories(
@@ -38,7 +38,7 @@ public class ModelToJsonTransformations {
                 .filter(a -> !a.getCategories().isEmpty())//not empty set of categories
                 .map(a -> artefactsJson.put(a.composeJsonObject()))//add json-Artefact to JsonArray
                 .count();//just to terminate stream
-        LOG.debug("Length of artefacts-json {}", artefactsJson.length());
+        LOG.debug("Length of artefacts: {}, artefacts-json {}", count, artefactsJson.length());
         return artefactsJson;
     }
 
