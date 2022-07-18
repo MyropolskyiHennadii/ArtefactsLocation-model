@@ -95,7 +95,8 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
     public int hashCode() {
         return getId_artefacts_categories();
     }
-
+    
+    @Override
     /**
      * composes json-representation for ArtefactsCategory-exemplar
      */
@@ -104,5 +105,15 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
         jsonArtefactsCategory.put("id_artefacts_categories", id_artefacts_categories);
         jsonArtefactsCategory.put("category", category.composeJsonObject());
         return jsonArtefactsCategory;
+    }
+    
+    @Override
+     /**
+     * decomposes json-representation TO ArtefactsCategory-exemplar
+     */
+    public ArtefactsCategory decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_artefacts_categories = Integer.parseInt(json.getString("id_artefacts_categories"));
+        this.category = (Category) new Category().decomposeJsonObject(json.getJSONObject("category"))
+        return this;
     }
 }
