@@ -104,7 +104,7 @@ public class MapsRectangle implements LocationsJsonRepresentable {
      * decomposes json-representation TO Region-exemplar
      */
     @Override
-    public Category decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+    public MapsRectangle decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.idregion = Integer.parseInt(json.getString("idregion"));
         this.region_name = json.getString("region_name");
         this.left_bottom_longitude = Double.parseDouble(json.getString("left_bottom_longitude"));
