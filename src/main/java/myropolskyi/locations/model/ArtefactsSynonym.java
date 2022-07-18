@@ -93,6 +93,7 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
         this.artefact = artefact;
     }
 
+    @Override
     /**
      * composes json-representation for ArtefactSynonym-exemplar
      */
@@ -103,6 +104,18 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
         jsonSynonym.put("lang_name", lang_name);
         jsonSynonym.put("web_reference_wiki", web_reference_wiki);
         return jsonSynonym;
+    }
+    
+     @Override
+     /**
+     * decomposes json-representation TO ArtefactSynonym-exemplar
+     */
+    public ArtefactSynonym decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_artefacts_synonyms = Integer.parseInt(json.getString("id_artefacts_synonyms"));
+        this.lang = json.getString("lang");
+        this.lang_name = json.getString("lang_name");
+        this.web_reference_wiki = json.getString("web_reference_wiki");
+        return this;
     }
 
     @Override
