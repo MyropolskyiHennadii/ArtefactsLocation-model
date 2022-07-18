@@ -168,6 +168,7 @@ public class Artefact implements LocationsJsonRepresentable {
     /**
      * composes json-representation for Artefact-exemplar
      */
+    @Override
     public JSONObject composeJsonObject() {
         JSONObject jsonArtefact = new JSONObject();
         LOG.trace("Compose Artefact with id: {}", id_artefacts);
