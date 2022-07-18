@@ -150,7 +150,12 @@ public class Category implements LocationsJsonRepresentable {
         this.page_language = json.getString("page_language"); 
         this.type_category = json.getString("type_category");
         this.thema = json.getString("thema");
-        
+        //synonyms
+        JSONArray synonymsJson = json.getJSONArray("events");
+        Set<CategoriesSynonym> categoriesSynonym = new HashSet<>();
+        for (int i = 0; i < synonymsJson.length(); i++) {
+            categoriesSynonym.add((CategoriesSynonym) new CategoriesSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
+        }
         return this;
     }
     
