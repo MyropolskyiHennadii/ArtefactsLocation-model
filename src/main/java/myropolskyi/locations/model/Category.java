@@ -117,6 +117,43 @@ public class Category implements LocationsJsonRepresentable {
         return type_category;
     }
 
+    
+    /**
+     * composes json-representation for Category-exemplar
+     */
+    @Override
+    public JSONObject composeJsonObject(){
+        JSONObject jsonCategory = new JSONObject();
+        jsonCategory.put("id_category", id_category);
+        jsonCategory.put("category_name", category_name);
+        jsonCategory.put("web_reference_wiki", web_reference_wiki);
+        jsonCategory.put("page_language", page_language);
+        jsonCategory.put("type_category", type_category);
+        jsonCategory.put("thema", thema.getThema_name());
+        //synonyms
+        JSONArray synonymsJson = new JSONArray();
+        for (CategoriesSynonym synonym: getSynonyms()) {
+            synonymsJson.put(synonym.composeJsonObject());
+        }
+        jsonCategory.put("synonyms", synonymsJson);
+        return jsonCategory;
+    }
+    
+     /**
+     * decomposes json-representation TO Category-exemplar
+     */
+    @Override
+    public Category decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_category = Integer.parseInt(json.getString("id_category"));
+        this.category_name = json.getString("category_name");
+        this.web_reference_wiki = json.getString("web_reference_wiki");
+        this.page_language = json.getString("page_language"); 
+        this.type_category = json.getString("type_category");
+        this.thema = json.getString("thema");
+        
+        return this;
+    }
+    
     @Override
     public String toString() {
         return "Category{" +
@@ -141,23 +178,4 @@ public class Category implements LocationsJsonRepresentable {
         return getId_category();
     }
 
-    /**
-     * composes json-representation for Category-exemplar
-     */
-    public JSONObject composeJsonObject(){
-        JSONObject jsonCategory = new JSONObject();
-        jsonCategory.put("id_category", id_category);
-        jsonCategory.put("category_name", category_name);
-        jsonCategory.put("web_reference_wiki", web_reference_wiki);
-        jsonCategory.put("page_language", page_language);
-        jsonCategory.put("type_category", type_category);
-        jsonCategory.put("thema", thema.getThema_name());
-        //synonyms
-        JSONArray synonymsJson = new JSONArray();
-        for (CategoriesSynonym synonym: getSynonyms()) {
-            synonymsJson.put(synonym.composeJsonObject());
-        }
-        jsonCategory.put("synonyms", synonymsJson);
-        return jsonCategory;
-    }
 }
