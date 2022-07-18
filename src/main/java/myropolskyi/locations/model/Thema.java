@@ -67,6 +67,7 @@ public class Thema implements LocationsJsonRepresentable {
     /**
      * composes json-representation for Thema-exemplar
      */
+    @Override
     public JSONObject composeJsonObject(){
         JSONObject jsonThema = new JSONObject();
         jsonThema.put("thema_name", thema_name);
@@ -77,6 +78,17 @@ public class Thema implements LocationsJsonRepresentable {
         }
         return jsonThema;
     }
+    
+     /**
+     * decomposes json-representation TO Thema-exemplar
+     */
+    @Override
+    public Thema decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.thema_name = json.getString("thema_name");
+        
+        return this;
+    }
+
 
     @Override
     public String toString() {
