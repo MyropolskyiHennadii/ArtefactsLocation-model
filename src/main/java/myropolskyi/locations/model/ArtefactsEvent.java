@@ -108,7 +108,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
 
     @Override
     /**
-     * composes json-representation for Artefact-exemplar
+     * composes json-representation for ArtefactsEvent-exemplar
      */
     public JSONObject composeJsonObject(){
         JSONObject jsonEvent = new JSONObject();
