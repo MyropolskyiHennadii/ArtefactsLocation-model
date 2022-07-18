@@ -93,6 +93,13 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
         jsonAuthor.put("author_name", author_name);
         return jsonAuthor;
     }
+    
+    @Override
+    public ArtefactsAuthor decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_artefacts_authors = Integer.parseInt(json.getString("id_artefacts_authors"));
+        this.author_name = json.getString("author_name");
+        return this;
+    }
 
     @Override
     public String toString() {
