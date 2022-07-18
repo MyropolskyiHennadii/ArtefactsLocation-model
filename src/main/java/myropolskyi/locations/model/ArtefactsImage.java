@@ -70,6 +70,27 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
     public void setArtefact(Artefact artefact) {
         this.artefact = artefact;
     }
+    
+    @Override
+    /**
+     * composes json-representation for ArtefactsImage-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonImage = new JSONObject();
+        jsonImage.put("id_image", id_image);
+        jsonImage.put("path_to_image", path_to_image);
+        return jsonImage;
+    }
+    
+     @Override
+     /**
+     * decomposes json-representation TO ArtefactsImage-exemplar
+     */
+    public ArtefactsImage decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_image = Integer.parseInt(json.getString("id_image"));
+        this.path_to_image = json.getString("path_to_image");
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -93,13 +114,4 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
         return path_to_image.length();
     }
 
-    /**
-     * composes json-representation for ArtefactsLocation-exemplar
-     */
-    public JSONObject composeJsonObject(){
-        JSONObject jsonImage = new JSONObject();
-        jsonImage.put("id_image", id_image);
-        jsonImage.put("path_to_image", path_to_image);
-        return jsonImage;
-    }
 }
