@@ -2,6 +2,7 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -68,7 +69,7 @@ public class Thema implements LocationsJsonRepresentable {
      * composes json-representation for Thema-exemplar
      */
     @Override
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonThema = new JSONObject();
         jsonThema.put("thema_name", thema_name);
         //categories. Do we need it?
@@ -79,8 +80,8 @@ public class Thema implements LocationsJsonRepresentable {
         jsonThema.put("categories", categoriesJson);*/
         return jsonThema;
     }
-    
-     /**
+
+    /**
      * decomposes json-representation TO Thema-exemplar
      */
     @Override

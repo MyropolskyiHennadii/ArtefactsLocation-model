@@ -1,5 +1,8 @@
 package myropolskyi.locations.model;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import javax.persistence.*;
 
 
@@ -89,7 +92,7 @@ public class MapsRectangle implements LocationsJsonRepresentable {
      * composes json-representation for Region-exemplar
      */
     @Override
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonRegion = new JSONObject();
         jsonRegion.put("idregion", idregion);
         jsonRegion.put("region_name", region_name);
@@ -99,8 +102,8 @@ public class MapsRectangle implements LocationsJsonRepresentable {
         jsonRegion.put("right_top_latitude", right_top_latitude);
         return jsonRegion;
     }
-    
-     /**
+
+    /**
      * decomposes json-representation TO Region-exemplar
      */
     @Override

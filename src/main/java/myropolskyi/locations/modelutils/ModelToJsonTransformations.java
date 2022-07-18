@@ -4,8 +4,12 @@ import myropolskyi.locations.model.Artefact;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +44,20 @@ public class ModelToJsonTransformations {
                 .count();//just to terminate stream
         LOG.debug("Length of artefacts: {}, artefacts-json {}", count, artefactsJson.length());
         return artefactsJson;
+    }
+
+    /**
+     * decomposes JSONarray to List<Artefact>
+     * @param jsonArtefacts
+     * @return
+     */
+    public static List<Artefact> getListArtefactFromJSONArtefactsArray(JSONArray jsonArtefacts) throws NumberFormatException, JSONException {
+        List<Artefact> listArtefact = new ArrayList<>();
+        for (int i = 0; i < jsonArtefacts.length(); i++) {
+            listArtefact.add(new Artefact().decomposeJsonObject((JSONObject) jsonArtefacts.get(i)));
+        }
+        LOG.debug("After decomposing size of List<Artefacts>: {}", listArtefact.size());
+        return listArtefact;
     }
 
     /**

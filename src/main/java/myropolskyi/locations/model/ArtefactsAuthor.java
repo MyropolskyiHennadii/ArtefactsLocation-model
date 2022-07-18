@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -88,14 +89,14 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
      * composes json-representation for ArtefactAuthor-exemplar
      */
     @Override
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonAuthor = new JSONObject();
         jsonAuthor.put("id_artefacts_authors", id_artefacts_authors);
         jsonAuthor.put("author_name", author_name);
         return jsonAuthor;
     }
-    
-     /**
+
+    /**
      * decomposes json-representation TO ArtefactsAuthor-exemplar
      */
     @Override

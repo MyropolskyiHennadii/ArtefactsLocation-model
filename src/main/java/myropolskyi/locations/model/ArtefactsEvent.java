@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -110,7 +111,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
     /**
      * composes json-representation for ArtefactsEvent-exemplar
      */
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonEvent = new JSONObject();
         jsonEvent.put("id_events_artefacts", id_events_artefacts);
         jsonEvent.put("event", event);
@@ -119,8 +120,8 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
         return jsonEvent;
     }
 
-     @Override
-     /**
+    @Override
+    /**
      * decomposes json-representation TO ArtefactsEvent-exemplar
      */
     public ArtefactsEvent decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
@@ -141,7 +142,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
                 ", artefact=" + artefact +
                 '}';
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

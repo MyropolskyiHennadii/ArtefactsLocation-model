@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -97,7 +98,7 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
     /**
      * composes json-representation for ArtefactSynonym-exemplar
      */
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonSynonym = new JSONObject();
         jsonSynonym.put("id_artefacts_synonyms", id_artefacts_synonyms);
         jsonSynonym.put("lang", lang);
@@ -105,12 +106,12 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
         jsonSynonym.put("web_reference_wiki", web_reference_wiki);
         return jsonSynonym;
     }
-    
-     @Override
-     /**
+
+    @Override
+    /**
      * decomposes json-representation TO ArtefactSynonym-exemplar
      */
-    public ArtefactSynonym decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+    public ArtefactsSynonym decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.id_artefacts_synonyms = Integer.parseInt(json.getString("id_artefacts_synonyms"));
         this.lang = json.getString("lang");
         this.lang_name = json.getString("lang_name");

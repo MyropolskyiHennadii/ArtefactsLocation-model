@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -91,13 +92,13 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
     public int getId_category_synonym() {
         return id_category_synonym;
     }
-    
-    
+
+
     /**
      * composes json-representation for CategoriesSynonym-exemplar
      */
     @Override
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonSynonym = new JSONObject();
         jsonSynonym.put("id_category_synonym", id_category_synonym);
         jsonSynonym.put("lang", lang);
@@ -105,8 +106,8 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
         jsonSynonym.put("web_reference_wiki", web_reference_wiki);
         return jsonSynonym;
     }
-    
-     /**
+
+    /**
      * decomposes json-representation TO CategoriesSynonym-exemplar
      */
     @Override
@@ -114,7 +115,7 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
         this.id_category_synonym = Integer.parseInt(json.getString("id_category_synonym"));
         this.lang = json.getString("lang");
         this.lang_name = json.getString("lang_name");
-        this.web_reference_wiki = json.getString("web_reference_wiki"); 
+        this.web_reference_wiki = json.getString("web_reference_wiki");
         return this;
     }
 
@@ -146,5 +147,5 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
             return getCategory().getId_category();
         }
     }
-    
+
 }

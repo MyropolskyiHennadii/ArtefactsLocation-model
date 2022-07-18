@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -70,20 +71,20 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
     public void setArtefact(Artefact artefact) {
         this.artefact = artefact;
     }
-    
+
     @Override
     /**
      * composes json-representation for ArtefactsImage-exemplar
      */
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonImage = new JSONObject();
         jsonImage.put("id_image", id_image);
         jsonImage.put("path_to_image", path_to_image);
         return jsonImage;
     }
-    
-     @Override
-     /**
+
+    @Override
+    /**
      * decomposes json-representation TO ArtefactsImage-exemplar
      */
     public ArtefactsImage decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {

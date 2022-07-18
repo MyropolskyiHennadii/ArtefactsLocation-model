@@ -3,6 +3,7 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -117,12 +118,12 @@ public class Category implements LocationsJsonRepresentable {
         return type_category;
     }
 
-    
+
     /**
      * composes json-representation for Category-exemplar
      */
     @Override
-    public JSONObject composeJsonObject(){
+    public JSONObject composeJsonObject() {
         JSONObject jsonCategory = new JSONObject();
         jsonCategory.put("id_category", id_category);
         jsonCategory.put("category_name", category_name);
@@ -132,14 +133,14 @@ public class Category implements LocationsJsonRepresentable {
         jsonCategory.put("thema", thema.getThema_name());
         //synonyms
         JSONArray synonymsJson = new JSONArray();
-        for (CategoriesSynonym synonym: getSynonyms()) {
+        for (CategoriesSynonym synonym : getSynonyms()) {
             synonymsJson.put(synonym.composeJsonObject());
         }
         jsonCategory.put("synonyms", synonymsJson);
         return jsonCategory;
     }
-    
-     /**
+
+    /**
      * decomposes json-representation TO Category-exemplar
      */
     @Override
@@ -147,9 +148,9 @@ public class Category implements LocationsJsonRepresentable {
         this.id_category = Integer.parseInt(json.getString("id_category"));
         this.category_name = json.getString("category_name");
         this.web_reference_wiki = json.getString("web_reference_wiki");
-        this.page_language = json.getString("page_language"); 
+        this.page_language = json.getString("page_language");
         this.type_category = json.getString("type_category");
-        this.thema = json.getString("thema");
+        this.thema = new Thema(json.getString("thema"));
         //synonyms
         JSONArray synonymsJson = json.getJSONArray("synonyms");
         synonyms.clear();
@@ -158,7 +159,7 @@ public class Category implements LocationsJsonRepresentable {
         }
         return this;
     }
-    
+
     @Override
     public String toString() {
         return "Category{" +
