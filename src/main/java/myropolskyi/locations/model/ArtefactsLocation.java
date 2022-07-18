@@ -94,6 +94,28 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
         this.artefact = artefact;
     }
 
+    @Override
+    /**
+     * composes json-representation for ArtefactsLocation-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonLocation = new JSONObject();
+        jsonLocation.put("id_artefacts_locations", id_artefacts_locations);
+        jsonLocation.put("longitude", longitude);
+        jsonLocation.put("latitude", latitude);
+        return jsonLocation;
+    }
+    
+     @Override
+     /**
+     * decomposes json-representation TO ArtefactsLocation-exemplar
+     */
+    public ArtefactsCategory decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_artefacts_locations = Integer.parseInt(json.getString("id_artefacts_locations"));
+        this.longitude = Double.parseDouble(json.getString("longitude"));
+        this.longitude = Double.parseDouble(json.getString("latitude"));
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -119,14 +141,4 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
         return id_artefacts_locations;
     }
 
-    /**
-     * composes json-representation for ArtefactsLocation-exemplar
-     */
-    public JSONObject composeJsonObject(){
-        JSONObject jsonLocation = new JSONObject();
-        jsonLocation.put("id_artefacts_locations", id_artefacts_locations);
-        jsonLocation.put("longitude", longitude);
-        jsonLocation.put("latitude", latitude);
-        return jsonLocation;
-    }
 }
