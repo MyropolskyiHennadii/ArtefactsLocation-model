@@ -85,8 +85,9 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
     }
 
     /**
-     * composes json-representation for Artefact-exemplar
+     * composes json-representation for ArtefactAuthor-exemplar
      */
+    @Override
     public JSONObject composeJsonObject(){
         JSONObject jsonAuthor = new JSONObject();
         jsonAuthor.put("id_artefacts_authors", id_artefacts_authors);
@@ -94,6 +95,9 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
         return jsonAuthor;
     }
     
+     /**
+     * decomposes json-representation TO ArtefactsAuthor-exemplar
+     */
     @Override
     public ArtefactsAuthor decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.id_artefacts_authors = Integer.parseInt(json.getString("id_artefacts_authors"));
