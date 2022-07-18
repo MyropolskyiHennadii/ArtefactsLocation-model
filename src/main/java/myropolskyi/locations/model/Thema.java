@@ -86,7 +86,7 @@ public class Thema implements LocationsJsonRepresentable {
     @Override
     public Thema decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.thema_name = json.getString("thema_name");
-        //categories
+        //categories. Do we need it?
         JSONArray categoriesJson = json.getJSONArray("categories");
         categories.clear();
         for (int i = 0; i < synonymsJson.length(); i++) {
