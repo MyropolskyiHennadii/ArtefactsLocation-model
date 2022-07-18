@@ -106,6 +106,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
         return id_temporary;
     }
 
+    @Override
     /**
      * composes json-representation for Artefact-exemplar
      */
@@ -118,6 +119,18 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
         return jsonEvent;
     }
 
+     @Override
+     /**
+     * decomposes json-representation TO ArtefactsEvent-exemplar
+     */
+    public ArtefactsEvent decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.id_events_artefacts = Integer.parseInt(json.getString("id_events_artefacts"));
+        this.event = json.getString("event");
+        this.event_begin = json.getString("event_begin");
+        this.event_end = json.getString("event_end");
+        return this;
+    }
+
     @Override
     public String toString() {
         return "ArtefactsEvent{" +
@@ -128,7 +141,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
                 ", artefact=" + artefact +
                 '}';
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
