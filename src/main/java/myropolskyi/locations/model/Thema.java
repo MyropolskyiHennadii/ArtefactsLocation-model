@@ -72,11 +72,11 @@ public class Thema implements LocationsJsonRepresentable {
         JSONObject jsonThema = new JSONObject();
         jsonThema.put("thema_name", thema_name);
         //categories. Do we need it?
-        JSONArray categoriesJson = new JSONArray();
+        /*JSONArray categoriesJson = new JSONArray();
         for (Category category: getCategories()) {
             categoriesJson.put(category.composeJsonObject());
         }
-        jsonThema.put("categories", categoriesJson);
+        jsonThema.put("categories", categoriesJson);*/
         return jsonThema;
     }
     
@@ -87,11 +87,11 @@ public class Thema implements LocationsJsonRepresentable {
     public Thema decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.thema_name = json.getString("thema_name");
         //categories. Do we need it?
-        JSONArray categoriesJson = json.getJSONArray("categories");
+        /*JSONArray categoriesJson = json.getJSONArray("categories");
         categories.clear();
         for (int i = 0; i < synonymsJson.length(); i++) {
             categories.add((Category) new Category().decomposeJsonObject(categoriesJson.getJSONObject(i)));
-        }
+        }*/
         return this;
     }
 
