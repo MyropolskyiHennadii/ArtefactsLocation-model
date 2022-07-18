@@ -88,6 +88,7 @@ public class MapsRectangle implements LocationsJsonRepresentable {
     /**
      * composes json-representation for Region-exemplar
      */
+    @Override
     public JSONObject composeJsonObject(){
         JSONObject jsonRegion = new JSONObject();
         jsonRegion.put("idregion", idregion);
@@ -97,6 +98,20 @@ public class MapsRectangle implements LocationsJsonRepresentable {
         jsonRegion.put("right_top_longitude", right_top_longitude);
         jsonRegion.put("right_top_latitude", right_top_latitude);
         return jsonRegion;
+    }
+    
+     /**
+     * decomposes json-representation TO Region-exemplar
+     */
+    @Override
+    public Category decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        this.idregion = Integer.parseInt(json.getString("idregion"));
+        this.region_name = json.getString("region_name");
+        this.left_bottom_longitude = Double.parseDouble(json.getString("left_bottom_longitude"));
+        this.left_bottom_latitude = Double.parseDouble(json.getString("left_bottom_latitude"));
+        this.right_top_longitude = Double.parseDouble(json.getString("right_top_longitude"));
+        this.right_top_latitude = Double.parseDouble(json.getString("right_top_latitude"));
+        return this;
     }
 
     @Override
