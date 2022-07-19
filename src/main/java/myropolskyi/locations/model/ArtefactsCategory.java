@@ -90,7 +90,7 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactsCategory-exemplar
      */
     public ArtefactsCategory decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_artefacts_categories = Integer.parseInt(json.getString("id_artefacts_categories"));
+        this.id_artefacts_categories = json.getInt("id_artefacts_categories");
         this.category = (Category) new Category().decomposeJsonObject(json.getJSONObject("category"));
         return this;
     }

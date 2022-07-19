@@ -219,7 +219,7 @@ public class Artefact implements LocationsJsonRepresentable {
      */
     @Override
     public Artefact decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_artefacts = Integer.parseInt(json.getString("id_artefacts"));
+        this.id_artefacts = json.getInt("id_artefacts");
         this.artefacts_name = json.getString("artefacts_name");
         this.web_reference_wiki = json.getString("web_reference_wiki");
         this.page_language = json.getString("page_language");

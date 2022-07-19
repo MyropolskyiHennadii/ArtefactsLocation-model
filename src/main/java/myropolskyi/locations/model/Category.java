@@ -145,7 +145,7 @@ public class Category implements LocationsJsonRepresentable {
      */
     @Override
     public Category decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_category = Integer.parseInt(json.getString("id_category"));
+        this.id_category = json.getInt("id_category");
         this.category_name = json.getString("category_name");
         this.web_reference_wiki = json.getString("web_reference_wiki");
         this.page_language = json.getString("page_language");

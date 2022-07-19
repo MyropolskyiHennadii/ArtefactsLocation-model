@@ -112,7 +112,7 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactSynonym-exemplar
      */
     public ArtefactsSynonym decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_artefacts_synonyms = Integer.parseInt(json.getString("id_artefacts_synonyms"));
+        this.id_artefacts_synonyms = json.getInt("id_artefacts_synonyms");
         this.lang = json.getString("lang");
         this.lang_name = json.getString("lang_name");
         this.web_reference_wiki = json.getString("web_reference_wiki");

@@ -125,7 +125,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactsEvent-exemplar
      */
     public ArtefactsEvent decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_events_artefacts = Integer.parseInt(json.getString("id_events_artefacts"));
+        this.id_events_artefacts = json.getInt("id_events_artefacts");
         this.event = json.getString("event");
         this.event_begin = json.getString("event_begin");
         this.event_end = json.getString("event_end");

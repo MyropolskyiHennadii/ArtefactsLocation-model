@@ -112,7 +112,7 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
      */
     @Override
     public CategoriesSynonym decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_category_synonym = Integer.parseInt(json.getString("id_category_synonym"));
+        this.id_category_synonym = json.getInt("id_category_synonym");
         this.lang = json.getString("lang");
         this.lang_name = json.getString("lang_name");
         this.web_reference_wiki = json.getString("web_reference_wiki");

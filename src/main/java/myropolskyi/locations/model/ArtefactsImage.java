@@ -88,7 +88,7 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactsImage-exemplar
      */
     public ArtefactsImage decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_image = Integer.parseInt(json.getString("id_image"));
+        this.id_image = json.getInt("id_image");
         this.path_to_image = json.getString("path_to_image");
         return this;
     }

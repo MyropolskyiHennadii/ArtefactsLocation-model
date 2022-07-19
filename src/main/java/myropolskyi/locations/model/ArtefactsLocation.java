@@ -112,9 +112,9 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactsLocation-exemplar
      */
     public ArtefactsLocation decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_artefacts_locations = Integer.parseInt(json.getString("id_artefacts_locations"));
-        this.longitude = Double.parseDouble(json.getString("longitude"));
-        this.longitude = Double.parseDouble(json.getString("latitude"));
+        this.id_artefacts_locations = json.getInt("id_artefacts_locations");
+        this.longitude = json.getDouble("longitude");
+        this.longitude = json.getDouble("latitude");
         return this;
     }
 

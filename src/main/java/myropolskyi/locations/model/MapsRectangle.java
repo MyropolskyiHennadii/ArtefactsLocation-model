@@ -108,12 +108,12 @@ public class MapsRectangle implements LocationsJsonRepresentable {
      */
     @Override
     public MapsRectangle decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.idregion = Integer.parseInt(json.getString("idregion"));
+        this.idregion = json.getInt("idregion");
         this.region_name = json.getString("region_name");
-        this.left_bottom_longitude = Double.parseDouble(json.getString("left_bottom_longitude"));
-        this.left_bottom_latitude = Double.parseDouble(json.getString("left_bottom_latitude"));
-        this.right_top_longitude = Double.parseDouble(json.getString("right_top_longitude"));
-        this.right_top_latitude = Double.parseDouble(json.getString("right_top_latitude"));
+        this.left_bottom_longitude = json.getDouble("left_bottom_longitude");
+        this.left_bottom_latitude = json.getDouble("left_bottom_latitude");
+        this.right_top_longitude = json.getDouble("right_top_longitude");
+        this.right_top_latitude = json.getDouble("right_top_latitude");
         return this;
     }
 
