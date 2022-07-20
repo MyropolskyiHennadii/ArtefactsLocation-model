@@ -91,7 +91,7 @@ public class Thema implements LocationsJsonRepresentable {
         /*JSONArray categoriesJson = json.getJSONArray("categories");
         categories.clear();
         for (int i = 0; i < synonymsJson.length(); i++) {
-            categories.add((Category) new Category().decomposeJsonObject(categoriesJson.getJSONObject(i)));
+            categories.add(new Category().decomposeJsonObject(categoriesJson.getJSONObject(i)));
         }*/
         return this;
     }

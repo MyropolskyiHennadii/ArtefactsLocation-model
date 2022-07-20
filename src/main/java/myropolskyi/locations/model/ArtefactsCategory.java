@@ -91,7 +91,7 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
      */
     public ArtefactsCategory decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.id_artefacts_categories = json.getInt("id_artefacts_categories");
-        this.category = (Category) new Category().decomposeJsonObject(json.getJSONObject("category"));
+        this.category = new Category().decomposeJsonObject(json.getJSONObject("category"));
         return this;
     }
 

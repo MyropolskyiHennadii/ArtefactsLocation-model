@@ -155,7 +155,7 @@ public class Category implements LocationsJsonRepresentable {
         JSONArray synonymsJson = json.getJSONArray("synonyms");
         synonyms.clear();
         for (int i = 0; i < synonymsJson.length(); i++) {
-            synonyms.add((CategoriesSynonym) new CategoriesSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
+            synonyms.add(new CategoriesSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
         }
         return this;
     }

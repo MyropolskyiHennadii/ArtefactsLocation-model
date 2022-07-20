@@ -214,7 +214,7 @@ public class Artefact implements LocationsJsonRepresentable {
         return jsonArtefact;
     }
 
-     /**
+    /**
      * decomposes json-representation TO Artefact-exemplar
      */
     @Override
@@ -225,37 +225,38 @@ public class Artefact implements LocationsJsonRepresentable {
         this.page_language = json.getString("page_language");
 
         this.artefactsLocation = (ArtefactsLocation) new ArtefactsLocation().decomposeJsonObject((JSONObject) json.get("artefactsLocation"));
-        Object image = json.get("artefactsImage");
-        if(image == null || image.toString().isEmpty()){
+        Object objImage = json.get("artefactsImage");
+        if (objImage == null || objImage.toString().isEmpty()) {
             this.artefactsImage = null;
-        } else {    
-        this.artefactsImage = (ArtefactsImage) new ArtefactsImage().decomposeJsonObject((JSONObject) json.get("artefactsImage"));}
+        } else {
+            this.artefactsImage = new ArtefactsImage().decomposeJsonObject((JSONObject) objImage);
+        }
         //authors
         JSONArray authorsJson = json.getJSONArray("authors");
         Set<ArtefactsAuthor> artefactsAuthors = new HashSet<>();
         for (int i = 0; i < authorsJson.length(); i++) {
-            artefactsAuthors.add((ArtefactsAuthor) new ArtefactsAuthor().decomposeJsonObject(authorsJson.getJSONObject(i)));
+            artefactsAuthors.add(new ArtefactsAuthor().decomposeJsonObject(authorsJson.getJSONObject(i)));
         }
         setAuthors(artefactsAuthors);
         //events
         JSONArray eventsJson = json.getJSONArray("events");
         Set<ArtefactsEvent> artefactsEvents = new HashSet<>();
         for (int i = 0; i < eventsJson.length(); i++) {
-            artefactsEvents.add((ArtefactsEvent) new ArtefactsEvent().decomposeJsonObject(eventsJson.getJSONObject(i)));
+            artefactsEvents.add(new ArtefactsEvent().decomposeJsonObject(eventsJson.getJSONObject(i)));
         }
         setEvents(artefactsEvents);
         //synonyms
         JSONArray synonymsJson = json.getJSONArray("synonyms");
         Set<ArtefactsSynonym> artefactsSynonyms = new HashSet<>();
         for (int i = 0; i < synonymsJson.length(); i++) {
-            artefactsSynonyms.add((ArtefactsSynonym) new ArtefactsSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
+            artefactsSynonyms.add(new ArtefactsSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
         }
         setSynonyms(artefactsSynonyms);
         //categories
         JSONArray categoriesJson = json.getJSONArray("categories");
         Set<ArtefactsCategory> artefactsCategories = new HashSet<>();
         for (int i = 0; i < categoriesJson.length(); i++) {
-            artefactsCategories.add((ArtefactsCategory) new ArtefactsCategory().decomposeJsonObject(categoriesJson.getJSONObject(i)));
+            artefactsCategories.add(new ArtefactsCategory().decomposeJsonObject(categoriesJson.getJSONObject(i)));
         }
         setCategories(artefactsCategories);
 
