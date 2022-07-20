@@ -114,7 +114,7 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
     public ArtefactsLocation decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.id_artefacts_locations = json.getInt("id_artefacts_locations");
         this.longitude = json.getDouble("longitude");
-        this.longitude = json.getDouble("latitude");
+        this.latitude = json.getDouble("latitude");
         return this;
     }
 
