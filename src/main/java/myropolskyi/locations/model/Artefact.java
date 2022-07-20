@@ -225,7 +225,11 @@ public class Artefact implements LocationsJsonRepresentable {
         this.page_language = json.getString("page_language");
 
         this.artefactsLocation = (ArtefactsLocation) new ArtefactsLocation().decomposeJsonObject((JSONObject) json.get("artefactsLocation"));
-        this.artefactsImage = (ArtefactsImage) new ArtefactsImage().decomposeJsonObject((JSONObject) json.get("artefactsImage"));
+        Object image = json.get("artefactsImage");
+        if(image == null || image.toString().isEmpty()){
+            this.artefactsImage = null;
+        } else {    
+        this.artefactsImage = (ArtefactsImage) new ArtefactsImage().decomposeJsonObject((JSONObject) json.get("artefactsImage"));}
         //authors
         JSONArray authorsJson = json.getJSONArray("authors");
         Set<ArtefactsAuthor> artefactsAuthors = new HashSet<>();
