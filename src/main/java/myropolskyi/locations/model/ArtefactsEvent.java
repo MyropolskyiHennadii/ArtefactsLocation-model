@@ -1,6 +1,9 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import myropolskyi.locations.modelutils.ModelToJsonTransformations;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +14,8 @@ import javax.persistence.*;
 @Table(name = "artefacts_events")
 public class ArtefactsEvent implements LocationsJsonRepresentable {
 
+    private static final Logger LOG = LogManager.getLogger(ArtefactsEvent.class);
+
     private static int counter;//for comparing objects created with id_events_artefacts = 0
 
     @Id
@@ -19,9 +24,9 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
     @Column
     private String event;
     @Column
-    private String event_begin;//year of event
+    private String event_begin;
     @Column
-    private String event_end;//something like "XV centure"
+    private String event_end;
     @Column
     private int updated;//1 = was updated, 0 = wasn't
     @Column
@@ -125,6 +130,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactsEvent-exemplar
      */
     public ArtefactsEvent decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
+        LOG.trace("Reading artefact event from json: {}", json.toString());
         this.id_events_artefacts = json.getInt("id_events_artefacts");
         this.event = json.getString("event");
         this.event_begin = json.getString("event_begin");
