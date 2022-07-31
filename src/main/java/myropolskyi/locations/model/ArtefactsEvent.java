@@ -119,9 +119,9 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
     public JSONObject composeJsonObject() {
         JSONObject jsonEvent = new JSONObject();
         jsonEvent.put("id_events_artefacts", id_events_artefacts);
-        jsonEvent.put("event", event);
-        jsonEvent.put("event_begin", event_begin);
-        jsonEvent.put("event_end", event_end);
+        jsonEvent.put("event", event==null? "": event);
+        jsonEvent.put("event_begin", event_begin==null ? "": event_begin);
+        jsonEvent.put("event_end", event_end==null ? "": event_end);
         return jsonEvent;
     }
 
