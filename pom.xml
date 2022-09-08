@@ -16,7 +16,7 @@
         <log4j2.version>2.17.2</log4j2.version>
         <hibernate.version>5.6.5.Final</hibernate.version>
         <fasterxml.version>2.13.3</fasterxml.version>
-        <mavencompiler.version>3.9.0</mavencompiler.version>
+        <mavencompiler.version>3.10.1</mavencompiler.version>
         <json.version>20220320</json.version>
     </properties>
 
