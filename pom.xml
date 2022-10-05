@@ -7,7 +7,7 @@
     <groupId>myropolskyi.locations</groupId>
     <artifactId>ArtefactsLocation-model</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
         <java.version>1.8</java.version>
         <log4j2.version>2.17.2</log4j2.version>
         <hibernate.version>5.6.5.Final</hibernate.version>
-        <fasterxml.version>2.13.3</fasterxml.version>
+        <fasterxml.version>2.13.4</fasterxml.version>
         <mavencompiler.version>3.10.1</mavencompiler.version>
         <json.version>20220320</json.version>
     </properties>

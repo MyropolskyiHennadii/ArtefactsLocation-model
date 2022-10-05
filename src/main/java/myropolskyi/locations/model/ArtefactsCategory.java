@@ -21,12 +21,12 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "artefacts_categories")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category_artefact")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "id_categories")//important to prevent infinite loop of references
     private Category category;//foreign key in database
 
     public ArtefactsCategory() {

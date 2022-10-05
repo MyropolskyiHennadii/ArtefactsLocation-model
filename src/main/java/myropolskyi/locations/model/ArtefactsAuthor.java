@@ -25,7 +25,7 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "artefacts_authors")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
     //for comparing objects created with id_events_artefacts = 0

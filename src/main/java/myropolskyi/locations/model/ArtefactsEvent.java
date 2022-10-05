@@ -34,7 +34,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "artefacts_events")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
     //for comparing objects created with id_events_artefacts = 0
@@ -130,7 +130,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
      * decomposes json-representation TO ArtefactsEvent-exemplar
      */
     public ArtefactsEvent decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        LOG.trace("Reading artefact event from json: {}", json.toString());
+        LOG.trace("Reading artefact event from json: {}", json);
         this.id_events_artefacts = json.getInt("id_events_artefacts");
         this.event = json.getString("event");
         this.event_begin = json.getString("event_begin");

@@ -33,14 +33,19 @@ public class Category implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "thema")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "thema_categories")//important to prevent infinite loop of references
     private Thema thema;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     //@OneToMany(targetEntity= CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "categories_synonyms")//!!! important to prevent infinite loop with json references
     private Set<CategoriesSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
+
+    //orphanRemoval = true to refresh all synonyms
+    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "id_categories")//!!! important to prevent infinite loop with json references
+    private Set<ArtefactsCategory> artefactsCategories = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     public Category() {
     }

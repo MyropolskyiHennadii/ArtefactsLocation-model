@@ -28,7 +28,7 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "artefacts_synonyms")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
     public ArtefactsSynonym() {

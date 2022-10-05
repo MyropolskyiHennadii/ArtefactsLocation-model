@@ -18,6 +18,7 @@ import java.util.Set;
 public class Artefact implements LocationsJsonRepresentable {
 
     private static final Logger LOG = LogManager.getLogger(Artefact.class);
+    public static final String IMAGE = "artefactsImage";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,32 +36,32 @@ public class Artefact implements LocationsJsonRepresentable {
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "artefacts_authors")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "artefacts_events")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "artefacts_synonyms")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "artefacts_categories")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsCategory> categories = new HashSet<>();// foreign key in database. One Artefact = many categories
 
     //orphanRemoval = true to refresh all synonyms
     @OneToOne(targetEntity = ArtefactsLocation.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "artefacts_location")//!!! important to prevent infinite loop with json references
     private ArtefactsLocation artefactsLocation;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
     @OneToOne(targetEntity = ArtefactsImage.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "artefacts_image")//!!! important to prevent infinite loop with json references
     private ArtefactsImage artefactsImage;//foreign key in database
 
     public Artefact() {
@@ -183,9 +184,9 @@ public class Artefact implements LocationsJsonRepresentable {
         }
         jsonArtefact.put("artefactsLocation", artefactsLocation.composeJsonObject());
         if (artefactsImage != null) {
-            jsonArtefact.put("artefactsImage", artefactsImage.composeJsonObject());
+            jsonArtefact.put(IMAGE, artefactsImage.composeJsonObject());
         } else {
-            jsonArtefact.put("artefactsImage", "");
+            jsonArtefact.put(IMAGE, "");
         }
         //authors
         JSONArray authorsJson = new JSONArray();
@@ -224,8 +225,8 @@ public class Artefact implements LocationsJsonRepresentable {
         this.web_reference_wiki = json.getString("web_reference_wiki");
         this.page_language = json.getString("page_language");
 
-        this.artefactsLocation = (ArtefactsLocation) new ArtefactsLocation().decomposeJsonObject((JSONObject) json.get("artefactsLocation"));
-        Object objImage = json.get("artefactsImage");
+        this.artefactsLocation = new ArtefactsLocation().decomposeJsonObject((JSONObject) json.get("artefactsLocation"));
+        Object objImage = json.get(IMAGE);
         if (objImage == null || objImage.toString().isEmpty()) {
             this.artefactsImage = null;
         } else {

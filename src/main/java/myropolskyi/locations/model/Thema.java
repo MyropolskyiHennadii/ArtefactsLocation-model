@@ -1,7 +1,6 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +21,7 @@ public class Thema implements LocationsJsonRepresentable {
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @OneToMany(targetEntity = Category.class, mappedBy = "thema", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference//!!! important to prevent infinite loop with json references
+    @JsonManagedReference(value = "thema_categories")//!!! important to prevent infinite loop with json references
     private Set<Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
 
     public Thema() {
@@ -72,12 +71,6 @@ public class Thema implements LocationsJsonRepresentable {
     public JSONObject composeJsonObject() {
         JSONObject jsonThema = new JSONObject();
         jsonThema.put("thema_name", thema_name);
-        //categories. Do we need it?
-        /*JSONArray categoriesJson = new JSONArray();
-        for (Category category: getCategories()) {
-            categoriesJson.put(category.composeJsonObject());
-        }
-        jsonThema.put("categories", categoriesJson);*/
         return jsonThema;
     }
 
@@ -87,12 +80,6 @@ public class Thema implements LocationsJsonRepresentable {
     @Override
     public Thema decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
         this.thema_name = json.getString("thema_name");
-        //categories. Do we need it?
-        /*JSONArray categoriesJson = json.getJSONArray("categories");
-        categories.clear();
-        for (int i = 0; i < synonymsJson.length(); i++) {
-            categories.add(new Category().decomposeJsonObject(categoriesJson.getJSONObject(i)));
-        }*/
         return this;
     }
 

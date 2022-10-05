@@ -27,7 +27,7 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category")
-    @JsonBackReference//important to prevent infinite loop of references
+    @JsonBackReference(value = "categories_synonyms")//important to prevent infinite loop of references
     private Category category;//foreign key in database
 
     public CategoriesSynonym() {
