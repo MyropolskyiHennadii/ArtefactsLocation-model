@@ -1,5 +1,8 @@
 package myropolskyi.locations.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import myropolskyi.locations.modelexceptions.ComposeJsonException;
 import org.apache.logging.log4j.LogManager;
@@ -30,13 +33,15 @@ public class Artefact implements LocationsJsonRepresentable {
     @Column
     private String page_language;//language of wiki-page
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "artefacts_authors")//!!! important to prevent infinite loop with json references
+    @JsonManagedReference//!!! important to prevent infinite loop with json references
     private Set<ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     //orphanRemoval = true to refresh all synonyms
@@ -51,7 +56,9 @@ public class Artefact implements LocationsJsonRepresentable {
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "artefacts_categories")//!!! important to prevent infinite loop with json references
+    //@JsonManagedReference(value = "artefacts_categories")//!!! important to prevent infinite loop with json references
+    //@JsonManagedReference(value = "getIdArtefactsCategory")
+    @JsonIgnore
     private Set<ArtefactsCategory> categories = new HashSet<>();// foreign key in database. One Artefact = many categories
 
     //orphanRemoval = true to refresh all synonyms
@@ -300,6 +307,16 @@ public class Artefact implements LocationsJsonRepresentable {
             checkingEvents.add(newEvent);
         }
         return checkingEvents;
+    }
+
+    //try to make json compact
+    @JsonGetter(value = "categories")
+    private Set<Integer> getIdArtefactsCategory() {
+        Set<Integer> idArtefactsCategory = new HashSet<>();
+        for (ArtefactsCategory a : getCategories()) {
+            idArtefactsCategory.add(a.getCategory().getId_category());
+        }
+        return idArtefactsCategory;
     }
 
     /**

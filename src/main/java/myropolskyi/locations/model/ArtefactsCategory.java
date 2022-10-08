@@ -1,6 +1,8 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,8 +17,10 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_artefacts_categories;
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,7 +30,10 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category_artefact")
-    @JsonBackReference(value = "id_categories")//important to prevent infinite loop of references
+    //@JsonBackReference(value = "id_categories")//important to prevent infinite loop of references
+    //try:
+    //@JsonBackReference(value = "getIdMainCategory")//important to prevent infinite loop of references
+    @JsonIgnore
     private Category category;//foreign key in database
 
     public ArtefactsCategory() {
@@ -72,6 +79,12 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    //try
+    @JsonGetter("category")
+    public Integer getIdMainCategory(){
+        return category.getId_category();
     }
 
     @Override

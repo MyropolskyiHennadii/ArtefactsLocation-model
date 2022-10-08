@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,8 +18,10 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
     private String path_to_image;
 
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @OneToOne(fetch = FetchType.EAGER)

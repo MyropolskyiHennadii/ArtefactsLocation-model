@@ -1,5 +1,6 @@
 package myropolskyi.locations.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,8 +17,10 @@ public class Thema implements LocationsJsonRepresentable {
     @Id
     private String thema_name;
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @OneToMany(targetEntity = Category.class, mappedBy = "thema", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

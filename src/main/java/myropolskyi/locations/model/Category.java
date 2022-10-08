@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,13 +28,16 @@ public class Category implements LocationsJsonRepresentable {
     @Column
     private String type_category;// style, temporal or other type
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "thema")
-    @JsonBackReference(value = "thema_categories")//important to prevent infinite loop of references
+    @JsonIgnore
+    //@JsonBackReference(value = "thema_categories")//important to prevent infinite loop of references
     private Thema thema;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
@@ -44,7 +48,8 @@ public class Category implements LocationsJsonRepresentable {
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "id_categories")//!!! important to prevent infinite loop with json references
+    //@JsonManagedReference(value = "id_categories")//!!! important to prevent infinite loop with json references
+    @JsonIgnore
     private Set<ArtefactsCategory> artefactsCategories = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     public Category() {

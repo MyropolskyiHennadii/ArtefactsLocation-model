@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import myropolskyi.locations.modelutils.ModelToJsonTransformations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,8 +29,10 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
     @Column
     private String event_end;
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -39,6 +42,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
 
     //for comparing objects created with id_events_artefacts = 0
     @Transient
+    @JsonIgnore
     private int id_temporary;
 
     public ArtefactsEvent() {

@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,8 +22,10 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
     @Column
     private double latitude;
     @Column
+    @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
     @Column
+    @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -32,6 +35,7 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
 
     //for comparing objects created with id_artefacts_locations = 0
     @Transient
+    @JsonIgnore
     private int id_temporary;
 
     public ArtefactsLocation() {
