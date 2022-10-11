@@ -2,8 +2,6 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -66,26 +64,6 @@ public class Thema implements LocationsJsonRepresentable {
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
-
-    /**
-     * composes json-representation for Thema-exemplar
-     */
-    @Override
-    public JSONObject composeJsonObject() {
-        JSONObject jsonThema = new JSONObject();
-        jsonThema.put("thema_name", thema_name);
-        return jsonThema;
-    }
-
-    /**
-     * decomposes json-representation TO Thema-exemplar
-     */
-    @Override
-    public Thema decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.thema_name = json.getString("thema_name");
-        return this;
-    }
-
 
     @Override
     public String toString() {

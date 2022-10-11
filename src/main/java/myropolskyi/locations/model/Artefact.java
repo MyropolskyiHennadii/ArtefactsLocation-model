@@ -1,17 +1,16 @@
 package myropolskyi.locations.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import myropolskyi.locations.modelexceptions.ComposeJsonException;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,9 +19,8 @@ import java.util.Set;
 @Table(name = "artefacts")
 public class Artefact implements LocationsJsonRepresentable {
 
-    private static final Logger LOG = LogManager.getLogger(Artefact.class);
     public static final String IMAGE = "artefactsImage";
-
+    private static final Logger LOG = LogManager.getLogger(Artefact.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_artefacts;
@@ -38,34 +36,31 @@ public class Artefact implements LocationsJsonRepresentable {
     @Column
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
-
+    /*field to get integer array with Category's codes fron Json*/
+    @Transient
+    private Set<Integer> mainCategoriesId = new HashSet<>();
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
     private Set<ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
-
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "artefacts_events")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
-
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "artefacts_synonyms")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
-
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     //@JsonManagedReference(value = "artefacts_categories")//!!! important to prevent infinite loop with json references
     //@JsonManagedReference(value = "getIdArtefactsCategory")
     @JsonIgnore
     private Set<ArtefactsCategory> categories = new HashSet<>();// foreign key in database. One Artefact = many categories
-
     //orphanRemoval = true to refresh all synonyms
     @OneToOne(targetEntity = ArtefactsLocation.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_location")//!!! important to prevent infinite loop with json references
     private ArtefactsLocation artefactsLocation;//foreign key in database
-
     //orphanRemoval = true to refresh all synonyms
     @OneToOne(targetEntity = ArtefactsImage.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_image")//!!! important to prevent infinite loop with json references
@@ -79,6 +74,15 @@ public class Artefact implements LocationsJsonRepresentable {
         this.web_reference_wiki = web_reference_wiki;
         this.page_language = page_language;
         this.updated = 1;//always for new exemplar (for database exchange)
+    }
+
+    public Set<Integer> getMainCategoriesId() {
+        return mainCategoriesId;
+    }
+
+    @JsonSetter("categories")
+    public void setMainCategoriesId(Integer[] inputArray){
+        Arrays.asList(inputArray).stream().forEach(a -> mainCategoriesId.add(a));
     }
 
     public String getArtefacts_name() {
@@ -171,104 +175,6 @@ public class Artefact implements LocationsJsonRepresentable {
 
     public void setArtefactsImage(ArtefactsImage artefactsImage) {
         this.artefactsImage = artefactsImage;
-    }
-
-    /**
-     * composes json-representation for Artefact-exemplar
-     */
-    @Override
-    public JSONObject composeJsonObject() {
-        JSONObject jsonArtefact = new JSONObject();
-        LOG.trace("Compose Artefact with id: {}", id_artefacts);
-        jsonArtefact.put("id_artefacts", id_artefacts);
-        jsonArtefact.put("artefacts_name", artefacts_name);
-        jsonArtefact.put("web_reference_wiki", web_reference_wiki);
-        jsonArtefact.put("page_language", page_language);
-        //impossible, but:
-        if (artefactsLocation == null) {
-            LOG.warn("Empty location. Artefact's id={}", id_artefacts);
-            throw new ComposeJsonException("Empty location. Artefact's id=" + id_artefacts);
-        }
-        jsonArtefact.put("artefactsLocation", artefactsLocation.composeJsonObject());
-        if (artefactsImage != null) {
-            jsonArtefact.put(IMAGE, artefactsImage.composeJsonObject());
-        } else {
-            jsonArtefact.put(IMAGE, "");
-        }
-        //authors
-        JSONArray authorsJson = new JSONArray();
-        for (ArtefactsAuthor author : getAuthors()) {
-            authorsJson.put(author.composeJsonObject());
-        }
-        jsonArtefact.put("authors", authorsJson);
-        //events
-        JSONArray eventsJson = new JSONArray();
-        for (ArtefactsEvent event : getEvents()) {
-            eventsJson.put(event.composeJsonObject());
-        }
-        jsonArtefact.put("events", eventsJson);
-        //synonyms
-        JSONArray synonymsJson = new JSONArray();
-        for (ArtefactsSynonym synonym : getSynonyms()) {
-            synonymsJson.put(synonym.composeJsonObject());
-        }
-        jsonArtefact.put("synonyms", synonymsJson);
-        //categories
-        JSONArray categoriesJson = new JSONArray();
-        for (ArtefactsCategory artefactsCategory : getCategories()) {
-            categoriesJson.put(artefactsCategory.composeJsonObject());
-        }
-        jsonArtefact.put("categories", categoriesJson);
-        return jsonArtefact;
-    }
-
-    /**
-     * decomposes json-representation TO Artefact-exemplar
-     */
-    @Override
-    public Artefact decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_artefacts = json.getInt("id_artefacts");
-        this.artefacts_name = json.getString("artefacts_name");
-        this.web_reference_wiki = json.getString("web_reference_wiki");
-        this.page_language = json.getString("page_language");
-
-        this.artefactsLocation = new ArtefactsLocation().decomposeJsonObject((JSONObject) json.get("artefactsLocation"));
-        Object objImage = json.get(IMAGE);
-        if (objImage == null || objImage.toString().isEmpty()) {
-            this.artefactsImage = null;
-        } else {
-            this.artefactsImage = new ArtefactsImage().decomposeJsonObject((JSONObject) objImage);
-        }
-        //authors
-        JSONArray authorsJson = json.getJSONArray("authors");
-        Set<ArtefactsAuthor> artefactsAuthors = new HashSet<>();
-        for (int i = 0; i < authorsJson.length(); i++) {
-            artefactsAuthors.add(new ArtefactsAuthor().decomposeJsonObject(authorsJson.getJSONObject(i)));
-        }
-        setAuthors(artefactsAuthors);
-        //events
-        JSONArray eventsJson = json.getJSONArray("events");
-        Set<ArtefactsEvent> artefactsEvents = new HashSet<>();
-        for (int i = 0; i < eventsJson.length(); i++) {
-            artefactsEvents.add(new ArtefactsEvent().decomposeJsonObject(eventsJson.getJSONObject(i)));
-        }
-        setEvents(artefactsEvents);
-        //synonyms
-        JSONArray synonymsJson = json.getJSONArray("synonyms");
-        Set<ArtefactsSynonym> artefactsSynonyms = new HashSet<>();
-        for (int i = 0; i < synonymsJson.length(); i++) {
-            artefactsSynonyms.add(new ArtefactsSynonym().decomposeJsonObject(synonymsJson.getJSONObject(i)));
-        }
-        setSynonyms(artefactsSynonyms);
-        //categories
-        JSONArray categoriesJson = json.getJSONArray("categories");
-        Set<ArtefactsCategory> artefactsCategories = new HashSet<>();
-        for (int i = 0; i < categoriesJson.length(); i++) {
-            artefactsCategories.add(new ArtefactsCategory().decomposeJsonObject(categoriesJson.getJSONObject(i)));
-        }
-        setCategories(artefactsCategories);
-
-        return this;
     }
 
     /**

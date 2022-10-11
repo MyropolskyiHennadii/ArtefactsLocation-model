@@ -2,11 +2,8 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import myropolskyi.locations.modelutils.ModelToJsonTransformations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -114,32 +111,6 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
 
     public int getId_temporary() {
         return id_temporary;
-    }
-
-    @Override
-    /**
-     * composes json-representation for ArtefactsEvent-exemplar
-     */
-    public JSONObject composeJsonObject() {
-        JSONObject jsonEvent = new JSONObject();
-        jsonEvent.put("id_events_artefacts", id_events_artefacts);
-        jsonEvent.put("event", event==null? "": event);
-        jsonEvent.put("event_begin", event_begin==null ? "": event_begin);
-        jsonEvent.put("event_end", event_end==null ? "": event_end);
-        return jsonEvent;
-    }
-
-    @Override
-    /**
-     * decomposes json-representation TO ArtefactsEvent-exemplar
-     */
-    public ArtefactsEvent decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        LOG.trace("Reading artefact event from json: {}", json);
-        this.id_events_artefacts = json.getInt("id_events_artefacts");
-        this.event = json.getString("event");
-        this.event_begin = json.getString("event_begin");
-        this.event_end = json.getString("event_end");
-        return this;
     }
 
     @Override

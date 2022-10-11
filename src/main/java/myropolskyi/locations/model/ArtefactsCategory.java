@@ -3,8 +3,6 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -81,31 +79,10 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
         this.category = category;
     }
 
-    //try
+    /*to download integer Category's id*/
     @JsonGetter("category")
     public Integer getIdMainCategory(){
         return category.getId_category();
-    }
-
-    @Override
-    /**
-     * composes json-representation for ArtefactsCategory-exemplar
-     */
-    public JSONObject composeJsonObject() {
-        JSONObject jsonArtefactsCategory = new JSONObject();
-        jsonArtefactsCategory.put("id_artefacts_categories", id_artefacts_categories);
-        jsonArtefactsCategory.put("category", category.composeJsonObject());
-        return jsonArtefactsCategory;
-    }
-
-    @Override
-    /**
-     * decomposes json-representation TO ArtefactsCategory-exemplar
-     */
-    public ArtefactsCategory decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.id_artefacts_categories = json.getInt("id_artefacts_categories");
-        this.category = new Category().decomposeJsonObject(json.getJSONObject("category"));
-        return this;
     }
 
     @Override

@@ -3,9 +3,9 @@ package myropolskyi.locations.modelutils;
 import myropolskyi.locations.model.Artefact;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
+/*import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.JSONObject;*/
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +28,7 @@ public class ModelToJsonTransformations {
      * @param thema
      * @return
      */
-    public static JSONArray getJsonFromArtefactsCollection(Collection<Artefact> artefacts, String thema) {
+   /* public static JSONArray getJsonFromArtefactsCollection(Collection<Artefact> artefacts, String thema) {
 //TODO how to do the first query with сategories filter?
         final JSONArray artefactsJson = new JSONArray();
         artefacts.stream()
@@ -43,21 +43,21 @@ public class ModelToJsonTransformations {
                 .forEach(a -> artefactsJson.put(a.composeJsonObject()));
         LOG.debug("Length of artefacts-json {}", artefactsJson.length());
         return artefactsJson;
-    }
+    }*/
 
     /**
      * decomposes JSONarray to List<Artefact>
      * @param jsonArtefacts
      * @return
      */
-    public static List<Artefact> getListArtefactFromJSONArtefactsArray(JSONArray jsonArtefacts) throws NumberFormatException, JSONException {
+ /*   public static List<Artefact> getListArtefactFromJSONArtefactsArray(JSONArray jsonArtefacts) throws NumberFormatException, JSONException {
         List<Artefact> listArtefact = new ArrayList<>();
         for (int i = 0; i < jsonArtefacts.length(); i++) {
             listArtefact.add(new Artefact().decomposeJsonObject((JSONObject) jsonArtefacts.get(i)));
         }
         LOG.debug("After decomposing size of List<Artefacts>: {}", listArtefact.size());
         return listArtefact;
-    }
+    }*/
 
     /**
      * forms JSON array with used in Artefacts collection categories (only categories ID)
@@ -65,7 +65,7 @@ public class ModelToJsonTransformations {
      * @param artefacts
      * @return
      */
-    public static JSONArray getJsonIdUsedCategories(Collection<Artefact> artefacts) {
+   /* public static JSONArray getJsonIdUsedCategories(Collection<Artefact> artefacts) {
         final JSONArray artefactsCategoryIdSet = new JSONArray();
         artefacts.stream()
                 .flatMap(a -> a.getCategories().stream())
@@ -74,5 +74,5 @@ public class ModelToJsonTransformations {
                 .forEach(artefactsCategoryIdSet::put);
         LOG.debug("Length of artefacts ID categories-json {}", artefactsCategoryIdSet.length());
         return artefactsCategoryIdSet;
-    }
+    }*/
 }

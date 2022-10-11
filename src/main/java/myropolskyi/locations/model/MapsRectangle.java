@@ -1,8 +1,5 @@
 package myropolskyi.locations.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import javax.persistence.*;
 
 
@@ -86,35 +83,6 @@ public class MapsRectangle implements LocationsJsonRepresentable {
 
     public void setRight_top_latitude(Double right_top_latitude) {
         this.right_top_latitude = right_top_latitude;
-    }
-
-    /**
-     * composes json-representation for Region-exemplar
-     */
-    @Override
-    public JSONObject composeJsonObject() {
-        JSONObject jsonRegion = new JSONObject();
-        jsonRegion.put("idregion", idregion);
-        jsonRegion.put("region_name", region_name);
-        jsonRegion.put("left_bottom_longitude", left_bottom_longitude);
-        jsonRegion.put("left_bottom_latitude", left_bottom_latitude);
-        jsonRegion.put("right_top_longitude", right_top_longitude);
-        jsonRegion.put("right_top_latitude", right_top_latitude);
-        return jsonRegion;
-    }
-
-    /**
-     * decomposes json-representation TO Region-exemplar
-     */
-    @Override
-    public MapsRectangle decomposeJsonObject(JSONObject json) throws NumberFormatException, JSONException {
-        this.idregion = json.getInt("idregion");
-        this.region_name = json.getString("region_name");
-        this.left_bottom_longitude = json.getDouble("left_bottom_longitude");
-        this.left_bottom_latitude = json.getDouble("left_bottom_latitude");
-        this.right_top_longitude = json.getDouble("right_top_longitude");
-        this.right_top_latitude = json.getDouble("right_top_latitude");
-        return this;
     }
 
     @Override
