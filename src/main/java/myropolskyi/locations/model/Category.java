@@ -130,8 +130,7 @@ public class Category implements LocationsJsonRepresentable {
                 "id_category=" + id_category +
                 ", category_name='" + category_name + '\'' +
                 ", page_language='" + page_language + '\'' +
-                ", web_reference_wiki='" + web_reference_wiki + '\'' +
-                ", thema=" + thema.getThema_name() +
+                ", web_reference_wiki='" + web_reference_wiki +
                 '}';
     }
 
