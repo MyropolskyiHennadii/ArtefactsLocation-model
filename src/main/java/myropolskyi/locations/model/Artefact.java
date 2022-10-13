@@ -36,6 +36,7 @@ public class Artefact implements LocationsJsonRepresentable {
     @Column
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
+
     /*field to get integer array with Category's codes fron Json*/
     @Transient
     private Set<Integer> mainCategoriesId = new HashSet<>();
@@ -215,7 +216,7 @@ public class Artefact implements LocationsJsonRepresentable {
         return checkingEvents;
     }
 
-    //try to make json compact
+    //make json compact; without references to object. just integers = Category.id
     @JsonGetter(value = "categories")
     private Set<Integer> getIdArtefactsCategory() {
         Set<Integer> idArtefactsCategory = new HashSet<>();

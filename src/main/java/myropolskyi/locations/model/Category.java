@@ -1,5 +1,6 @@
 package myropolskyi.locations.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -122,6 +123,12 @@ public class Category implements LocationsJsonRepresentable {
 
     public String getType_category() {
         return type_category;
+    }
+
+    //make json compact; without references to object. just name of the thema
+    @JsonGetter(value = "thema")
+    private String getThemaName() {
+        return thema.getThema_name();
     }
 
     @Override
