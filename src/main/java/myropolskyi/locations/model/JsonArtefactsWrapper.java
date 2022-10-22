@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.List;
 
 /**
- * class for reading list of artefacts from json
+ * class for reading list of artefacts from json-file (defined structure and downloaded from ArtefactsLocation-API)
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonArtefactsWrapper {
