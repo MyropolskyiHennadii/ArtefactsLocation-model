@@ -1,16 +1,16 @@
 package myropolskyi.locations.modelutils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import myropolskyi.locations.model.Artefact;
+import myropolskyi.locations.model.JsonArtefactsWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-/*import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;*/
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * class for static service functions
@@ -21,58 +21,25 @@ public class ModelToJsonTransformations {
 
     private static final Logger LOG = LogManager.getLogger(ModelToJsonTransformations.class);
 
-    /**
-     * forms JSONArray from Artefacts collection
-     *
-     * @param artefacts
-     * @param thema
-     * @return
-     */
-   /* public static JSONArray getJsonFromArtefactsCollection(Collection<Artefact> artefacts, String thema) {
-//TODO how to do the first query with сategories filter?
-        final JSONArray artefactsJson = new JSONArray();
-        artefacts.stream()
-                //remain categories only for defined thema
-                .map(a -> {
-                    a.setCategories(
-                            a.getCategories().stream()
-                                    .filter(b -> b.getCategory().getThema().getThema_name().equals(thema))
-                                    .collect(Collectors.toSet())); return a;
-                })
-                .filter(a -> !a.getCategories().isEmpty())//not empty set of categories
-                .forEach(a -> artefactsJson.put(a.composeJsonObject()));
-        LOG.debug("Length of artefacts-json {}", artefactsJson.length());
-        return artefactsJson;
-    }*/
+    public static List<Artefact> getListArtefactForRegion(String pathToFile, Charset encoding) throws IOException {
+        String jsonContent = readFile(pathToFile, encoding);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonArtefactsWrapper jsonArtefactsWrapper = objectMapper.readValue(jsonContent, JsonArtefactsWrapper.class);
+        LOG.debug("jsonArtefactsWrapper was filled successfully.");
+        return jsonArtefactsWrapper.getArtefacts();
+    }
 
     /**
-     * decomposes JSONarray to List<Artefact>
-     * @param jsonArtefacts
-     * @return
-     */
- /*   public static List<Artefact> getListArtefactFromJSONArtefactsArray(JSONArray jsonArtefacts) throws NumberFormatException, JSONException {
-        List<Artefact> listArtefact = new ArrayList<>();
-        for (int i = 0; i < jsonArtefacts.length(); i++) {
-            listArtefact.add(new Artefact().decomposeJsonObject((JSONObject) jsonArtefacts.get(i)));
-        }
-        LOG.debug("After decomposing size of List<Artefacts>: {}", listArtefact.size());
-        return listArtefact;
-    }*/
-
-    /**
-     * forms JSON array with used in Artefacts collection categories (only categories ID)
+     * returns content of file as string
      *
-     * @param artefacts
+     * @param path
+     * @param encoding
      * @return
+     * @throws IOException
      */
-   /* public static JSONArray getJsonIdUsedCategories(Collection<Artefact> artefacts) {
-        final JSONArray artefactsCategoryIdSet = new JSONArray();
-        artefacts.stream()
-                .flatMap(a -> a.getCategories().stream())
-                .map(a -> a.getCategory().getId_category())
-                .collect(Collectors.toSet())
-                .forEach(artefactsCategoryIdSet::put);
-        LOG.debug("Length of artefacts ID categories-json {}", artefactsCategoryIdSet.length());
-        return artefactsCategoryIdSet;
-    }*/
+    static String readFile(String path, Charset encoding)
+            throws IOException {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
 }
