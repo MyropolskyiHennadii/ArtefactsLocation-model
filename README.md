@@ -16,3 +16,7 @@ Artefact <-------
                                                             |CategoriesSynonym (Set)
                                                             |Thema (One)
 
+## Version History
+
+**Version 1.1.4** **(05.05.2023)**
+* Method getResumeFromWiki(String wikiPage, String artefactName) was added for exact page, not artefact

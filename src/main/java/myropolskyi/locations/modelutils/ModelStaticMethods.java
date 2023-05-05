@@ -10,9 +10,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,6 +30,7 @@ public class ModelStaticMethods {
 
     /**
      * from json-file with artefacts to list of artefacts from file
+     *
      * @param pathToFile
      * @param encoding
      * @return list of artefacts
@@ -47,6 +46,7 @@ public class ModelStaticMethods {
 
     /**
      * from json-file with artefacts to list of artefacts from InputStream
+     *
      * @param isr
      * @return list of artefacts
      * @throws IOException
@@ -76,8 +76,9 @@ public class ModelStaticMethods {
 
     /**
      * gets from wiki-api extract for the artefact's page
+     *
      * @param artefact
-     * @return
+     * @return wiki-resume
      * @throws IOException
      */
     public static String getResumeFromWiki(Artefact artefact) throws IOException {
@@ -85,6 +86,32 @@ public class ModelStaticMethods {
         String domainName = artefact.getWeb_reference_wiki().replaceAll("http(s)?://|www\\.|/.*", "");
         String strUrl = "http://" + domainName + "/w/api.php?action=query&prop=extracts&format=json&titles="
                 + URLEncoder.encode(artefact.getArtefacts_name(), StandardCharsets.UTF_8.toString());
+        return getResultFromWikiAPI(strUrl);
+    }
+
+    /**
+     * gets from wiki-api extract for the artefact's page
+     *
+     * @param wikiPage     url wiki
+     * @param artefactName artefacts name in language url wiki
+     * @return wiki-resume
+     * @throws IOException
+     */
+    public static String getResumeFromWiki(String wikiPage, String artefactName) throws IOException {
+        /*it depends on domain... de, en, so on*/
+        String domainName = wikiPage.replaceAll("http(s)?://|www\\.|/.*", "");
+        String strUrl = "http://" + domainName + "/w/api.php?action=query&prop=extracts&format=json&titles="
+                + URLEncoder.encode(artefactName, StandardCharsets.UTF_8.toString());
+        return getResultFromWikiAPI(strUrl);
+    }
+
+    /**
+     * gets result from wiki-API for resume
+     *
+     * @param strUrl
+     * @return
+     */
+    public static String getResultFromWikiAPI(String strUrl) throws IOException {
         URL url = new URL(strUrl);
 
         StringBuilder result = new StringBuilder();
@@ -112,6 +139,7 @@ public class ModelStaticMethods {
     /**
      * recursive: if extract is not empty, stop it end return it
      * We don't know, where is our key 'extract' exactly (on what stock)
+     *
      * @param jsonString
      * @return
      */
