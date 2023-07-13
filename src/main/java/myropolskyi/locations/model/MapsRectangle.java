@@ -1,6 +1,6 @@
 package myropolskyi.locations.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 /**

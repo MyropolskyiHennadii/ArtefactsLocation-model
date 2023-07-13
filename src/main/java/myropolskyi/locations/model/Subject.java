@@ -2,18 +2,18 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 //Themas of record
 @Entity
 @Table(name = "themas")
-public class Thema implements LocationsJsonRepresentable {
+public class Subject implements LocationsJsonRepresentable {
 
     @Id
-    private String thema_name;
+    private String subject_name;
     @Column
     @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
@@ -25,20 +25,20 @@ public class Thema implements LocationsJsonRepresentable {
     @JsonManagedReference(value = "thema_categories")//!!! important to prevent infinite loop with json references
     private Set<Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
 
-    public Thema() {
+    public Subject() {
     }
 
-    public Thema(String thema_name) {
-        this.thema_name = thema_name;
+    public Subject(String subject_name) {
+        this.subject_name = subject_name;
         this.updated = 1;//always for new exemplar (for database exchange)
     }
 
-    public String getThema_name() {
-        return thema_name;
+    public String getSubject_name() {
+        return subject_name;
     }
 
-    public void setThema_name(String thema_name) {
-        this.thema_name = thema_name;
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
     }
 
     public int getUpdated() {
@@ -68,7 +68,7 @@ public class Thema implements LocationsJsonRepresentable {
     @Override
     public String toString() {
         return "Thema{" +
-                ", thema_name='" + thema_name + '\'' +
+                ", thema_name='" + subject_name + '\'' +
                 ", categories=" + categories +
                 '}';
     }
@@ -77,12 +77,12 @@ public class Thema implements LocationsJsonRepresentable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Thema thema = (Thema) o;
-        return getThema_name().equals(thema.getThema_name());
+        Subject subject = (Subject) o;
+        return getSubject_name().equals(subject.getSubject_name());
     }
 
     @Override
     public int hashCode() {
-        return getThema_name().length();
+        return getSubject_name().length();
     }
 }

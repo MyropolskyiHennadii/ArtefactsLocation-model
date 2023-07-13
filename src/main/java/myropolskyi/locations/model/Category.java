@@ -3,8 +3,8 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,7 +35,7 @@ public class Category implements LocationsJsonRepresentable {
     @JoinColumn(name = "thema")
     @JsonIgnore
     //@JsonBackReference(value = "thema_categories")//important to prevent infinite loop of references
-    private Thema thema;//foreign key in database
+    private Subject subject;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -52,13 +52,13 @@ public class Category implements LocationsJsonRepresentable {
     public Category() {
     }
 
-    public Category(String category_name, String web_reference_wiki, String lang, String typeCategory, Thema thema) {
+    public Category(String category_name, String web_reference_wiki, String lang, String typeCategory, Subject subject) {
         this.category_name = category_name;
         this.web_reference_wiki = web_reference_wiki;
         this.page_language = lang;
         this.updated = 1;//always for new exemplar (for database exchange)
         this.type_category = typeCategory;
-        this.thema = thema;
+        this.subject = subject;
     }
 
     public int getId_category() {
@@ -97,12 +97,12 @@ public class Category implements LocationsJsonRepresentable {
         this.deleted = deleted;
     }
 
-    public Thema getThema() {
-        return thema;
+    public Subject getThema() {
+        return subject;
     }
 
-    public void setThema(Thema thema) {
-        this.thema = thema;
+    public void setThema(Subject subject) {
+        this.subject = subject;
     }
 
     public String getPage_language() {
@@ -128,7 +128,7 @@ public class Category implements LocationsJsonRepresentable {
     //make json compact; without references to object. just name of the thema
     @JsonGetter(value = "thema")
     private String getThemaName() {
-        return thema.getThema_name();
+        return subject.getSubject_name();
     }
 
     @Override

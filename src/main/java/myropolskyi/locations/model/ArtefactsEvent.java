@@ -2,17 +2,14 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.persistence.*;
 
 //Events of Artefact
 @Entity
 @Table(name = "artefacts_events")
 public class ArtefactsEvent implements LocationsJsonRepresentable {
-
-    private static final Logger LOG = LogManager.getLogger(ArtefactsEvent.class);
 
     private static int counter;//for comparing objects created with id_events_artefacts = 0
 

@@ -7,17 +7,16 @@
     <groupId>myropolskyi.locations</groupId>
     <artifactId>ArtefactsLocation-model</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.4</version>
+    <version>1.2.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <log4j2.version>2.19.0</log4j2.version>
-        <hibernate.version>5.6.5.Final</hibernate.version>
-        <fasterxml.version>2.13.4</fasterxml.version>
-        <mavencompiler.version>3.10.1</mavencompiler.version>
-        <json.version>20220924</json.version>
+        <java.version>11</java.version>
+        <log4j2.version>2.20.0</log4j2.version>
+        <hibernate.version>6.2.6.Final</hibernate.version>
+        <fasterxml.version>2.15.2</fasterxml.version>
+        <mavencompiler.version>3.11.0</mavencompiler.version>
     </properties>
 
     <dependencies>
@@ -29,11 +28,11 @@
             <version>${log4j2.version}</version>
         </dependency>
 
-        <!--jpa and sql. Need to keep old hibernate because of a lot of job afte transfer to new hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>
@@ -46,13 +45,13 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.14.0-rc1</version>
+            <version>${fasterxml.version}</version>
         </dependency>
         <!-- json only for next app support-->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>${json.version}</version>
+            <version>20230618</version>
         </dependency>
     </dependencies>
 
@@ -67,32 +66,6 @@
                     <source>${java.version}</source>
                 </configuration>
             </plugin>
-            <!--for verify-->
-            <!--<plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>6.5.3</version>
-                <configuration>
-                    <failOnError>false</failOnError>
-                    <formats>
-                        <format>XML</format>
-                        <format>HTML</format>
-                    </formats>
-                    <connectionTimeout>60000</connectionTimeout>
-                    &lt;!&ndash; Disable .Net contents&ndash;&gt;
-                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-                    <nugetconfAnalyzerEnabled>false</nugetconfAnalyzerEnabled>
-                    <nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
--->
         </plugins>
     </build>
 
