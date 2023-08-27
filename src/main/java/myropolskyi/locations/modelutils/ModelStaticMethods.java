@@ -146,11 +146,9 @@ public class ModelStaticMethods {
     }
 
     /**
-     * recursive: if extract is not empty, stop it end return it
-     * We don't know, where is our key 'extract' exactly (on what stock)
-     *
-     * @param jsonString
-     * @return
+     * gets extract from wiki-page-json
+     * @param jsonString input json
+     * @return string with extract
      */
     public static String getExtractFromJsonWiki(String jsonString) throws JsonReadingException {
         //it was getExtractFromJsonWiki(String jsonString, StringBuilder extract)

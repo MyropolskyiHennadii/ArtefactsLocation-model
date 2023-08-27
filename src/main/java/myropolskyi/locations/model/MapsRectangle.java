@@ -8,7 +8,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "regions")
-public class MapsRectangle implements LocationsJsonRepresentable {
+public class MapsRectangle implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

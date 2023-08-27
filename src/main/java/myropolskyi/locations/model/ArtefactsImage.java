@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "artefacts_images")
-public class ArtefactsImage implements LocationsJsonRepresentable {
+public class ArtefactsImage implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

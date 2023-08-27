@@ -9,8 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import myropolskyi.location.exceptions.JsonReadingException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,7 +17,7 @@ import java.util.Set;
 //main class of artefacts
 @Entity
 @Table(name = "artefacts")
-public class Artefact implements LocationsJsonRepresentable {
+public class Artefact implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

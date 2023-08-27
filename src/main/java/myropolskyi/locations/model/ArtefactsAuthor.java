@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 //Author of Artefact
 @Entity
 @Table(name = "artefacts_authors")
-public class ArtefactsAuthor implements LocationsJsonRepresentable {
+public class ArtefactsAuthor implements AsModelRepresentable {
 
     private static int counter;//for comparing objects created with id_artefacts_authors = 0
 

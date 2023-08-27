@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 //Category's synonym in different languages
 @Entity
 @Table(name = "categories_synonyms")
-public class CategoriesSynonym implements LocationsJsonRepresentable {
+public class CategoriesSynonym implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

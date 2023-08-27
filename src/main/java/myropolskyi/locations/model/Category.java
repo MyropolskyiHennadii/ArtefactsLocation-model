@@ -11,7 +11,7 @@ import java.util.Set;
 //Category of subject
 @Entity
 @Table(name = "categories")
-public class Category implements LocationsJsonRepresentable {
+public class Category implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 //Artefact's category
 @Entity
 @Table(name = "artefacts_categories")
-public class ArtefactsCategory implements LocationsJsonRepresentable {
+public class ArtefactsCategory implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

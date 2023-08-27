@@ -10,7 +10,7 @@ import java.util.Set;
 //Themas of record
 @Entity
 @Table(name = "themas")
-public class Subject implements LocationsJsonRepresentable {
+public class Subject implements AsModelRepresentable {
 
     @Id
     private String subject_name;
