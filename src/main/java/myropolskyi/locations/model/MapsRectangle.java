@@ -37,7 +37,7 @@ public class MapsRectangle implements LocationsJsonRepresentable {
         this.right_top_latitude = right_top_latitude;
     }
 
-    public int getIdregion() {
+    public int getId() {
         return idregion;
     }
 

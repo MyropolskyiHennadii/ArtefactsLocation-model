@@ -3,8 +3,6 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //Events of Artefact
 @Entity
@@ -54,7 +52,7 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
         counter++;
     }
 
-    public int getId_events_artefacts() {
+    public int getId() {
         return id_events_artefacts;
     }
 
@@ -132,6 +130,6 @@ public class ArtefactsEvent implements LocationsJsonRepresentable {
 
     @Override
     public int hashCode() {
-        return getId_events_artefacts();
+        return getId();
     }
 }

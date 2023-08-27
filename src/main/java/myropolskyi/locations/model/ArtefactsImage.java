@@ -36,7 +36,7 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
     public ArtefactsImage() {
     }
 
-    public int getId_image() {
+    public int getId() {
         return id_image;
     }
 
@@ -86,7 +86,7 @@ public class ArtefactsImage implements LocationsJsonRepresentable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArtefactsImage that = (ArtefactsImage) o;
-        return path_to_image.equals(that.path_to_image) && (artefact.getId_artefacts() == that.getArtefact().getId_artefacts());
+        return path_to_image.equals(that.path_to_image) && (artefact.getId() == that.getArtefact().getId());
     }
 
     @Override

@@ -77,7 +77,7 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
         this.artefact = artefact;
     }
 
-    public int getId_artefacts_authors() {
+    public int getId() {
         return id_artefacts_authors;
     }
 
@@ -105,6 +105,6 @@ public class ArtefactsAuthor implements LocationsJsonRepresentable {
 
     @Override
     public int hashCode() {
-        return getId_artefacts_authors();
+        return getId();
     }
 }

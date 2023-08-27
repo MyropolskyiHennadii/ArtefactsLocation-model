@@ -52,7 +52,7 @@ public class ArtefactsLocation implements LocationsJsonRepresentable {
         return id_temporary;
     }
 
-    public int getId_artefacts_locations() {
+    public int getId() {
         return id_artefacts_locations;
     }
 

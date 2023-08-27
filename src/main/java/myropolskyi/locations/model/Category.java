@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-//Category of thema
+//Category of subject
 @Entity
 @Table(name = "categories")
 public class Category implements LocationsJsonRepresentable {
@@ -61,7 +61,7 @@ public class Category implements LocationsJsonRepresentable {
         this.subject = subject;
     }
 
-    public int getId_category() {
+    public int getId() {
         return id_category;
     }
 
@@ -151,7 +151,7 @@ public class Category implements LocationsJsonRepresentable {
 
     @Override
     public int hashCode() {
-        return getId_category();
+        return getId();
     }
 
 }

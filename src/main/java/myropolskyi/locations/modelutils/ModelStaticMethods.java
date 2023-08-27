@@ -1,21 +1,24 @@
 package myropolskyi.locations.modelutils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import myropolskyi.location.exceptions.JsonReadingException;
 import myropolskyi.locations.model.Artefact;
 import myropolskyi.locations.model.JsonArtefactsWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -133,7 +136,13 @@ public class ModelStaticMethods {
             }
         }
         //we get json-string. Now we have to get exactly extract from this json
-        return getExtractFromJsonWiki(result.toString(), new StringBuilder());
+        try {
+            return getExtractFromJsonWiki(result.toString());
+        } catch (JsonReadingException e) {
+            /*TODO: check, how does it work*/
+            return "Error by reading json from wiki: " + e.getMessage();
+        }
+
     }
 
     /**
@@ -143,24 +152,15 @@ public class ModelStaticMethods {
      * @param jsonString
      * @return
      */
-    public static String getExtractFromJsonWiki(String jsonString, StringBuilder extract) {
-        JSONObject jsonObject = new JSONObject(jsonString.trim());
-        Iterator<String> keys = jsonObject.keys();
-
-        while (keys.hasNext()) {
-            if (!extract.toString().trim().isEmpty()) {
-                return extract.toString();
-            }
-            String key = keys.next();
-            Object currentValue = jsonObject.get(key);
-            if (key.trim().equals("extract")) {
-                extract.append(jsonObject.get("extract").toString());
-                break;
-            }
-            if (jsonObject.get(key) instanceof JSONObject) {
-                getExtractFromJsonWiki(currentValue.toString(), extract);
-            }
+    public static String getExtractFromJsonWiki(String jsonString) throws JsonReadingException {
+        //it was getExtractFromJsonWiki(String jsonString, StringBuilder extract)
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode obj = mapper.readTree(jsonString);
+            return obj.get("extract").asText();
+        } catch (JsonProcessingException e) {
+            throw new JsonReadingException("Impossible to read  extract from wiki: " + e.getMessage());
         }
-        return extract.toString();
+
     }
 }

@@ -89,7 +89,7 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
         this.category = category;
     }
 
-    public int getId_category_synonym() {
+    public int getId() {
         return id_category_synonym;
     }
 
@@ -118,7 +118,7 @@ public class CategoriesSynonym implements LocationsJsonRepresentable {
         if (category == null) {
             return 999999999;
         } else {
-            return getCategory().getId_category();
+            return getCategory().getId();
         }
     }
 

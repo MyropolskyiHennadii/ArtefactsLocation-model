@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
+import myropolskyi.location.exceptions.JsonReadingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,8 +21,6 @@ import java.util.Set;
 @Table(name = "artefacts")
 public class Artefact implements LocationsJsonRepresentable {
 
-    public static final String IMAGE = "artefactsImage";
-    private static final Logger LOG = LogManager.getLogger(Artefact.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_artefacts;
@@ -82,7 +82,7 @@ public class Artefact implements LocationsJsonRepresentable {
     }
 
     @JsonSetter("categories")
-    public void setMainCategoriesId(Integer[] inputArray){
+    public void setMainCategoriesId(Integer[] inputArray) {
         Arrays.asList(inputArray).stream().forEach(a -> mainCategoriesId.add(a));
     }
 
@@ -150,7 +150,7 @@ public class Artefact implements LocationsJsonRepresentable {
         this.categories = categories;
     }
 
-    public int getId_artefacts() {
+    public int getId() {
         return id_artefacts;
     }
 
@@ -184,19 +184,19 @@ public class Artefact implements LocationsJsonRepresentable {
      * @param jsonString
      * @return
      */
-    public ArtefactsLocation getArtefactsLocationFromJson(String jsonString) {
+    public ArtefactsLocation getArtefactsLocationFromJson(String jsonString) throws JsonReadingException {
         try {
-            JSONObject obj = new JSONObject(jsonString.replace("\n", "").replace("\r", ""));
-            Double longitude = obj.getDouble("lon");
-            Double latitude = obj.getDouble("lat");
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode obj = mapper.readTree(jsonString);
+            Double longitude = obj.get("lon").asDouble();
+            Double latitude = obj.get("lat").asDouble();
             if (longitude != null && latitude != null) {
                 return new ArtefactsLocation(longitude, latitude, this);
             } else {
-                return null;
+                throw new JsonReadingException("Impossible to read lon and lat by getting long and lat of artefact, one of them or both are null.");
             }
-        } catch (JSONException e) {
-            LOG.error("Impossible to parse json-coordinates {} for artefact {}", jsonString, this);
-            return null;
+        } catch (JsonProcessingException e) {
+            throw new JsonReadingException("JsonProcessingException by getting long and lat of artefact: " + e.getMessage());
         }
     }
 
@@ -221,7 +221,7 @@ public class Artefact implements LocationsJsonRepresentable {
     private Set<Integer> getIdArtefactsCategory() {
         Set<Integer> idArtefactsCategory = new HashSet<>();
         for (ArtefactsCategory a : getCategories()) {
-            idArtefactsCategory.add(a.getCategory().getId_category());
+            idArtefactsCategory.add(a.getCategory().getId());
         }
         return idArtefactsCategory;
     }

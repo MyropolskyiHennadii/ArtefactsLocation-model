@@ -21,7 +21,7 @@ public class Subject implements LocationsJsonRepresentable {
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
-    @OneToMany(targetEntity = Category.class, mappedBy = "thema", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Category.class, mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "thema_categories")//!!! important to prevent infinite loop with json references
     private Set<Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
 
@@ -84,5 +84,11 @@ public class Subject implements LocationsJsonRepresentable {
     @Override
     public int hashCode() {
         return getSubject_name().length();
+    }
+
+    /*only to fulfill claim of interface. It does not matter here, because Subject has no int ID*/
+    @Override
+    public int getId() {
+        return 0;
     }
 }

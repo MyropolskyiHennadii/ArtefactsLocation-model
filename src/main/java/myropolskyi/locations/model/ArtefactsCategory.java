@@ -50,7 +50,7 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
         this.artefact = artefact;
     }
 
-    public int getId_artefacts_categories() {
+    public int getId() {
         return id_artefacts_categories;
     }
 
@@ -81,7 +81,7 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
     /*to download integer Category's id*/
     @JsonGetter("category")
     public Integer getIdMainCategory(){
-        return category.getId_category();
+        return category.getId();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class ArtefactsCategory implements LocationsJsonRepresentable {
 
     @Override
     public int hashCode() {
-        return getId_artefacts_categories();
+        return getId();
     }
 
 }

@@ -32,7 +32,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
-            <type>pom</type>
         </dependency>
 
         <dependency>
@@ -40,18 +39,11 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${fasterxml.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <!--convert java object to json-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${fasterxml.version}</version>
-        </dependency>
-        <!-- json only for next app support-->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20230618</version>
         </dependency>
     </dependencies>
 

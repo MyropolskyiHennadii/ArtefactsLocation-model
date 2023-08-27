@@ -42,7 +42,7 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
         this.artefact = artefact;
     }
 
-    public int getId_artefacts_synonyms() {
+    public int getId() {
         return id_artefacts_synonyms;
     }
 
@@ -116,6 +116,6 @@ public class ArtefactsSynonym implements LocationsJsonRepresentable {
 
     @Override
     public int hashCode() {
-        return getId_artefacts_synonyms();
+        return getId();
     }
 }
