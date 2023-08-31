@@ -39,19 +39,19 @@ public class Artefact implements AsModelRepresentable {
     @Transient
     private Set<Integer> mainCategoriesId = new HashSet<>();
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
     private Set<ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_events")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_synonyms")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     //@JsonManagedReference(value = "artefacts_categories")//!!! important to prevent infinite loop with json references
     //@JsonManagedReference(value = "getIdArtefactsCategory")
     @JsonIgnore

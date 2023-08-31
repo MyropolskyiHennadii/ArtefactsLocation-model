@@ -38,7 +38,7 @@ public class Category implements AsModelRepresentable {
     private Subject subject;//foreign key in database
 
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     //@OneToMany(targetEntity= CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "categories_synonyms")//!!! important to prevent infinite loop with json references
     private Set<CategoriesSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
@@ -128,7 +128,7 @@ public class Category implements AsModelRepresentable {
     //make json compact; without references to object. just name of the thema
     @JsonGetter(value = "thema")
     private String getThemaName() {
-        return subject.getSubject_name();
+        return subject.getThema_name();
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.Set;
 public class Subject implements AsModelRepresentable {
 
     @Id
-    private String subject_name;
+    private String thema_name;
     @Column
     @JsonIgnore
     private int updated;//1 = was updated, 0 = wasn't
@@ -28,17 +28,17 @@ public class Subject implements AsModelRepresentable {
     public Subject() {
     }
 
-    public Subject(String subject_name) {
-        this.subject_name = subject_name;
+    public Subject(String thema_name) {
+        this.thema_name = thema_name;
         this.updated = 1;//always for new exemplar (for database exchange)
     }
 
-    public String getSubject_name() {
-        return subject_name;
+    public String getThema_name() {
+        return thema_name;
     }
 
-    public void setSubject_name(String subject_name) {
-        this.subject_name = subject_name;
+    public void setThema_name(String subject_name) {
+        this.thema_name = subject_name;
     }
 
     public int getUpdated() {
@@ -68,7 +68,7 @@ public class Subject implements AsModelRepresentable {
     @Override
     public String toString() {
         return "Thema{" +
-                ", thema_name='" + subject_name + '\'' +
+                ", thema_name='" + thema_name + '\'' +
                 ", categories=" + categories +
                 '}';
     }
@@ -78,12 +78,12 @@ public class Subject implements AsModelRepresentable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subject subject = (Subject) o;
-        return getSubject_name().equals(subject.getSubject_name());
+        return getThema_name().equals(subject.getThema_name());
     }
 
     @Override
     public int hashCode() {
-        return getSubject_name().length();
+        return getThema_name().length();
     }
 
     /*only to fulfill claim of interface. It does not matter here, because Subject has no int ID*/
