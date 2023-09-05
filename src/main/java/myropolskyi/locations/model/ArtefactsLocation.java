@@ -3,6 +3,9 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.PartitionKey;
+
+import static java.lang.Math.floor;
 
 //Location of Artefact
 @Entity
@@ -25,6 +28,11 @@ public class ArtefactsLocation implements AsModelRepresentable {
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
+    @Column
+    @PartitionKey
+    @JsonIgnore
+    private int int_longitude;//floor(longitude) for partitioning the table
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
     @JsonBackReference(value = "artefacts_location")//important to prevent infinite loop of references
@@ -41,6 +49,7 @@ public class ArtefactsLocation implements AsModelRepresentable {
     public ArtefactsLocation(double longitude, double latitude, Artefact artefact) {
         this.longitude = longitude;
         this.latitude = latitude;
+        this.int_longitude = (int)floor(longitude);
         this.updated = 1;//always for new exemplar (for database exchange)
         this.artefact = artefact;
         //for comparing objects created with id_artefacts_locations = 0
@@ -62,6 +71,7 @@ public class ArtefactsLocation implements AsModelRepresentable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+        this.int_longitude = (int)floor(longitude);
     }
 
     public double getLatitude() {
@@ -94,6 +104,14 @@ public class ArtefactsLocation implements AsModelRepresentable {
 
     public void setArtefact(Artefact artefact) {
         this.artefact = artefact;
+    }
+
+    public int getInt_longitude() {
+        return int_longitude;
+    }
+
+    public void setInt_longitude(int int_longitude) {
+        this.int_longitude = int_longitude;
     }
 
     @Override
