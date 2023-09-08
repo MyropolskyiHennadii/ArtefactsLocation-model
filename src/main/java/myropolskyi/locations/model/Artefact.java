@@ -75,6 +75,13 @@ public class Artefact implements AsModelRepresentable {
         this.updated = 1;//always for new exemplar (for database exchange)
     }
 
+    public Artefact(int id, String artefacts_name, String web_reference_wiki, String page_language) {
+        this.id_artefacts = id;
+        this.artefacts_name = artefacts_name;
+        this.web_reference_wiki = web_reference_wiki;
+        this.page_language = page_language;
+        this.updated = 1;//always for new exemplar (for database exchange)
+    }
     public Set<Integer> getMainCategoriesId() {
         return mainCategoriesId;
     }
