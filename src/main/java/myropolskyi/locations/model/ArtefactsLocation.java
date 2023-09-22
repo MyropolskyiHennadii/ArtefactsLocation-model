@@ -57,6 +57,15 @@ public class ArtefactsLocation implements AsModelRepresentable {
         counter++;
     }
 
+    /*this constructor we need to create artefact_location from native (not hibernate) query*/
+    public ArtefactsLocation(int id_artefacts_locations, double longitude, double latitude) {
+        this.id_artefacts_locations = id_artefacts_locations;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.int_longitude = (int)floor(longitude);
+        this.updated = 0;//always for new exemplar (for database exchange)
+    }
+
     public int getId_temporary() {
         return id_temporary;
     }

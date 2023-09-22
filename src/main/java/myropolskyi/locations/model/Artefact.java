@@ -38,6 +38,7 @@ public class Artefact implements AsModelRepresentable {
     /*field to get integer array with Category's codes fron Json*/
     @Transient
     private Set<Integer> mainCategoriesId = new HashSet<>();
+
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
@@ -46,20 +47,26 @@ public class Artefact implements AsModelRepresentable {
     @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_events")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
+
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsSynonym.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_synonyms")//!!! important to prevent infinite loop with json references
     private Set<ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
+
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    //@JsonManagedReference(value = "artefacts_categories")//!!! important to prevent infinite loop with json references
-    //@JsonManagedReference(value = "getIdArtefactsCategory")
-    @JsonIgnore
+    /*TODO: this Transient stays here in order to make quick query. Because, at first, we don't need to get all categories of artefact, just id of main category.
+    And second:  just simple hibernate query is VERY slow in this case. May be we need to optimize database*/
+    /*TODO: need to change writing to database because of this transient*/
+/*    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonIgnore*/
+    @Transient
     private Set<ArtefactsCategory> categories = new HashSet<>();// foreign key in database. One Artefact = many categories
+
     //orphanRemoval = true to refresh all synonyms
     @OneToOne(targetEntity = ArtefactsLocation.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_location")//!!! important to prevent infinite loop with json references
     private ArtefactsLocation artefactsLocation;//foreign key in database
+
     //orphanRemoval = true to refresh all synonyms
     @OneToOne(targetEntity = ArtefactsImage.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "artefacts_image")//!!! important to prevent infinite loop with json references
@@ -75,6 +82,7 @@ public class Artefact implements AsModelRepresentable {
         this.updated = 1;//always for new exemplar (for database exchange)
     }
 
+    /*this constructor we need to create artefact from native (not hibernate) query*/
     public Artefact(int id, String artefacts_name, String web_reference_wiki, String page_language) {
         this.id_artefacts = id;
         this.artefacts_name = artefacts_name;

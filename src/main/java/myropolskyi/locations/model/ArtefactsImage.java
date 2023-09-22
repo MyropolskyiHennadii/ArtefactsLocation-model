@@ -26,11 +26,19 @@ public class ArtefactsImage implements AsModelRepresentable {
     @JsonBackReference(value = "artefacts_image")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
+    /*this constructor we need to create artefact_image from native (not hibernate) query*/
     public ArtefactsImage(String path_to_image, int updated, int deleted, Artefact artefact) {
         this.path_to_image = path_to_image;
         this.updated = updated;
         this.deleted = deleted;
         this.artefact = artefact;
+    }
+
+    public ArtefactsImage(int id_image, String path_to_image) {
+        this.id_image = id_image;
+        this.path_to_image = path_to_image;
+        this.deleted = 0;
+        this.updated = 0;
     }
 
     public ArtefactsImage() {
