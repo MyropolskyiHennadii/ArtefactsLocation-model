@@ -154,8 +154,11 @@ public class ModelStaticMethods {
         //it was getExtractFromJsonWiki(String jsonString, StringBuilder extract)
         try {
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode obj = mapper.readTree(jsonString);
-            return obj.get("extract").asText();
+            JsonNode extract = mapper.readTree(jsonString).get("extract");
+            if (extract == null) {
+                throw new JsonReadingException("Impossible to read extract from wiki. Extract is null.");
+            }
+            return extract.asText();
         } catch (JsonProcessingException e) {
             throw new JsonReadingException("Impossible to read  extract from wiki: " + e.getMessage());
         }
