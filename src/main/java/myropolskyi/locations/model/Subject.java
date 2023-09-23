@@ -1,18 +1,20 @@
 package myropolskyi.locations.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-//Themas of record
+//Subjects ('thema') of record
 @Entity
 @Table(name = "themas")
 public class Subject implements AsModelRepresentable {
 
     @Id
+    @JsonProperty("id")
     private String thema_name;
     @Column
     @JsonIgnore
@@ -22,7 +24,8 @@ public class Subject implements AsModelRepresentable {
     private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @OneToMany(targetEntity = Category.class, mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "thema_categories")//!!! important to prevent infinite loop with json references
+    /*@JsonManagedReference(value = "thema_categories")//!!! important to prevent infinite loop with json references*/
+    @JsonIgnore
     private Set<Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
 
     public Subject() {
@@ -88,6 +91,7 @@ public class Subject implements AsModelRepresentable {
 
     /*only to fulfill claim of interface. It does not matter here, because Subject has no int ID*/
     @Override
+    @JsonGetter("thema_name")/* formal*/
     public int getId() {
         return 0;
     }

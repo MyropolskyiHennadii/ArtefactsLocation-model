@@ -1,9 +1,6 @@
 package myropolskyi.locations.model;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +18,7 @@ public class Artefact implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_artefacts;
     @Column
     private String artefacts_name;
@@ -45,7 +43,7 @@ public class Artefact implements AsModelRepresentable {
     private Set<ArtefactsAuthor> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsEvent.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JsonManagedReference(value = "artefacts_events")//!!! important to prevent infinite loop with json references
+    @JsonManagedReference//!!! important to prevent infinite loop with json references
     private Set<ArtefactsEvent> events = new HashSet<>();// foreign key in database. One Artefact = many events
 
     //orphanRemoval = true to refresh all synonyms
@@ -163,6 +161,7 @@ public class Artefact implements AsModelRepresentable {
         this.categories = categories;
     }
 
+    @JsonGetter("id_artefacts")
     public int getId() {
         return id_artefacts;
     }

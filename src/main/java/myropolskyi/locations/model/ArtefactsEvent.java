@@ -1,18 +1,17 @@
 package myropolskyi.locations.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 //Events of Artefact
 @Entity
 @Table(name = "artefacts_events")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ArtefactsEvent implements AsModelRepresentable {
-
-    private static int counter;//for comparing objects created with id_events_artefacts = 0
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_events_artefacts;
     @Column
     private String event;
@@ -29,7 +28,7 @@ public class ArtefactsEvent implements AsModelRepresentable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
-    @JsonBackReference(value = "artefacts_events")//important to prevent infinite loop of references
+    @JsonBackReference//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
     //for comparing objects created with id_events_artefacts = 0
@@ -46,12 +45,9 @@ public class ArtefactsEvent implements AsModelRepresentable {
         this.event_end = event_end;
         this.artefact = artefact;
         this.updated = 1;//always for new exemplar (for database exchange)
-
-        //for comparing objects created with id_events_artefacts = 0
-        this.id_temporary = counter;
-        counter++;
     }
 
+    @JsonGetter("id_events_artefacts")
     public int getId() {
         return id_events_artefacts;
     }

@@ -1,7 +1,9 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 //Category's synonym in different languages
@@ -11,6 +13,7 @@ public class CategoriesSynonym implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_category_synonym;
     @Column
     private String lang;//code of language
@@ -89,6 +92,7 @@ public class CategoriesSynonym implements AsModelRepresentable {
         this.category = category;
     }
 
+    @JsonGetter("id_category_synonym")
     public int getId() {
         return id_category_synonym;
     }

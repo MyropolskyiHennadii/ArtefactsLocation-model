@@ -3,6 +3,7 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -15,6 +16,7 @@ public class Category implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_category;
     @Column
     private String category_name;
@@ -61,6 +63,7 @@ public class Category implements AsModelRepresentable {
         this.subject = subject;
     }
 
+    @JsonGetter("id_category")
     public int getId() {
         return id_category;
     }

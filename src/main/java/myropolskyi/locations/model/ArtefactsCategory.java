@@ -3,6 +3,7 @@ package myropolskyi.locations.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 //Artefact's category
@@ -12,6 +13,7 @@ public class ArtefactsCategory implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_artefacts_categories;
     @Column
     @JsonIgnore
@@ -50,6 +52,7 @@ public class ArtefactsCategory implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
+    @JsonGetter("id_artefacts_categories")
     public int getId() {
         return id_artefacts_categories;
     }

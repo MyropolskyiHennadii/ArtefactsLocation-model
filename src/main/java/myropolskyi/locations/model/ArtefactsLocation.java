@@ -1,7 +1,9 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.PartitionKey;
 
@@ -12,10 +14,9 @@ import static java.lang.Math.floor;
 @Table(name = "artefacts_locations")
 public class ArtefactsLocation implements AsModelRepresentable {
 
-    private static int counter;//for comparing objects created with id_artefacts_locations = 0
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_artefacts_locations;
     @Column
     private double longitude;
@@ -38,11 +39,6 @@ public class ArtefactsLocation implements AsModelRepresentable {
     @JsonBackReference(value = "artefacts_location")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
-    //for comparing objects created with id_artefacts_locations = 0
-    @Transient
-    @JsonIgnore
-    private int id_temporary;
-
     public ArtefactsLocation() {
     }
 
@@ -52,9 +48,6 @@ public class ArtefactsLocation implements AsModelRepresentable {
         this.int_longitude = (int)floor(longitude);
         this.updated = 1;//always for new exemplar (for database exchange)
         this.artefact = artefact;
-        //for comparing objects created with id_artefacts_locations = 0
-        this.id_temporary = counter;
-        counter++;
     }
 
     /*this constructor we need to create artefact_location from native (not hibernate) query*/
@@ -66,10 +59,7 @@ public class ArtefactsLocation implements AsModelRepresentable {
         this.updated = 0;//always for new exemplar (for database exchange)
     }
 
-    public int getId_temporary() {
-        return id_temporary;
-    }
-
+    @JsonGetter("id_artefacts_locations")
     public int getId() {
         return id_artefacts_locations;
     }

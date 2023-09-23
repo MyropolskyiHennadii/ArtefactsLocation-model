@@ -1,7 +1,9 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 //Author of Artefact
@@ -9,10 +11,9 @@ import jakarta.persistence.*;
 @Table(name = "artefacts_authors")
 public class ArtefactsAuthor implements AsModelRepresentable {
 
-    private static int counter;//for comparing objects created with id_artefacts_authors = 0
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_artefacts_authors;
     @Column
     private String author_name;
@@ -28,10 +29,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     @JsonBackReference//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
-    //for comparing objects created with id_events_artefacts = 0
-    @Transient
-    private int id_temporary;
-
     public ArtefactsAuthor() {
     }
 
@@ -39,10 +36,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.author_name = author_name;
         this.artefact = artefact;
         this.updated = 1;//always for new exemplar (for database exchange)
-
-        //for comparing objects created with id_artefacts_authors = 0
-        this.id_temporary = counter;
-        counter++;
     }
 
     public String getAuthor_name() {
@@ -77,12 +70,9 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
+    @JsonGetter("id_artefacts_authors")
     public int getId() {
         return id_artefacts_authors;
-    }
-
-    public int getId_temporary() {
-        return id_temporary;
     }
 
     @Override

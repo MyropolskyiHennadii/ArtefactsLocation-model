@@ -1,7 +1,9 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 //Artefact's synonym in different languages
@@ -11,6 +13,7 @@ public class ArtefactsSynonym implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private int id_artefacts_synonyms;
     @Column
     private String lang;//code of language
@@ -42,6 +45,7 @@ public class ArtefactsSynonym implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
+    @JsonGetter("id_artefacts_synonyms")
     public int getId() {
         return id_artefacts_synonyms;
     }
