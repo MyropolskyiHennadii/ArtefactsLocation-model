@@ -32,6 +32,9 @@ public class Artefact implements AsModelRepresentable {
     @Column
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
+    @Column
+    @JsonIgnore
+    private String last_modified;//date-time of last modification
 
     /*field to get integer array with Category's codes fron Json*/
     @Transient
@@ -188,6 +191,14 @@ public class Artefact implements AsModelRepresentable {
 
     public void setArtefactsImage(ArtefactsImage artefactsImage) {
         this.artefactsImage = artefactsImage;
+    }
+
+    public String getLast_modified() {
+        return last_modified;
+    }
+
+    public void setLast_modified(String last_modified) {
+        this.last_modified = last_modified;
     }
 
     /**
