@@ -164,7 +164,6 @@ public class Artefact implements AsModelRepresentable {
         this.categories = categories;
     }
 
-    @JsonGetter("id_artefacts")
     public int getId() {
         return id_artefacts;
     }

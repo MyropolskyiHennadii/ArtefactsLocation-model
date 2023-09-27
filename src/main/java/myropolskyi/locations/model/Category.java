@@ -63,7 +63,6 @@ public class Category implements AsModelRepresentable {
         this.subject = subject;
     }
 
-    @JsonGetter("id_category")
     public int getId() {
         return id_category;
     }

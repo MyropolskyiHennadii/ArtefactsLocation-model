@@ -1,7 +1,6 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -70,7 +69,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
-    @JsonGetter("id_artefacts_authors")
     public int getId() {
         return id_artefacts_authors;
     }

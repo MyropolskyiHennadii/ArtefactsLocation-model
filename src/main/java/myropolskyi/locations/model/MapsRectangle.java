@@ -1,6 +1,5 @@
 package myropolskyi.locations.model;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -40,7 +39,6 @@ public class MapsRectangle implements AsModelRepresentable {
         this.right_top_latitude = right_top_latitude;
     }
 
-    @JsonGetter("idregion")
     public int getId() {
         return idregion;
     }
