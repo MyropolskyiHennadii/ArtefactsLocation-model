@@ -3,6 +3,7 @@ package myropolskyi.locations.modelutils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import myropolskyi.location.exceptions.JsonReadingException;
 import myropolskyi.locations.model.Artefact;
 import myropolskyi.locations.model.JsonArtefactsWrapper;
@@ -19,7 +20,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -151,17 +152,43 @@ public class ModelStaticMethods {
      * @return string with extract
      */
     public static String getExtractFromJsonWiki(String jsonString) throws JsonReadingException {
-        //it was getExtractFromJsonWiki(String jsonString, StringBuilder extract)
+        Map<String, String> keyValuePaar = new HashMap<>();
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode extract = mapper.readTree(jsonString).get("extract");
-            if (extract == null) {
-                throw new JsonReadingException("Impossible to read extract from wiki. Extract is null.");
-            }
-            return extract.asText();
+            getAllKeysInJsonUsingJsonNodeFieldNames(jsonString, new ObjectMapper(), keyValuePaar);
+            return(keyValuePaar.get("extract"));
         } catch (JsonProcessingException e) {
             throw new JsonReadingException("Impossible to read  extract from wiki: " + e.getMessage());
         }
+    }
 
+    /**
+     * gets all keys from json and fills map with key-value
+     * @param json
+     * @param mapper
+     * @param keyValuePaar
+     * @return
+     * @throws JsonProcessingException
+     */
+    public static List<String> getAllKeysInJsonUsingJsonNodeFieldNames(String json, ObjectMapper mapper, Map<String, String> keyValuePaar) throws JsonProcessingException {
+        List<String> keys = new ArrayList<>();
+        JsonNode jsonNode = mapper.readTree(json);
+        getAllKeysUsingJsonNodeFields(jsonNode, keys, keyValuePaar);
+        return keys;
+    }
+
+    public static void getAllKeysUsingJsonNodeFields(JsonNode jsonNode, List<String> keys, Map<String, String> keyValuePaar) {
+        if (jsonNode.isObject()) {
+            Iterator<Map.Entry<String, JsonNode>> fields = jsonNode.fields();
+            fields.forEachRemaining(field -> {
+                keys.add(field.getKey());
+                keyValuePaar.put(field.getKey(), field.getValue().asText());
+                getAllKeysUsingJsonNodeFields(field.getValue(), keys, keyValuePaar);
+            });
+        } else if (jsonNode.isArray()) {
+            ArrayNode arrayField = (ArrayNode) jsonNode;
+            arrayField.forEach(node -> {
+                getAllKeysUsingJsonNodeFields(node, keys, keyValuePaar);
+            });
+        }
     }
 }
