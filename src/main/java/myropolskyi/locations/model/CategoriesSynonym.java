@@ -32,6 +32,10 @@ public class CategoriesSynonym implements AsModelRepresentable {
     @JsonBackReference(value = "categories_synonyms")//important to prevent infinite loop of references
     private Category category;//foreign key in database
 
+    @Transient
+    @JsonIgnore
+    private int id_category;//for native query
+
     public CategoriesSynonym() {
     }
 
@@ -41,6 +45,19 @@ public class CategoriesSynonym implements AsModelRepresentable {
         this.web_reference_wiki = web_reference_wiki;
         this.updated = 1;//always for new exemplar (for database exchange)
         this.category = category;
+    }
+
+    /*this constructor we need to create artefact from native (not hibernate) query*/
+    public CategoriesSynonym(int id_category_synonym,
+                             int id_category,
+                             String lang,
+                             String lang_name,
+                             String web_reference_wiki) {
+        this.id_category_synonym = id_category_synonym;
+        this.id_category = id_category;
+        this.lang = lang;
+        this.lang_name = lang_name;
+        this.web_reference_wiki = web_reference_wiki;
     }
 
     public String getLang() {

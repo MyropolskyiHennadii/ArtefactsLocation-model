@@ -63,6 +63,21 @@ public class Category implements AsModelRepresentable {
         this.subject = subject;
     }
 
+    /*this constructor we need to create artefact from native (not hibernate) query*/
+    public Category(int id_category,
+                    String subject,
+                    String category_name,
+                    String typeCategory,
+                    String web_reference_wiki,
+                    String lang) {
+        this.id_category = id_category;
+        this.subject = new Subject(subject);
+        this.category_name = category_name;
+        this.type_category = typeCategory;
+        this.web_reference_wiki = web_reference_wiki;
+        this.page_language = lang;
+    }
+
     public int getId() {
         return id_category;
     }

@@ -35,13 +35,31 @@ public class ArtefactsCategory implements AsModelRepresentable {
     @JsonIgnore
     private Category category;//foreign key in database
 
+    @Transient
+    @JsonIgnore
+    private int id_artefacts;//for native query
+
+    @Transient
+    @JsonIgnore
+    private int id_category_artefact;//for native query
+
+    public int getId_category_artefact() {//for native query
+        return id_category_artefact;
+    }
+
     public ArtefactsCategory() {
     }
 
     public ArtefactsCategory(Artefact artefact, Category category) {
         this.artefact = artefact;
         this.category = category;
-        this.updated = 1;//always for new exemplar (for database exchange)
+    }
+
+    /*this constructor we need to create artefact from native (not hibernate) query*/
+    public ArtefactsCategory(int id_artefacts_categories, int id_artefacts, int id_category_artefact) {
+        this.id_artefacts_categories = id_artefacts_categories;
+        this.id_artefacts = id_artefacts;
+        this.id_category_artefact = id_category_artefact;
     }
 
     public Artefact getArtefact() {
