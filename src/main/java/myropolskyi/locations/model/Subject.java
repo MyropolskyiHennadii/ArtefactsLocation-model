@@ -18,12 +18,6 @@ public class Subject implements AsModelRepresentable {
     private String thema_name;
     @Column
     @JsonIgnore
-    private int updated;//1 = was updated, 0 = wasn't
-    @Column
-    @JsonIgnore
-    private int deleted;//1 = was marked as deleted, 0 = wasn't
-    @Column
-    @JsonIgnore
     private String modified;//date-time of last modification
     @Column
     @JsonIgnore
@@ -42,7 +36,6 @@ public class Subject implements AsModelRepresentable {
 
     public Subject(String thema_name) {
         this.thema_name = thema_name;
-        this.updated = 1;//always for new exemplar (for database exchange)
     }
 
     public String getThema_name() {
@@ -51,22 +44,6 @@ public class Subject implements AsModelRepresentable {
 
     public void setThema_name(String subject_name) {
         this.thema_name = subject_name;
-    }
-
-    public int getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(int updated) {
-        this.updated = updated;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
     }
 
     public Set<Category> getCategories() {

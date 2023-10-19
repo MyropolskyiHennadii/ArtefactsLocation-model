@@ -24,12 +24,6 @@ public class ArtefactsEvent implements AsModelRepresentable {
     private String event_end;
     @Column
     @JsonIgnore
-    private int updated;//1 = was updated, 0 = wasn't
-    @Column
-    @JsonIgnore
-    private int deleted;//1 = was marked as deleted, 0 = wasn't
-    @Column
-    @JsonIgnore
     private String modified;//date-time of last modification
     @Column
     @JsonIgnore
@@ -57,7 +51,6 @@ public class ArtefactsEvent implements AsModelRepresentable {
         this.event_begin = event_begin;
         this.event_end = event_end;
         this.artefact = artefact;
-        this.updated = 1;//always for new exemplar (for database exchange)
     }
 
     public int getId() {
@@ -70,22 +63,6 @@ public class ArtefactsEvent implements AsModelRepresentable {
 
     public void setEvent(String event) {
         this.event = event;
-    }
-
-    public int getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(int updated) {
-        this.updated = updated;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
     }
 
     public Artefact getArtefact() {

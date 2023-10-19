@@ -17,12 +17,6 @@ public class ArtefactsCategory implements AsModelRepresentable {
     private int id_artefacts_categories;
     @Column
     @JsonIgnore
-    private int updated;//1 = was updated, 0 = wasn't
-    @Column
-    @JsonIgnore
-    private int deleted;//1 = was marked as deleted, 0 = wasn't
-    @Column
-    @JsonIgnore
     private String modified;//date-time of last modification
     @Column
     @JsonIgnore
@@ -81,22 +75,6 @@ public class ArtefactsCategory implements AsModelRepresentable {
 
     public int getId() {
         return id_artefacts_categories;
-    }
-
-    public int getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(int updated) {
-        this.updated = updated;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
     }
 
     public Category getCategory() {

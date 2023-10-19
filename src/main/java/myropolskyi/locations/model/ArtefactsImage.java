@@ -18,12 +18,6 @@ public class ArtefactsImage implements AsModelRepresentable {
 
     @Column
     @JsonIgnore
-    private int updated;//1 = was updated, 0 = wasn't
-    @Column
-    @JsonIgnore
-    private int deleted;//1 = was marked as deleted, 0 = wasn't
-    @Column
-    @JsonIgnore
     private String modified;//date-time of last modification
     @Column
     @JsonIgnore
@@ -39,18 +33,14 @@ public class ArtefactsImage implements AsModelRepresentable {
     private Artefact artefact;//foreign key in database
 
     /*this constructor we need to create artefact_image from native (not hibernate) query*/
-    public ArtefactsImage(String path_to_image, int updated, int deleted, Artefact artefact) {
+    public ArtefactsImage(String path_to_image, Artefact artefact) {
         this.path_to_image = path_to_image;
-        this.updated = updated;
-        this.deleted = deleted;
         this.artefact = artefact;
     }
 
     public ArtefactsImage(int id_image, String path_to_image) {
         this.id_image = id_image;
         this.path_to_image = path_to_image;
-        this.deleted = 0;
-        this.updated = 0;
     }
 
     public ArtefactsImage() {
@@ -66,22 +56,6 @@ public class ArtefactsImage implements AsModelRepresentable {
 
     public void setPath_to_image(String path_to_image) {
         this.path_to_image = path_to_image;
-    }
-
-    public int getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(int updated) {
-        this.updated = updated;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
     }
 
     public Artefact getArtefact() {

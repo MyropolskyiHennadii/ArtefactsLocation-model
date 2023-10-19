@@ -16,12 +16,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     private int id_artefacts_authors;
     @Column
     private String author_name;
-    @Column
-    @JsonIgnore
-    private int updated;//1 = was updated, 0 = wasn't
-    @Column
-    @JsonIgnore
-    private int deleted;//1 = was marked as deleted, 0 = wasn't
 
     @Column
     @JsonIgnore
@@ -44,7 +38,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     public ArtefactsAuthor(String author_name, Artefact artefact) {
         this.author_name = author_name;
         this.artefact = artefact;
-        this.updated = 1;//always for new exemplar (for database exchange)
     }
 
     public String getAuthor_name() {
@@ -53,22 +46,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
 
     public void setAuthor_name(String author_name) {
         this.author_name = author_name;
-    }
-
-    public int getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(int updated) {
-        this.updated = updated;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
     }
 
     public Artefact getArtefact() {

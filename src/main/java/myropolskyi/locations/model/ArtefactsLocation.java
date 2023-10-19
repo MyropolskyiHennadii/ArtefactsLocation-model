@@ -23,12 +23,6 @@ public class ArtefactsLocation implements AsModelRepresentable {
     private double latitude;
     @Column
     @JsonIgnore
-    private int updated;//1 = was updated, 0 = wasn't
-    @Column
-    @JsonIgnore
-    private int deleted;//1 = was marked as deleted, 0 = wasn't
-    @Column
-    @JsonIgnore
     private String modified;//date-time of last modification
     @Column
     @JsonIgnore
@@ -54,7 +48,6 @@ public class ArtefactsLocation implements AsModelRepresentable {
         this.longitude = longitude;
         this.latitude = latitude;
         this.int_longitude = (int)floor(longitude);
-        this.updated = 1;//always for new exemplar (for database exchange)
         this.artefact = artefact;
     }
 
@@ -64,7 +57,6 @@ public class ArtefactsLocation implements AsModelRepresentable {
         this.longitude = longitude;
         this.latitude = latitude;
         this.int_longitude = (int)floor(longitude);
-        this.updated = 0;//always for new exemplar (for database exchange)
     }
 
     public int getId() {
@@ -86,22 +78,6 @@ public class ArtefactsLocation implements AsModelRepresentable {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
-    }
-
-    public int getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(int updated) {
-        this.updated = updated;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
     }
 
     public Artefact getArtefact() {
