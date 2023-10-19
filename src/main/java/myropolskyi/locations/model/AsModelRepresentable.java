@@ -4,4 +4,7 @@ package myropolskyi.locations.model;
 public interface AsModelRepresentable {
 
     int getId();
+    String getModified();
+    String getCreated();
+    String getReviewed();
 }

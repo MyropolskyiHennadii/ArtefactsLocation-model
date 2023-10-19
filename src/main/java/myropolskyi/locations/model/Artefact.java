@@ -34,7 +34,14 @@ public class Artefact implements AsModelRepresentable {
     private int deleted;//1 = was marked as deleted, 0 = wasn't
     @Column
     @JsonIgnore
-    private String last_modified;//date-time of last modification
+    private String modified;//date-time of last modification
+    @Column
+    @JsonIgnore
+    private String created;//date-time of creation
+    @Column
+    @JsonIgnore
+    private String reviewed;//date-time of last review
+
 
     /*field to get integer array with Category's codes fron Json*/
     @Transient
@@ -55,7 +62,7 @@ public class Artefact implements AsModelRepresentable {
     private Set<ArtefactsSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
 
     //orphanRemoval = true to refresh all synonyms
-    /*TODO: this Transient stays here in order to make quick query. Because, at first, we don't need to get all categories of artefact, just id of main category.
+    /*this Transient stays here in order to make quick query. Because, at first, we don't need to get all categories of artefact, just id of main category.
     And second:  just simple hibernate query is VERY slow in this case. May be we need to optimize database*/
     /*TODO: need to change writing to database because of this transient*/
 /*    @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -192,12 +199,12 @@ public class Artefact implements AsModelRepresentable {
         this.artefactsImage = artefactsImage;
     }
 
-    public String getLast_modified() {
-        return last_modified;
+    public String getModified() {
+        return modified;
     }
 
-    public void setLast_modified(String last_modified) {
-        this.last_modified = last_modified;
+    public void setModified(String last_modified) {
+        this.modified = last_modified;
     }
 
     /**
@@ -262,6 +269,28 @@ public class Artefact implements AsModelRepresentable {
             checkingAuthors.add(newAuthor);
         }
         return checkingAuthors;
+    }
+
+    @Override
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    @Override
+    public String getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(String reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public void setMainCategoriesId(Set<Integer> mainCategoriesId) {
+        this.mainCategoriesId = mainCategoriesId;
     }
 
     @Override

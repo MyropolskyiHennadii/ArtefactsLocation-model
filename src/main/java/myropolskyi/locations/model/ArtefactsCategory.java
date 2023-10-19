@@ -21,6 +21,15 @@ public class ArtefactsCategory implements AsModelRepresentable {
     @Column
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
+    @Column
+    @JsonIgnore
+    private String modified;//date-time of last modification
+    @Column
+    @JsonIgnore
+    private String created;//date-time of creation
+    @Column
+    @JsonIgnore
+    private String reviewed;//date-time of last review
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")
@@ -102,6 +111,33 @@ public class ArtefactsCategory implements AsModelRepresentable {
     @JsonGetter("category")
     public Integer getIdMainCategory(){
         return category.getId();
+    }
+
+    @Override
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    @Override
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    @Override
+    public String getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(String reviewed) {
+        this.reviewed = reviewed;
     }
 
     @Override

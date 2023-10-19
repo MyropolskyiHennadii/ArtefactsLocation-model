@@ -140,7 +140,6 @@ public class ModelStaticMethods {
         try {
             return getExtractFromJsonWiki(result.toString());
         } catch (JsonReadingException e) {
-            /*TODO: check, how does it work*/
             return "Error by reading json from wiki: " + e.getMessage();
         }
 

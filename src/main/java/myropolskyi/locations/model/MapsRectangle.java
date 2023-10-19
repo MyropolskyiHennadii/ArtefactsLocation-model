@@ -1,5 +1,6 @@
 package myropolskyi.locations.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -27,6 +28,16 @@ public class MapsRectangle implements AsModelRepresentable {
     private Double right_top_longitude;
     @Column
     private Double right_top_latitude;
+    @Column
+    @JsonIgnore
+    private String modified;//date-time of last modification
+    @Column
+    @JsonIgnore
+    private String created;//date-time of creation
+    @Column
+    @JsonIgnore
+    private String reviewed;//date-time of last review
+
 
     public MapsRectangle() {
     }
@@ -85,6 +96,33 @@ public class MapsRectangle implements AsModelRepresentable {
 
     public void setRight_top_latitude(Double right_top_latitude) {
         this.right_top_latitude = right_top_latitude;
+    }
+
+    @Override
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    @Override
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    @Override
+    public String getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(String reviewed) {
+        this.reviewed = reviewed;
     }
 
     @Override

@@ -18,6 +18,9 @@ Artefact <-------
 
 ## Version History
 
+**Version 1.2.1** 19.10.2023
+* Fields modified, created, reviewed were added to model and to database.
+
 **Version 1.2.0** 27.08.2023
 * Java8 -> java11, hibernate 5 -> 6, other libraries.
 * Class Thema was renamed to Subject.

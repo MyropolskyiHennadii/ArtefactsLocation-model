@@ -22,6 +22,15 @@ public class Subject implements AsModelRepresentable {
     @Column
     @JsonIgnore
     private int deleted;//1 = was marked as deleted, 0 = wasn't
+    @Column
+    @JsonIgnore
+    private String modified;//date-time of last modification
+    @Column
+    @JsonIgnore
+    private String created;//date-time of creation
+    @Column
+    @JsonIgnore
+    private String reviewed;//date-time of last review
 
     @OneToMany(targetEntity = Category.class, mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     /*@JsonManagedReference(value = "thema_categories")//!!! important to prevent infinite loop with json references*/
@@ -66,6 +75,33 @@ public class Subject implements AsModelRepresentable {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    @Override
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    @Override
+    public String getReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(String reviewed) {
+        this.reviewed = reviewed;
     }
 
     @Override
