@@ -107,7 +107,19 @@ public class ArtefactsImage implements AsModelRepresentable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArtefactsImage that = (ArtefactsImage) o;
-        return path_to_image.equals(that.path_to_image) && (artefact.getId() == that.getArtefact().getId());
+
+        /*one of them is already written to the database (id!=0), another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return getPath_to_image().equals(that.getPath_to_image())
+                    && getArtefact().equals(that.getArtefact());
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
     }
 
     @Override

@@ -143,7 +143,18 @@ public class CategoriesSynonym implements AsModelRepresentable {
         if (o == null || getClass() != o.getClass()) return false;
         CategoriesSynonym that = (CategoriesSynonym) o;
 
-        return (getCategory() == that.getCategory() && getWeb_reference_wiki().equals(that.getWeb_reference_wiki()));
+        /*one of them is already written to the database (id!=0), another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return (getWeb_reference_wiki().trim().equals(that.getWeb_reference_wiki().trim())
+                    && getCategory().equals(that.getCategory()));
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
     }
 
     @Override

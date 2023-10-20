@@ -176,8 +176,20 @@ public class Category implements AsModelRepresentable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return getWeb_reference_wiki().equals(category.getWeb_reference_wiki());
+        Category that = (Category) o;
+
+        /*one of them is already written to the database (id!=0), another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return (getWeb_reference_wiki().trim().equals(that.getWeb_reference_wiki().trim()));
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
+
     }
 
     @Override

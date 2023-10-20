@@ -133,7 +133,20 @@ public class ArtefactsEvent implements AsModelRepresentable {
         if (o == null || getClass() != o.getClass()) return false;
         ArtefactsEvent that = (ArtefactsEvent) o;
 
-        return getArtefact() == that.getArtefact() && getEvent().equals(that.getEvent()) && getEvent_begin().equals(that.getEvent_begin()) && getEvent_end().equals(that.getEvent_end());
+        /*one of them is already written to the database (id!=0), another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return getEvent().equals(that.getEvent())
+                    && getEvent_begin().equals(that.getEvent_begin())
+                    && getEvent_end().equals(that.getEvent_end())
+                    && getArtefact().equals(that.getArtefact());
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
     }
 
     @Override

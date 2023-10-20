@@ -139,7 +139,19 @@ public class ArtefactsLocation implements AsModelRepresentable {
         if (o == null || getClass() != o.getClass()) return false;
         ArtefactsLocation that = (ArtefactsLocation) o;
 
-        return getArtefact() == that.getArtefact() && getLatitude() == that.getLatitude() && getLongitude() == that.getLongitude();
+        /*one of them is already written to the database (id!=0), another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return (getLatitude() == that.getLatitude()
+                    && getLongitude() == that.getLongitude())
+                    && getArtefact().equals(that.getArtefact());
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
     }
 
     @Override

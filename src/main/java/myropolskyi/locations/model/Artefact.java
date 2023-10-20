@@ -282,7 +282,17 @@ public class Artefact implements AsModelRepresentable {
         if (o == null || getClass() != o.getClass()) return false;
         Artefact artefact = (Artefact) o;
 
-        return getWeb_reference_wiki().trim().equals(artefact.getWeb_reference_wiki().trim());
+        /*one of them is already written (id!=0), another one can be not*/
+        if(getId()*artefact.getId() == 0 && (getId() + artefact.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + artefact.getId() == 0){
+            return getWeb_reference_wiki().trim().equals(artefact.getWeb_reference_wiki().trim());
+        }
+
+        /*both are written in database*/
+        return getId() == artefact.getId();
     }
 
     @Override

@@ -133,7 +133,18 @@ public class ArtefactsCategory implements AsModelRepresentable {
         if (o == null || getClass() != o.getClass()) return false;
         ArtefactsCategory that = (ArtefactsCategory) o;
 
-        return (getArtefact() == that.getArtefact() && getCategory() == that.getCategory());
+        /*one of them is already written (id!=0) to the database, another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return getId_category_artefact()==that.getId_category_artefact()  && getArtefact().equals(that.getArtefact());
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
+
     }
 
     @Override

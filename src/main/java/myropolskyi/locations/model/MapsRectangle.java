@@ -141,8 +141,19 @@ public class MapsRectangle implements AsModelRepresentable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MapsRectangle mapsRectangle = (MapsRectangle) o;
-        return idregion == mapsRectangle.idregion;
+        MapsRectangle that = (MapsRectangle) o;
+
+        /*one of them is already written to the database (id!=0), another one can be not*/
+        if(getId()*that.getId() == 0 && (getId() + that.getId()) > 0){
+            return false;
+        }
+        /*both are not written in database*/
+        if(getId() + that.getId() == 0){
+            return (getRegion_name().trim().equals(that.getRegion_name().trim()));
+        }
+
+        /*both are written in database*/
+        return getId() == that.getId();
     }
 
     @Override
