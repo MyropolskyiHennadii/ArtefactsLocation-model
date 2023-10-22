@@ -3,7 +3,6 @@
 Artefact is a concept of a real article (object), which can be described by its geo-coordinates (certainly), link to its valuable description (certainly), category (minimum 1, certainly), subject (certainly), author(s) (not necessarily), history/events (not necessarily), image (not necessarily), synonyms in different languages (not necessarily).
 
 This project contains main classes and methods to work with such artefacts and their properties.
-
 Artefact <-------
 
                 |ArtefactsAuthor (Set)
@@ -15,6 +14,10 @@ Artefact <-------
                                             |Category<-----
                                                             |CategoriesSynonym (Set)
                                                             |Thema (One)
+All classes are mapped to database tables. The database is filled by data from free source.
+All tables are connected by foreign keys with one important exception: ArtefactsLocation and Artefact are not connected by foreign key.
+That was done in order to minimize time for searching artefacts by location. Be sure by removing and creating artefacts, that you are removing or creating artefacts locations too. 
+ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
