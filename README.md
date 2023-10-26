@@ -15,7 +15,9 @@ Artefact <-------
                                                             |CategoriesSynonym (Set)
                                                             |Thema (One)
 All classes are mapped to database tables. The database is filled by data from free source.
-All tables are connected by foreign keys with one important exception: ArtefactsLocation and Artefact are not connected by foreign key.
+All tables are connected by foreign keys with important exceptions: 
+* ArtefactsLocation and Artefact are not connected by foreign key.
+* ArtefactCategory is announced as Transient in order to minimize time for getting artefacts.
 That was done in order to minimize time for searching artefacts by location. Be sure by removing and creating artefacts, that you are removing or creating artefacts locations too. 
 ArtefactsLocation-table is partitioned by longitude.
 

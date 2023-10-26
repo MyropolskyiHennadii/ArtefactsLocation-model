@@ -77,6 +77,10 @@ public class ArtefactsCategory implements AsModelRepresentable {
         return id_artefacts_categories;
     }
 
+    public void setIdArtefact(int id_artefacts) {
+        this.id_artefacts = id_artefacts;
+    }
+
     public Category getCategory() {
         return category;
     }
