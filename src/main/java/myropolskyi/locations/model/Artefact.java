@@ -7,9 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import myropolskyi.location.exceptions.JsonReadingException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 //main class of artefacts
 @Entity
@@ -40,6 +38,10 @@ public class Artefact implements AsModelRepresentable {
     /*field to get integer array with Category's codes fron Json*/
     @Transient
     private Set<Integer> mainCategoriesId = new HashSet<>();
+    /*map for using in android-app*/
+    @Transient
+    @JsonIgnore
+    Map<String,String> artefactsInfo = new HashMap<>();
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -181,6 +183,14 @@ public class Artefact implements AsModelRepresentable {
 
     public void setModified(String last_modified) {
         this.modified = last_modified;
+    }
+
+    public Map<String, String> getArtefactsInfo() {
+        return artefactsInfo;
+    }
+
+    public void setArtefactsInfo(Map<String, String> artefactsInfo) {
+        this.artefactsInfo = artefactsInfo;
     }
 
     /**
