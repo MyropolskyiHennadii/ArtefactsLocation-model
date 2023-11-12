@@ -38,7 +38,7 @@ public class Artefact implements AsModelRepresentable {
     /*field to get integer array with Category's codes fron Json*/
     @Transient
     private Set<Integer> mainCategoriesId = new HashSet<>();
-    /*map for using in android-app*/
+    /*map for simplifying use artefacts fields in android-app:*/
     @Transient
     @JsonIgnore
     Map<String,String> artefactsInfo = new HashMap<>();

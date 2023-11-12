@@ -25,7 +25,7 @@ ArtefactsLocation-table is partitioned by longitude.
 
 **Version 1.2.1** 19.10.2023
 * Fields modified, created, reviewed were added to model and to database. Fields updated, deleted were removed.
-* new Artefacts field: artefactsInfo. Map for using in android-app
+* new Artefacts field: artefactsInfo, map for simplifying use artefacts fields in android-app.
 
 **Version 1.2.0** 27.08.2023
 * Java8 -> java11, hibernate 5 -> 6, other libraries.
