@@ -21,6 +21,28 @@ public class ArtefactsLocation implements AsModelRepresentable {
     private double longitude;
     @Column
     private double latitude;
+    /*for data from reverse geocoding https://api.bigdatacloud.net/data/reverse-geocode-client*/
+    @Column
+    @JsonIgnore
+    private String continent;
+    @Column
+    @JsonIgnore
+    private String country;
+    @Column
+    @JsonIgnore
+    private String subdivision;
+    @Column
+    @JsonIgnore
+    private String city;
+    @Column
+    @JsonIgnore
+    private String locality;
+    @Column
+    @JsonIgnore
+    private String localityinfo;
+    @Column
+    @JsonIgnore
+    private String postcode;
     @Column
     @JsonIgnore
     private String modified;//date-time of last modification
@@ -121,6 +143,62 @@ public class ArtefactsLocation implements AsModelRepresentable {
 
     public void setReviewed(String reviewed) {
         this.reviewed = reviewed;
+    }
+
+    public String getContinent() {
+        return continent;
+    }
+
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getSubdivision() {
+        return subdivision;
+    }
+
+    public void setSubdivision(String subdivision) {
+        this.subdivision = subdivision;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getLocality() {
+        return locality;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getLocalityinfo() {
+        return localityinfo;
+    }
+
+    public void setLocalityinfo(String localityinfo) {
+        this.localityinfo = localityinfo;
     }
 
     @Override

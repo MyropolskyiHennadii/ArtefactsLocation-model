@@ -22,6 +22,8 @@ That was done in order to minimize time for searching artefacts by location. Be 
 ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
+**Version 1.2.2** 26.11.2023
+* New fields in ArtefactsLocation: for data from reverse geocoding https://api.bigdatacloud.net/data/reverse-geocode-client
 
 **Version 1.2.1** 19.10.2023
 * Fields modified, created, reviewed were added to model and to database. Fields updated, deleted were removed.
