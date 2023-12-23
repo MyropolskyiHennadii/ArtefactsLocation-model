@@ -116,6 +116,10 @@ public class ArtefactsEvent implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
+    public void setId_events_artefacts(int id_events_artefacts) {
+        this.id_events_artefacts = id_events_artefacts;
+    }
+
     @Override
     public String toString() {
         return "ArtefactsEvent{" +

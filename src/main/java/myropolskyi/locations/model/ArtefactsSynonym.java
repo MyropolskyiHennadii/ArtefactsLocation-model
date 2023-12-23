@@ -110,6 +110,10 @@ public class ArtefactsSynonym implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
+    public void setId_artefacts_synonyms(int id_artefacts_synonyms) {
+        this.id_artefacts_synonyms = id_artefacts_synonyms;
+    }
+
     @Override
     public String toString() {
         return "ArtefactsSynonym{" +

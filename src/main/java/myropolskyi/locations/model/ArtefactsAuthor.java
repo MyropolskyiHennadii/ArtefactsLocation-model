@@ -60,6 +60,10 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         return id_artefacts_authors;
     }
 
+    public void setId_artefacts_authors(int id_artefacts_authors) {
+        this.id_artefacts_authors = id_artefacts_authors;
+    }
+
     @Override
     public String getModified() {
         return modified;
