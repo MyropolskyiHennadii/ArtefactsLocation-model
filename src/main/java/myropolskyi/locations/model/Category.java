@@ -162,6 +162,10 @@ public class Category implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
+    public void setId_category(int id_category) {
+        this.id_category = id_category;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
