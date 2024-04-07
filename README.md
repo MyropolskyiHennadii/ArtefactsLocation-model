@@ -22,6 +22,9 @@ That was done in order to minimize time for searching artefacts by location. Be 
 ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
+**Version 1.2.4** 07.04.2024
+* logj42 -> 2.23.1, fasterxml -> 2.17.0, hibernate -> 6.4.4.Final, mavencompiler.version -> 3.13.0
+
 **Version 1.2.3** 23.12.2023
 * Setter id for authors, events, images and so on: for optimizing queries
 

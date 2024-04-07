@@ -7,16 +7,16 @@
     <groupId>myropolskyi.locations</groupId>
     <artifactId>ArtefactsLocation-model</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <log4j2.version>2.20.0</log4j2.version>
-        <hibernate.version>6.2.6.Final</hibernate.version>
-        <fasterxml.version>2.15.2</fasterxml.version>
-        <mavencompiler.version>3.11.0</mavencompiler.version>
+        <log4j2.version>2.23.1</log4j2.version>
+        <hibernate.version>6.4.4.Final</hibernate.version>
+        <fasterxml.version>2.17.0</fasterxml.version>
+        <mavencompiler.version>3.13.0</mavencompiler.version>
     </properties>
 
     <dependencies>
