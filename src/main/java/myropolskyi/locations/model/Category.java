@@ -47,13 +47,13 @@ public class Category implements AsModelRepresentable {
     @OneToMany(targetEntity = CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     //@OneToMany(targetEntity= CategoriesSynonym.class, mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "categories_synonyms")//!!! important to prevent infinite loop with json references
-    private Set<CategoriesSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
+    private Set<CategoriesSynonym> synonyms = new HashSet<>();// foreign key in database. One Artefact = many synonyms
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsCategory.class, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     //@JsonManagedReference(value = "id_categories")//!!! important to prevent infinite loop with json references
     @JsonIgnore
-    private Set<ArtefactsCategory> artefactsCategories = new HashSet<>();// foreign key in database. One Artefact = many Authors
+    private Set<ArtefactsCategory> artefactsCategories = new HashSet<>();// foreign key in database. One Artefact = many categories
 
     public Category() {
     }

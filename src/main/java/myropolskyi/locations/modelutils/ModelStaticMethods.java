@@ -30,7 +30,7 @@ public class ModelStaticMethods {
     private ModelStaticMethods() {
     }
 
-    private static final Logger LOG = LogManager.getLogger(ModelStaticMethods.class);
+    private static final Logger log = LogManager.getLogger(ModelStaticMethods.class);
 
     /**
      * from json-file with artefacts to list of artefacts from file
@@ -44,7 +44,7 @@ public class ModelStaticMethods {
         String jsonContent = readFile(pathToFile, encoding);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonArtefactsWrapper jsonArtefactsWrapper = objectMapper.readValue(jsonContent, JsonArtefactsWrapper.class);
-        LOG.debug("jsonArtefactsWrapper was filled successfully.");
+        log.debug("jsonArtefactsWrapper was filled successfully.");
         return jsonArtefactsWrapper.getArtefacts();
     }
 
@@ -60,7 +60,7 @@ public class ModelStaticMethods {
                 .lines().collect(Collectors.joining("\n"));
         ObjectMapper objectMapper = new ObjectMapper();
         JsonArtefactsWrapper jsonArtefactsWrapper = objectMapper.readValue(jsonContent, JsonArtefactsWrapper.class);
-        LOG.debug("jsonArtefactsWrapper was filled successfully.");
+        log.debug("jsonArtefactsWrapper was filled successfully.");
         return jsonArtefactsWrapper.getArtefacts();
     }
 
