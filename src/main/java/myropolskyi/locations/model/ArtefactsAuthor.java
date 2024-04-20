@@ -93,10 +93,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
-    public int getId_artefacts_authors() {
-        return id_artefacts_authors;
-    }
-
     public int getId_web_authors() {
         return id_web_authors;
     }
