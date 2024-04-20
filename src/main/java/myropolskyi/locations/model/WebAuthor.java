@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "authors")
-public class Author implements AsModelRepresentable {
+@Table(name = "web_authors")
+public class WebAuthor implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +33,11 @@ public class Author implements AsModelRepresentable {
     @JsonIgnore
     private String reviewed;//date-time of last review
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = AuthorsSynonym.class, mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = WebAuthorsSynonym.class, mappedBy = "webAuthor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<AuthorsSynonym> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
+    private Set<WebAuthorsSynonym> webAuthors = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
-    public Author() {
+    public WebAuthor() {
     }
 
     public void setId_authors(int id_authors) {
@@ -100,31 +100,31 @@ public class Author implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
-    public Set<AuthorsSynonym> getAuthors() {
-        return authors;
+    public Set<WebAuthorsSynonym> getWebAuthors() {
+        return webAuthors;
     }
 
-    public void setAuthors(Set<AuthorsSynonym> authors) {
-        this.authors = authors;
+    public void setWebAuthors(Set<WebAuthorsSynonym> authors) {
+        this.webAuthors = authors;
     }
 
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
+        WebAuthor webAuthor = (WebAuthor) o;
 
         /*one of them is already written (id!=0), another one can be not*/
-        if(getId()*author.getId() == 0 && (getId() + author.getId()) > 0){
+        if(getId()* webAuthor.getId() == 0 && (getId() + webAuthor.getId()) > 0){
             return false;
         }
         /*both are not written in database*/
-        if(getId() + author.getId() == 0){
-            return getWeb_reference_wiki().trim().equals(author.getWeb_reference_wiki().trim());
+        if(getId() + webAuthor.getId() == 0){
+            return getWeb_reference_wiki().trim().equals(webAuthor.getWeb_reference_wiki().trim());
         }
 
         /*both are written in database*/
-        return getId() == author.getId();
+        return getId() == webAuthor.getId();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Author implements AsModelRepresentable {
 
     @Override
     public String toString() {
-        return "Author{" +
+        return "WebAuthor{" +
                 "id_authors=" + id_authors +
                 ", author_name='" + author_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +

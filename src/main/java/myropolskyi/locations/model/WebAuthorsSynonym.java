@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "authors_synonyms")
-public class AuthorsSynonym  implements AsModelRepresentable {
+@Table(name = "web_authors_synonyms")
+public class WebAuthorsSynonym implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,11 @@ public class AuthorsSynonym  implements AsModelRepresentable {
     private String reviewed;//date-time of last review
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_authors")
+    @JoinColumn(name = "id_web_authors")
     @JsonBackReference//important to prevent infinite loop of references
-    private Author author;//foreign key in database
+    private WebAuthor webAuthor;//foreign key in database
 
-    public AuthorsSynonym() {
+    public WebAuthorsSynonym() {
     }
 
     public int getId_authors_synonyms() {
@@ -69,12 +69,12 @@ public class AuthorsSynonym  implements AsModelRepresentable {
         this.page_language = page_language;
     }
 
-    public Author getAuthor() {
-        return author;
+    public WebAuthor getWebAuthor() {
+        return webAuthor;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setWebAuthor(WebAuthor webAuthor) {
+        this.webAuthor = webAuthor;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class AuthorsSynonym  implements AsModelRepresentable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorsSynonym that = (AuthorsSynonym) o;
+        WebAuthorsSynonym that = (WebAuthorsSynonym) o;
 
         /*one of them is already written (id!=0), another one can be not*/
         if(getId()*that.getId() == 0  && (getId() + that.getId()) > 0){
@@ -121,7 +121,7 @@ public class AuthorsSynonym  implements AsModelRepresentable {
         }
         /*both are not written in database*/
         if(getId() + that.getId() == 0){
-            return getAuthor_name().trim().equals(that.getAuthor_name().trim()) && getAuthor().equals(that.getAuthor());
+            return getAuthor_name().trim().equals(that.getAuthor_name().trim()) && getWebAuthor().equals(that.getWebAuthor());
         }
         /*both are written in database*/
         return getId() == that.getId();
@@ -134,7 +134,7 @@ public class AuthorsSynonym  implements AsModelRepresentable {
 
     @Override
     public String toString() {
-        return "AuthorsSynonym{" +
+        return "WebAuthorsSynonym{" +
                 "id_authors_synonyms=" + id_authors_synonyms +
                 ", author_name='" + author_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +

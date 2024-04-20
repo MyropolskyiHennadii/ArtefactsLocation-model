@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-//Author of Artefact
+//WebAuthor of Artefact
 @Entity
 @Table(name = "artefacts_authors")
 public class ArtefactsAuthor implements AsModelRepresentable {
@@ -17,7 +17,8 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     @Column
     private String author_name;
     @Column
-    private int id_authors;
+    @JsonProperty("id_web_authors")
+    private int id_web_authors;
     @Column
     @JsonIgnore
     private String modified;//date-time of last modification
@@ -96,12 +97,12 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         return id_artefacts_authors;
     }
 
-    public int getId_authors() {
-        return id_authors;
+    public int getId_web_authors() {
+        return id_web_authors;
     }
 
-    public void setId_authors(int id_authors) {
-        this.id_authors = id_authors;
+    public void setId_web_authors(int id_web_authors) {
+        this.id_web_authors = id_web_authors;
     }
 
     @Override

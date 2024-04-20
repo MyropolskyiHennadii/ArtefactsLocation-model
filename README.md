@@ -1,6 +1,6 @@
 # ArtefactsLocations-model
 
-Artefact is a concept of a real article (object), which can be described by its geo-coordinates (certainly), link to its valuable description (certainly), category (minimum 1, certainly), subject (certainly), author(s) (not necessarily), history/events (not necessarily), image (not necessarily), synonyms in different languages (not necessarily).
+Artefact is a concept of a real article (object), which can be described by its geo-coordinates (certainly), link to its valuable description (certainly), category (minimum 1, certainly), subject (certainly), webAuthor(s) (not necessarily), history/events (not necessarily), image (not necessarily), synonyms in different languages (not necessarily).
 
 This project contains main classes and methods to work with such artefacts and their properties.
 Artefact <-------
