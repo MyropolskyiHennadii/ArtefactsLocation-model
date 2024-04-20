@@ -14,6 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <log4j2.version>2.23.1</log4j2.version>
+        <slf4j.version>2.0.12</slf4j.version>
         <hibernate.version>6.4.4.Final</hibernate.version>
         <fasterxml.version>2.17.0</fasterxml.version>
         <mavencompiler.version>3.13.0</mavencompiler.version>
@@ -26,6 +27,16 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <dependency>
