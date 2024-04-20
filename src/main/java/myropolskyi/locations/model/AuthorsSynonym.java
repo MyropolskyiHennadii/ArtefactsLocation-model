@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
+@Entity
+@Table(name = "authors_synonyms")
 public class AuthorsSynonym  implements AsModelRepresentable {
 
     @Id

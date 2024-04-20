@@ -33,7 +33,7 @@ public class Author implements AsModelRepresentable {
     @JsonIgnore
     private String reviewed;//date-time of last review
     //orphanRemoval = true to refresh all synonyms
-    @OneToMany(targetEntity = Author.class, mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = AuthorsSynonym.class, mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
     private Set<AuthorsSynonym> authors = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
@@ -98,6 +98,14 @@ public class Author implements AsModelRepresentable {
 
     public void setReviewed(String reviewed) {
         this.reviewed = reviewed;
+    }
+
+    public Set<AuthorsSynonym> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<AuthorsSynonym> authors) {
+        this.authors = authors;
     }
 
     @Override
