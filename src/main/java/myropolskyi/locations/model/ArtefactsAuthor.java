@@ -16,7 +16,8 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     private int id_artefacts_authors;
     @Column
     private String author_name;
-
+    @Column
+    private int id_authors;
     @Column
     @JsonIgnore
     private String modified;//date-time of last modification
@@ -91,6 +92,18 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
+    public int getId_artefacts_authors() {
+        return id_artefacts_authors;
+    }
+
+    public int getId_authors() {
+        return id_authors;
+    }
+
+    public void setId_authors(int id_authors) {
+        this.id_authors = id_authors;
+    }
+
     @Override
     public String toString() {
         return "ArtefactsAuthor{" +
@@ -107,11 +120,11 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         ArtefactsAuthor that = (ArtefactsAuthor) o;
 
         /*one of them is already written (id!=0), another one can be not*/
-        if(getId()*that.getId() == 0  && (getId() + that.getId()) > 0){
+        if (getId() * that.getId() == 0 && (getId() + that.getId()) > 0) {
             return false;
         }
         /*both are not written in database*/
-        if(getId() + that.getId() == 0){
+        if (getId() + that.getId() == 0) {
             return getAuthor_name().trim().equals(that.getAuthor_name().trim()) && getArtefact().equals(that.getArtefact());
         }
         /*both are written in database*/
