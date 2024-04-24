@@ -2,6 +2,7 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -18,7 +19,10 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     private String author_name;
     @Column
     @JsonProperty("id_web_authors")
-    private int id_web_authors;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    /*with old (first) versions of android apps this column did not exist in database.
+    * It appears at LookAroundArchitecture only for 2.1.2 version*/
+    private String id_web_authors = "";
     @Column
     @JsonIgnore
     private String modified;//date-time of last modification
@@ -40,6 +44,13 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     public ArtefactsAuthor(String author_name, Artefact artefact) {
         this.author_name = author_name;
         this.artefact = artefact;
+        this.id_web_authors = "";
+    }
+
+    public ArtefactsAuthor(String author_name, Artefact artefact, String id_web_authors) {
+        this.author_name = author_name;
+        this.artefact = artefact;
+        this.id_web_authors = id_web_authors;
     }
 
     public String getAuthor_name() {
@@ -93,11 +104,11 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
-    public int getId_web_authors() {
+    public String getId_web_authors() {
         return id_web_authors;
     }
 
-    public void setId_web_authors(int id_web_authors) {
+    public void setId_web_authors(String id_web_authors) {
         this.id_web_authors = id_web_authors;
     }
 
