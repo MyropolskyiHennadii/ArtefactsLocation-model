@@ -21,7 +21,8 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     @JsonProperty("id_web_authors")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     /*with old (first) versions of android apps this column did not exist in database.
-    * It appears at LookAroundArchitecture only for 2.1.2 version*/
+    * It appears at LookAroundArchitecture only for 2.1.2 version.
+    * This "String" means reference to WebAuthor-id*/
     private String id_web_authors = "";
     @Column
     @JsonIgnore
