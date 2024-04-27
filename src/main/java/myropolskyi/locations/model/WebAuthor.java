@@ -16,7 +16,7 @@ public class WebAuthor implements AsModelRepresentable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_authors;
+    private int id_web_authors;
     @Column
     private String author_name;
     @Column
@@ -40,8 +40,8 @@ public class WebAuthor implements AsModelRepresentable {
     public WebAuthor() {
     }
 
-    public void setId_authors(int id_authors) {
-        this.id_authors = id_authors;
+    public void setId_web_authors(int id_authors) {
+        this.id_web_authors = id_authors;
     }
 
     public String getAuthor_name() {
@@ -70,7 +70,7 @@ public class WebAuthor implements AsModelRepresentable {
 
     @Override
     public int getId() {
-        return id_authors;
+        return id_web_authors;
     }
 
     @Override
@@ -135,7 +135,7 @@ public class WebAuthor implements AsModelRepresentable {
     @Override
     public String toString() {
         return "WebAuthor{" +
-                "id_authors=" + id_authors +
+                "id_authors=" + id_web_authors +
                 ", author_name='" + author_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +
                 ", page_language='" + page_language + '\'' +
