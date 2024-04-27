@@ -12,7 +12,7 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_authors_synonyms;
+    private int id_web_authors_synonyms;
     @Column
     private String author_name;
     @Column
@@ -37,12 +37,8 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
     public WebAuthorsSynonym() {
     }
 
-    public int getId_authors_synonyms() {
-        return id_authors_synonyms;
-    }
-
-    public void setId_authors_synonyms(int id_authors_synonyms) {
-        this.id_authors_synonyms = id_authors_synonyms;
+    public void setId_web_authors_synonyms(int id_authors_synonyms) {
+        this.id_web_authors_synonyms = id_authors_synonyms;
     }
 
     public String getAuthor_name() {
@@ -79,7 +75,7 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
 
     @Override
     public int getId() {
-        return id_authors_synonyms;
+        return id_web_authors_synonyms;
     }
 
     @Override
@@ -135,7 +131,7 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
     @Override
     public String toString() {
         return "WebAuthorsSynonym{" +
-                "id_authors_synonyms=" + id_authors_synonyms +
+                "id_authors_synonyms=" + id_web_authors_synonyms +
                 ", author_name='" + author_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +
                 ", page_language='" + page_language + '\'' +
