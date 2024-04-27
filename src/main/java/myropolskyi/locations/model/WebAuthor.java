@@ -35,7 +35,7 @@ public class WebAuthor implements AsModelRepresentable {
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = WebAuthorsSynonym.class, mappedBy = "webAuthor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
-    private Set<WebAuthorsSynonym> webAuthors = new HashSet<>();// foreign key in database. One Artefact = many Authors
+    private Set<WebAuthorsSynonym> webAuthorsSynonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
 
     public WebAuthor() {
     }
@@ -100,12 +100,12 @@ public class WebAuthor implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
-    public Set<WebAuthorsSynonym> getWebAuthors() {
-        return webAuthors;
+    public Set<WebAuthorsSynonym> getWebAuthorsSynonyms() {
+        return webAuthorsSynonyms;
     }
 
-    public void setWebAuthors(Set<WebAuthorsSynonym> authors) {
-        this.webAuthors = authors;
+    public void setWebAuthorsSynonyms(Set<WebAuthorsSynonym> authors) {
+        this.webAuthorsSynonyms = authors;
     }
 
     @Override
