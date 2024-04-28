@@ -126,6 +126,18 @@ public class CategoriesSynonym implements AsModelRepresentable {
         this.reviewed = reviewed;
     }
 
+    public void setId_category_synonym(int id_category_synonym) {
+        this.id_category_synonym = id_category_synonym;
+    }
+
+    public int getId_category() {
+        return id_category;
+    }
+
+    public void setId_category(int id_category) {
+        this.id_category = id_category;
+    }
+
     @Override
     public String toString() {
         return "CategoriesSynonym{" +
