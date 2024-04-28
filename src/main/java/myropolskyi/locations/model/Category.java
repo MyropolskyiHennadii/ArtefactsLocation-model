@@ -25,6 +25,7 @@ public class Category implements AsModelRepresentable {
     @Column
     private String page_language;//language of web-page
     @Column
+    @JsonIgnore
     private String type_category;// style, temporal or other type
     @Column
     @JsonIgnore
@@ -164,6 +165,14 @@ public class Category implements AsModelRepresentable {
 
     public void setId_category(int id_category) {
         this.id_category = id_category;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Subject getSubject() {
+        return subject;
     }
 
     @Override
