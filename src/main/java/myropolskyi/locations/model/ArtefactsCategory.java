@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-//Artefact's category
+/**
+ * Artefact's category (one building can be related to many styles of architecture for instance)
+ */
 @Entity
 @Table(name = "artefacts_categories")
 public class ArtefactsCategory implements AsModelRepresentable {

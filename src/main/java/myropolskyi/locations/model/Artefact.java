@@ -9,7 +9,9 @@ import myropolskyi.location.exceptions.JsonReadingException;
 
 import java.util.*;
 
-//main class of artefacts
+/**
+ * Artefact itself as an geographical and artificial object
+ */
 @Entity
 @Table(name = "artefacts")
 public class Artefact implements AsModelRepresentable {

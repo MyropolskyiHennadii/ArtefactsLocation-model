@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-//Category's synonym in different languages
+/**
+ * Category's synonym (name of the category in another language and so on)
+ */
 @Entity
 @Table(name = "categories_synonyms")
 public class CategoriesSynonym implements AsModelRepresentable {

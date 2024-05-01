@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-//Artefact's synonym in different languages
+/**
+ * Artefact's synonym (name of the artefact in another language and so on)
+ */
 @Entity
 @Table(name = "artefacts_synonyms")
 public class ArtefactsSynonym implements AsModelRepresentable {
@@ -29,8 +31,6 @@ public class ArtefactsSynonym implements AsModelRepresentable {
     @Column
     @JsonIgnore
     private String reviewed;//date-time of last review
-
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_artefacts")

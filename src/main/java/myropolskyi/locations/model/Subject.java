@@ -8,7 +8,9 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-//Subjects ('thema') of record
+/**
+ * Subject of artefacts (Architecture for instance)
+ */
 @Entity
 @Table(name = "themas")
 public class Subject implements AsModelRepresentable {

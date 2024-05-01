@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
+/**
+ * Artefact's image (link to image)
+ */
 @Entity
 @Table(name = "artefacts_images")
 public class ArtefactsImage implements AsModelRepresentable {

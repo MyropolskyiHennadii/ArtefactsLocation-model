@@ -8,7 +8,9 @@ import org.hibernate.annotations.PartitionKey;
 
 import static java.lang.Math.floor;
 
-//Location of Artefact
+/**
+ * Artefact's location (latitude, longitude and other attributes of location)
+ */
 @Entity
 @Table(name = "artefacts_locations")
 public class ArtefactsLocation implements AsModelRepresentable {

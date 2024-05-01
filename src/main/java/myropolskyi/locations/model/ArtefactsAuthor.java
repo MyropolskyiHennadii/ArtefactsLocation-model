@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-//WebAuthor of Artefact
+/**
+ * Author of artefact (as they are written in artefact's webpage, also as not well defined strings)
+ */
 @Entity
 @Table(name = "artefacts_authors")
 public class ArtefactsAuthor implements AsModelRepresentable {

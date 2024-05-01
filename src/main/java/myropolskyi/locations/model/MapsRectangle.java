@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 
 /**
- * class saves info about borders of geographic regions
+ * class saves info about borders of geographic rectangle
  */
 @Entity
 @Table(name = "regions")

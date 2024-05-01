@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
+/**
+ * Synonym of strictly defined author (WebAuthor) (name of the author in another language and so on)
+ */
 @Entity
 @Table(name = "web_authors_synonyms")
 public class WebAuthorsSynonym implements AsModelRepresentable {

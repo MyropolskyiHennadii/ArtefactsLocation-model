@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-//Events of Artefact
+/**
+ * Artefact's event (for instance, the date of construction or destruction)
+ */
 @Entity
 @Table(name = "artefacts_events")
 @JsonIgnoreProperties(ignoreUnknown = true)

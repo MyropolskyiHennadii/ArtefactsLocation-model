@@ -9,7 +9,9 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-//Category of subject
+/**
+ * Categories, classified artefacts (style of building for instance
+ */
 @Entity
 @Table(name = "categories")
 public class Category implements AsModelRepresentable {
