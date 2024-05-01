@@ -19,6 +19,7 @@ public class JsonArtefactsWrapper {
     private String error;
     private List<Category> categories;
     private List<Artefact> artefacts;
+    private List<WebAuthor> webAuthors;
 
     public JsonArtefactsWrapper(String date, String subversion, String thema, String region, String error, List<Category> categories, List<Artefact> artefacts) {
         this.date = date;
@@ -88,5 +89,21 @@ public class JsonArtefactsWrapper {
 
     public void setArtefacts(List<Artefact> artefacts) {
         this.artefacts = artefacts;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<WebAuthor> getWebAuthors() {
+        return webAuthors;
+    }
+
+    public void setWebAuthors(List<WebAuthor> webAuthors) {
+        this.webAuthors = webAuthors;
     }
 }

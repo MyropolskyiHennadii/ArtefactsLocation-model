@@ -76,6 +76,11 @@ public class Artefact implements AsModelRepresentable {
     @JsonManagedReference(value = "artefacts_image")//!!! important to prevent infinite loop with json references
     private ArtefactsImage artefactsImage;//foreign key in database
 
+    @Transient
+    @JsonIgnore
+    /*new field in DB for strictly defined authors:*/
+    private Set<WebAuthor> webAuthors = new HashSet<>();
+
     public Artefact() {
     }
 
@@ -275,6 +280,13 @@ public class Artefact implements AsModelRepresentable {
 
     public void setMainCategoriesId(Set<Integer> mainCategoriesId) {
         this.mainCategoriesId = mainCategoriesId;
+    }
+
+    public Set<WebAuthor> getWebAuthors() {
+        return webAuthors;
+    }
+    public void setWebAuthors(Set<WebAuthor> webAuthors) {
+        this.webAuthors = webAuthors;
     }
 
     @Override
