@@ -74,15 +74,6 @@ public class JsonArtefactsWrapper {
         this.error = error;
     }
 
-    public List<Category> getAll_categories() {
-        return categories;
-    }
-
-    @JsonSetter("categories")
-    public void setAll_categories(List<Category> all_categories) {
-        this.categories = all_categories;
-    }
-
     public List<Artefact> getArtefacts() {
         return artefacts;
     }
@@ -94,7 +85,7 @@ public class JsonArtefactsWrapper {
     public List<Category> getCategories() {
         return categories;
     }
-
+    @JsonSetter("categories")
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }

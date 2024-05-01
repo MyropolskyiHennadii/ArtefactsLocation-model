@@ -41,7 +41,7 @@ public class Artefact implements AsModelRepresentable {
     /*map for simplifying use artefacts fields in android-app:*/
     @Transient
     @JsonIgnore
-    Map<String,String> artefactsInfo = new HashMap<>();
+    Map<String, String> artefactsInfo = new HashMap<>();
 
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -79,7 +79,7 @@ public class Artefact implements AsModelRepresentable {
     @Transient
     @JsonIgnore
     /*new field in DB for strictly defined authors:*/
-    private Set<WebAuthor> webAuthors = new HashSet<>();
+    private Set<Integer> webAuthorsIDs = new HashSet<>();
 
     public Artefact() {
     }
@@ -97,6 +97,7 @@ public class Artefact implements AsModelRepresentable {
         this.web_reference_wiki = web_reference_wiki;
         this.page_language = page_language;
     }
+
     public Set<Integer> getMainCategoriesId() {
         return mainCategoriesId;
     }
@@ -210,11 +211,7 @@ public class Artefact implements AsModelRepresentable {
             JsonNode obj = mapper.readTree(jsonString);
             Double longitude = obj.get("lon").asDouble();
             Double latitude = obj.get("lat").asDouble();
-            if (longitude != null && latitude != null) {
-                return new ArtefactsLocation(longitude, latitude, this);
-            } else {
-                throw new JsonReadingException("Impossible to read lon and lat by getting long and lat of artefact, one of them or both are null.");
-            }
+            return new ArtefactsLocation(longitude, latitude, this);
         } catch (JsonProcessingException e) {
             throw new JsonReadingException("JsonProcessingException by getting long and lat of artefact: " + e.getMessage());
         }
@@ -282,11 +279,12 @@ public class Artefact implements AsModelRepresentable {
         this.mainCategoriesId = mainCategoriesId;
     }
 
-    public Set<WebAuthor> getWebAuthors() {
-        return webAuthors;
+    public Set<Integer> getWebAuthorsIDs() {
+        return webAuthorsIDs;
     }
-    public void setWebAuthors(Set<WebAuthor> webAuthors) {
-        this.webAuthors = webAuthors;
+
+    public void setWebAuthorsIDs(Set<Integer> webAuthorsIDs) {
+        this.webAuthorsIDs = webAuthorsIDs;
     }
 
     @Override
@@ -305,11 +303,11 @@ public class Artefact implements AsModelRepresentable {
         Artefact artefact = (Artefact) o;
 
         /*one of them is already written (id!=0), another one can be not*/
-        if(getId()*artefact.getId() == 0 && (getId() + artefact.getId()) > 0){
+        if (getId() * artefact.getId() == 0 && (getId() + artefact.getId()) > 0) {
             return false;
         }
         /*both are not written in database*/
-        if(getId() + artefact.getId() == 0){
+        if (getId() + artefact.getId() == 0) {
             return getWeb_reference_wiki().trim().equals(artefact.getWeb_reference_wiki().trim());
         }
 
