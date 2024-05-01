@@ -9,6 +9,9 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Strictly defined artefacts author (with web-page reference)
+ */
 @Entity
 @Table(name = "web_authors")
 public class WebAuthor implements AsModelRepresentable {
