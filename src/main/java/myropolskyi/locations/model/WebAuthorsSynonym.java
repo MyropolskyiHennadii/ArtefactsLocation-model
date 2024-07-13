@@ -16,11 +16,11 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     private int id_web_authors_synonyms;
-    @Column
+    @Column(name = "lang_name")
     private String author_name;
     @Column
     private String web_reference_wiki;//wiki-page, unique
-    @Column
+    @Column(name = "lang")
     private String page_language;//language of wiki-page
     @Column
     @JsonIgnore
@@ -120,7 +120,7 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
         }
         /*both are not written in database*/
         if(getId() + that.getId() == 0){
-            return getAuthor_name().trim().equals(that.getAuthor_name().trim()) && getWebAuthor().equals(that.getWebAuthor());
+            return getWeb_reference_wiki().trim().equals(that.getWeb_reference_wiki().trim()) && getWebAuthor().equals(that.getWebAuthor());
         }
         /*both are written in database*/
         return getId() == that.getId();
