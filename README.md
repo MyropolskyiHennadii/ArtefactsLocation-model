@@ -23,6 +23,9 @@ ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
+**Version 2.0.1** 21.09.2024
+* new class AuthorRepresentation. Libraries were refreshed
+
 **Version 2.0.0** 20.04.2024
 * new Classes: Authors, AuthorsSynonyms
 * org.slf4j

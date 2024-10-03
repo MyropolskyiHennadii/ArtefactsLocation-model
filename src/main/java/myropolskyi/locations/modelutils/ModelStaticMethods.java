@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import myropolskyi.location.exceptions.JsonReadingException;
+import myropolskyi.locations.exceptions.JsonReadingException;
 import myropolskyi.locations.model.Artefact;
 import myropolskyi.locations.model.JsonArtefactsWrapper;
 import org.apache.logging.log4j.LogManager;

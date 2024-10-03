@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
-import myropolskyi.location.exceptions.JsonReadingException;
+import myropolskyi.locations.exceptions.JsonReadingException;
 
 import java.util.*;
 
@@ -45,6 +45,7 @@ public class Artefact implements AsModelRepresentable {
     @JsonIgnore
     Map<String, String> artefactsInfo = new HashMap<>();
 
+
     //orphanRemoval = true to refresh all synonyms
     @OneToMany(targetEntity = ArtefactsAuthor.class, mappedBy = "artefact", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
@@ -80,8 +81,8 @@ public class Artefact implements AsModelRepresentable {
 
     @Transient
     @JsonIgnore
-    /*new field in DB for strictly defined authors:*/
-    private Set<Integer> webAuthorsIDs = new HashSet<>();
+    /*authors representation in mobile app*/
+    private Set<AuthorRepresentation> authorRepresentations = new HashSet<>();
 
     public Artefact() {
     }
@@ -281,12 +282,12 @@ public class Artefact implements AsModelRepresentable {
         this.mainCategoriesId = mainCategoriesId;
     }
 
-    public Set<Integer> getWebAuthorsIDs() {
-        return webAuthorsIDs;
+    public Set<AuthorRepresentation> getAuthorRepresentations() {
+        return authorRepresentations;
     }
 
-    public void setWebAuthorsIDs(Set<Integer> webAuthorsIDs) {
-        this.webAuthorsIDs = webAuthorsIDs;
+    public void setAuthorRepresentations(Set<AuthorRepresentation> authorRepresentations) {
+        this.authorRepresentations = authorRepresentations;
     }
 
     @Override
