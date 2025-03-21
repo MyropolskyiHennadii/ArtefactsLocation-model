@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import myropolskyi.locations.exceptions.JsonReadingException;
 
 import java.util.*;
@@ -14,12 +16,15 @@ import java.util.*;
  */
 @Entity
 @Table(name = "artefacts")
+@Data
+@NoArgsConstructor
 public class Artefact implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_artefacts;
+    @Column(name = "id_artefacts", nullable = false)
+    private int id;
     @Column
     private String artefacts_name;
     @Column
@@ -84,8 +89,6 @@ public class Artefact implements AsModelRepresentable {
     /*authors representation in mobile app*/
     private Set<AuthorRepresentation> authorRepresentations = new HashSet<>();
 
-    public Artefact() {
-    }
 
     public Artefact(String artefacts_name, String web_reference_wiki, String page_language) {
         this.artefacts_name = artefacts_name;
@@ -95,111 +98,15 @@ public class Artefact implements AsModelRepresentable {
 
     /*this constructor we need to create artefact from native (not hibernate) query*/
     public Artefact(int id, String artefacts_name, String web_reference_wiki, String page_language) {
-        this.id_artefacts = id;
+        this.id = id;
         this.artefacts_name = artefacts_name;
         this.web_reference_wiki = web_reference_wiki;
         this.page_language = page_language;
-    }
-
-    public Set<Integer> getMainCategoriesId() {
-        return mainCategoriesId;
     }
 
     @JsonSetter("categories")
     public void setMainCategoriesId(Integer[] inputArray) {
         Arrays.asList(inputArray).stream().forEach(a -> mainCategoriesId.add(a));
-    }
-
-    public String getArtefacts_name() {
-        return artefacts_name;
-    }
-
-    public void setArtefacts_name(String artefacts_name) {
-        this.artefacts_name = artefacts_name;
-    }
-
-    public String getWeb_reference_wiki() {
-        return web_reference_wiki;
-    }
-
-    public void setWeb_reference_wiki(String web_reference_wiki) {
-        this.web_reference_wiki = web_reference_wiki;
-    }
-
-    public Set<ArtefactsAuthor> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<ArtefactsAuthor> authors) {
-        this.authors = authors;
-    }
-
-    public Set<ArtefactsEvent> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<ArtefactsEvent> events) {
-        this.events = events;
-    }
-
-    public Set<ArtefactsSynonym> getSynonyms() {
-        return synonyms;
-    }
-
-    public void setSynonyms(Set<ArtefactsSynonym> synonyms) {
-        this.synonyms = synonyms;
-    }
-
-    public Set<ArtefactsCategory> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<ArtefactsCategory> categories) {
-        this.categories = categories;
-    }
-
-    public int getId() {
-        return id_artefacts;
-    }
-
-    public String getPage_language() {
-        return page_language;
-    }
-
-    public void setPage_language(String page_language) {
-        this.page_language = page_language;
-    }
-
-    public ArtefactsLocation getArtefactsLocation() {
-        return artefactsLocation;
-    }
-
-    public void setArtefactsLocation(ArtefactsLocation artefactsLocation) {
-        this.artefactsLocation = artefactsLocation;
-    }
-
-    public ArtefactsImage getArtefactsImage() {
-        return artefactsImage;
-    }
-
-    public void setArtefactsImage(ArtefactsImage artefactsImage) {
-        this.artefactsImage = artefactsImage;
-    }
-
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String last_modified) {
-        this.modified = last_modified;
-    }
-
-    public Map<String, String> getArtefactsInfo() {
-        return artefactsInfo;
-    }
-
-    public void setArtefactsInfo(Map<String, String> artefactsInfo) {
-        this.artefactsInfo = artefactsInfo;
     }
 
     /**
@@ -261,39 +168,9 @@ public class Artefact implements AsModelRepresentable {
     }
 
     @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
-    public void setMainCategoriesId(Set<Integer> mainCategoriesId) {
-        this.mainCategoriesId = mainCategoriesId;
-    }
-
-    public Set<AuthorRepresentation> getAuthorRepresentations() {
-        return authorRepresentations;
-    }
-
-    public void setAuthorRepresentations(Set<AuthorRepresentation> authorRepresentations) {
-        this.authorRepresentations = authorRepresentations;
-    }
-
-    @Override
     public String toString() {
         return "Artefact{" +
-                "id_artefacts=" + id_artefacts +
+                "id_artefacts=" + id +
                 ", artefacts_name='" + artefacts_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +
                 '}';

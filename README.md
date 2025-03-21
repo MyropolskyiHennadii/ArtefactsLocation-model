@@ -23,6 +23,9 @@ ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
+**Version 2.1.0-jakarta** 21.03.2025
+* java11 -> java21
+
 **Version 2.0.1** 21.09.2024
 * new class AuthorRepresentation. Libraries were refreshed
 
