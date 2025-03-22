@@ -4,18 +4,23 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Artefact's synonym (name of the artefact in another language and so on)
  */
 @Entity
 @Table(name = "artefacts_synonyms")
+@Data
+@NoArgsConstructor
 public class ArtefactsSynonym implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_artefacts_synonyms;
+    @Column(name = "id_artefacts_synonyms", nullable = false)
+    private int id;
     @Column
     private String lang;//code of language
     @Column
@@ -37,9 +42,6 @@ public class ArtefactsSynonym implements AsModelRepresentable {
     @JsonBackReference(value = "artefacts_synonyms")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
-    public ArtefactsSynonym() {
-    }
-
     public ArtefactsSynonym(String lang, String lang_name, String web_reference_wiki, Artefact artefact) {
         this.lang = lang;
         this.lang_name = lang_name;
@@ -47,77 +49,10 @@ public class ArtefactsSynonym implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
-    public int getId() {
-        return id_artefacts_synonyms;
-    }
-
-    public String getLang() {
-        return lang;
-    }
-
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
-
-    public String getLang_name() {
-        return lang_name;
-    }
-
-    public void setLang_name(String lang_name) {
-        this.lang_name = lang_name;
-    }
-
-    public String getWeb_reference_wiki() {
-        return web_reference_wiki;
-    }
-
-    public void setWeb_reference_wiki(String web_reference_wiki) {
-        this.web_reference_wiki = web_reference_wiki;
-    }
-
-    public Artefact getArtefact() {
-        return artefact;
-    }
-
-    public void setArtefact(Artefact artefact) {
-        this.artefact = artefact;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
-    public void setId_artefacts_synonyms(int id_artefacts_synonyms) {
-        this.id_artefacts_synonyms = id_artefacts_synonyms;
-    }
-
     @Override
     public String toString() {
         return "ArtefactsSynonym{" +
-                "id_artefacts_synonyms=" + id_artefacts_synonyms +
+                "id_artefacts_synonyms=" + id +
                 ", lang='" + lang + '\'' +
                 ", lang_name='" + lang_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +

@@ -5,18 +5,23 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Artefact's category (one building can be related to many styles of architecture for instance)
  */
 @Entity
 @Table(name = "artefacts_categories")
+@Data
+@NoArgsConstructor
 public class ArtefactsCategory implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_artefacts_categories;
+    @Column(name = "id_artefacts_authors", nullable = false)
+    private int id;
     @Column
     @JsonIgnore
     private String modified;//date-time of last modification
@@ -48,13 +53,6 @@ public class ArtefactsCategory implements AsModelRepresentable {
     @JsonIgnore
     private int id_category_artefact;//for native query
 
-    public int getId_category_artefact() {//for native query
-        return id_category_artefact;
-    }
-
-    public ArtefactsCategory() {
-    }
-
     public ArtefactsCategory(Artefact artefact, Category category) {
         this.artefact = artefact;
         this.category = category;
@@ -62,33 +60,9 @@ public class ArtefactsCategory implements AsModelRepresentable {
 
     /*this constructor we need to create artefact from native (not hibernate) query*/
     public ArtefactsCategory(int id_artefacts_categories, int id_artefacts, int id_category_artefact) {
-        this.id_artefacts_categories = id_artefacts_categories;
+        this.id = id_artefacts_categories;
         this.id_artefacts = id_artefacts;
         this.id_category_artefact = id_category_artefact;
-    }
-
-    public Artefact getArtefact() {
-        return artefact;
-    }
-
-    public void setArtefact(Artefact artefact) {
-        this.artefact = artefact;
-    }
-
-    public int getId() {
-        return id_artefacts_categories;
-    }
-
-    public void setIdArtefact(int id_artefacts) {
-        this.id_artefacts = id_artefacts;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     /*to download integer Category's id*/
@@ -98,36 +72,9 @@ public class ArtefactsCategory implements AsModelRepresentable {
     }
 
     @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
-    @Override
     public String toString() {
         return "ArtefactsCategory{" +
-                "id_artefacts_categories=" + id_artefacts_categories +
+                "id_artefacts_categories=" + id +
                 ", artefact=" + artefact +
                 ", category =" + category +
                 '}';

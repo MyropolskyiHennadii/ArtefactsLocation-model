@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,12 +16,15 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "web_authors")
+@Data
+@NoArgsConstructor
 public class WebAuthor implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_web_authors;
+    @Column(name = "id_web_authors", nullable = false)
+    private int id;
     @Column
     private String author_name;
     @Column
@@ -39,77 +44,6 @@ public class WebAuthor implements AsModelRepresentable {
     @OneToMany(targetEntity = WebAuthorsSynonym.class, mappedBy = "webAuthor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference//!!! important to prevent infinite loop with json references
     private Set<WebAuthorsSynonym> webAuthorsSynonyms = new HashSet<>();// foreign key in database. One Artefact = many Authors
-
-    public WebAuthor() {
-    }
-
-    public void setId_web_authors(int id_authors) {
-        this.id_web_authors = id_authors;
-    }
-
-    public String getAuthor_name() {
-        return author_name;
-    }
-
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
-    }
-
-    public String getWeb_reference_wiki() {
-        return web_reference_wiki;
-    }
-
-    public void setWeb_reference_wiki(String web_reference_wiki) {
-        this.web_reference_wiki = web_reference_wiki;
-    }
-
-    public String getPage_language() {
-        return page_language;
-    }
-
-    public void setPage_language(String page_language) {
-        this.page_language = page_language;
-    }
-
-    @Override
-    public int getId() {
-        return id_web_authors;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
-    public Set<WebAuthorsSynonym> getWebAuthorsSynonyms() {
-        return webAuthorsSynonyms;
-    }
-
-    public void setWebAuthorsSynonyms(Set<WebAuthorsSynonym> authors) {
-        this.webAuthorsSynonyms = authors;
-    }
 
     @Override
     public final boolean equals(Object o) {
@@ -138,7 +72,7 @@ public class WebAuthor implements AsModelRepresentable {
     @Override
     public String toString() {
         return "WebAuthor{" +
-                "id_authors=" + id_web_authors +
+                "id_authors=" + id +
                 ", author_name='" + author_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +
                 ", page_language='" + page_language + '\'' +

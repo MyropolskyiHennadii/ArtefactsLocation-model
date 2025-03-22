@@ -4,18 +4,23 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Artefact's image (link to image)
  */
 @Entity
 @Table(name = "artefacts_images")
+@Data
+@NoArgsConstructor
 public class ArtefactsImage implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_image;
+    @Column(name = "id_image", nullable = false)
+    private int id;
     @Column
     private String path_to_image;
 
@@ -41,65 +46,15 @@ public class ArtefactsImage implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
-    public ArtefactsImage(int id_image, String path_to_image) {
-        this.id_image = id_image;
+    public ArtefactsImage(int id, String path_to_image) {
+        this.id = id;
         this.path_to_image = path_to_image;
-    }
-
-    public ArtefactsImage() {
-    }
-
-    public int getId() {
-        return id_image;
-    }
-
-    public String getPath_to_image() {
-        return path_to_image;
-    }
-
-    public void setPath_to_image(String path_to_image) {
-        this.path_to_image = path_to_image;
-    }
-
-    public Artefact getArtefact() {
-        return artefact;
-    }
-
-    public void setArtefact(Artefact artefact) {
-        this.artefact = artefact;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
     }
 
     @Override
     public String toString() {
         return "ArtefactsImage{" +
-                "id_image=" + id_image +
+                "id_image=" + id +
                 ", path_to_image='" + path_to_image + '\'' +
                 ", artefact=" + artefact +
                 '}';

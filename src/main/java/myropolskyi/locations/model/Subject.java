@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +15,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "themas")
+@Data
+@NoArgsConstructor
 public class Subject implements AsModelRepresentable {
 
     @Id
@@ -33,54 +37,8 @@ public class Subject implements AsModelRepresentable {
     @JsonIgnore
     private Set<Category> categories = new HashSet<>();// foreign key in database. One thema = many categories
 
-    public Subject() {
-    }
-
     public Subject(String thema_name) {
         this.thema_name = thema_name;
-    }
-
-    public String getThema_name() {
-        return thema_name;
-    }
-
-    public void setThema_name(String subject_name) {
-        this.thema_name = subject_name;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
     }
 
     @Override

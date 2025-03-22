@@ -5,18 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Author of artefact (as they are written in artefact's webpage, also as not well defined strings)
  */
 @Entity
 @Table(name = "artefacts_authors")
+@Data
+@NoArgsConstructor
 public class ArtefactsAuthor implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_artefacts_authors;
+    @Column(name = "id_artefacts_authors", nullable = false)
+    private int id;
     @Column
     private String author_name;
     @Column
@@ -41,9 +46,6 @@ public class ArtefactsAuthor implements AsModelRepresentable {
     @JsonBackReference//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
 
-    public ArtefactsAuthor() {
-    }
-
     public ArtefactsAuthor(String author_name, Artefact artefact) {
         this.author_name = author_name;
         this.artefact = artefact;
@@ -56,69 +58,10 @@ public class ArtefactsAuthor implements AsModelRepresentable {
         this.id_web_authors = id_web_authors;
     }
 
-    public String getAuthor_name() {
-        return author_name;
-    }
-
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
-    }
-
-    public Artefact getArtefact() {
-        return artefact;
-    }
-
-    public void setArtefact(Artefact artefact) {
-        this.artefact = artefact;
-    }
-
-    public int getId() {
-        return id_artefacts_authors;
-    }
-
-    public void setId_artefacts_authors(int id_artefacts_authors) {
-        this.id_artefacts_authors = id_artefacts_authors;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
-    public String getId_web_authors() {
-        return id_web_authors;
-    }
-
-    public void setId_web_authors(String id_web_authors) {
-        this.id_web_authors = id_web_authors;
-    }
-
     @Override
     public String toString() {
         return "ArtefactsAuthor{" +
-                "id_artefacts_authors=" + id_artefacts_authors +
+                "id_artefacts_authors=" + id +
                 ", author_name='" + author_name + '\'' +
                 ", artefact=" + artefact +
                 '}';

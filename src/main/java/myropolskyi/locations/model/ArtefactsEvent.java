@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Artefact's event (for instance, the date of construction or destruction)
@@ -12,12 +14,15 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "artefacts_events")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
+@NoArgsConstructor
 public class ArtefactsEvent implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_events_artefacts;
+    @Column(name = "id_events_artefacts", nullable = false)
+    private int id;
     @Column
     private String event;
     @Column
@@ -45,9 +50,6 @@ public class ArtefactsEvent implements AsModelRepresentable {
     @JsonIgnore
     private int id_temporary;
 
-    public ArtefactsEvent() {
-    }
-
     public ArtefactsEvent(String event, String event_begin, String event_end, Artefact artefact) {
         this.event = event;
         this.event_begin = event_begin;
@@ -55,77 +57,10 @@ public class ArtefactsEvent implements AsModelRepresentable {
         this.artefact = artefact;
     }
 
-    public int getId() {
-        return id_events_artefacts;
-    }
-
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
-    public Artefact getArtefact() {
-        return artefact;
-    }
-
-    public void setArtefact(Artefact artefact) {
-        this.artefact = artefact;
-    }
-
-    public String getEvent_begin() {
-        return event_begin;
-    }
-
-    public void setEvent_begin(String event_begin) {
-        this.event_begin = event_begin;
-    }
-
-    public String getEvent_end() {
-        return event_end;
-    }
-
-    public void setEvent_end(String event_end) {
-        this.event_end = event_end;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
-    public void setId_events_artefacts(int id_events_artefacts) {
-        this.id_events_artefacts = id_events_artefacts;
-    }
-
     @Override
     public String toString() {
         return "ArtefactsEvent{" +
-                "id_events_artefacts=" + id_events_artefacts +
+                "id_events_artefacts=" + id +
                 ", event='" + event + '\'' +
                 ", event_begin=" + event_begin +
                 ", event_end=" + event_end +

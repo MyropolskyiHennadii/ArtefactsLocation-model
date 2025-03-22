@@ -2,6 +2,8 @@ package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * (defined structure and downloaded from ArtefactsLocation-API)
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
+@NoArgsConstructor
 public class JsonArtefactsWrapper {
 
     private String date;
@@ -31,70 +35,9 @@ public class JsonArtefactsWrapper {
         this.artefacts = artefacts;
     }
 
-    public JsonArtefactsWrapper() {
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getSubversion() {
-        return subversion;
-    }
-
-    public void setSubversion(String subversion) {
-        this.subversion = subversion;
-    }
-
-    public String getThema() {
-        return thema;
-    }
-
-    public void setThema(String thema) {
-        this.thema = thema;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public List<Artefact> getArtefacts() {
-        return artefacts;
-    }
-
-    public void setArtefacts(List<Artefact> artefacts) {
-        this.artefacts = artefacts;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
     @JsonSetter("categories")
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
-    public List<WebAuthor> getWebAuthors() {
-        return webAuthors;
-    }
-
-    public void setWebAuthors(List<WebAuthor> webAuthors) {
-        this.webAuthors = webAuthors;
-    }
 }
