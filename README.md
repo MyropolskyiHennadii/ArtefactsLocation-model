@@ -25,6 +25,7 @@ ArtefactsLocation-table is partitioned by longitude.
 
 **Version 2.1.0-jakarta** 22.03.2025
 * java11 -> java17
+* 01.05.2025: hashcode for web_reference_wiki in web-author was corrected
 
 **Version 2.0.1** 21.09.2024
 * new class AuthorRepresentation. Libraries were refreshed
