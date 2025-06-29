@@ -23,6 +23,9 @@ ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
+**Version 2.0.2** 29.06.2026
+* fixed bug with null as web_reference for webAuthor and it synonyms
+
 **Version 2.0.1** 21.09.2024
 * new class AuthorRepresentation. Libraries were refreshed
 

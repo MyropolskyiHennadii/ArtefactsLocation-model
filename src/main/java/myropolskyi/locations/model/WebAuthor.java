@@ -132,7 +132,7 @@ public class WebAuthor implements AsModelRepresentable {
 
     @Override
     public int hashCode() {
-        return web_reference_wiki.length();
+        return (web_reference_wiki == null) ? 0 : web_reference_wiki.hashCode();
     }
 
     @Override
