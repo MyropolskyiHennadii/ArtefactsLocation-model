@@ -23,6 +23,9 @@ ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
+**Version 2.1.1-jakarta** 14.09.2025
+* set for Wiki-Resume conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+
 **Version 2.1.0-jakarta** 22.03.2025
 * java11 -> java17
 * 01.05.2025: hashcode for web_reference_wiki in web-author was corrected

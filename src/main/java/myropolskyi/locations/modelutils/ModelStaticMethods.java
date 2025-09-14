@@ -121,6 +121,7 @@ public class ModelStaticMethods {
         StringBuilder result = new StringBuilder();
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
         int status = conn.getResponseCode();
         if (status == HttpURLConnection.HTTP_MOVED_TEMP
