@@ -23,6 +23,15 @@ ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
+TODO:
+change
+conn.setRequestMethod("GET");
+conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+to more clear app representation;
+
+**Version 2.1.2-jakarta** 24.09.2025
+* libraries were refreshed
+
 **Version 2.1.1-jakarta** 14.09.2025
 * set for Wiki-Resume conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
 
