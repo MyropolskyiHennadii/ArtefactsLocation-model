@@ -32,6 +32,8 @@ public class Artefact implements AsModelRepresentable {
     @Column
     private String page_language;//language of wiki-page
     @Column
+    private boolean is_outside_wiki;
+    @Column
     @JsonIgnore
     private String modified;//date-time of last modification
     @Column

@@ -23,6 +23,8 @@ public class ArtefactsImage implements AsModelRepresentable {
     private int id;
     @Column
     private String path_to_image;
+    @Column
+    private String image_copyright;
 
     @Column
     @JsonIgnore
