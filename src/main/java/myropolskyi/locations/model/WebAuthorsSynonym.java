@@ -4,18 +4,23 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Synonym of strictly defined author (WebAuthor) (name of the author in another language and so on)
  */
 @Entity
 @Table(name = "web_authors_synonyms")
+@Data
+@NoArgsConstructor
 public class WebAuthorsSynonym implements AsModelRepresentable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private int id_web_authors_synonyms;
+    @Column(name = "id_web_authors_synonyms", nullable = false)
+    private int id;
     @Column(name = "lang_name")
     private String author_name;
     @Column
@@ -37,77 +42,6 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
     @JsonBackReference//important to prevent infinite loop of references
     private WebAuthor webAuthor;//foreign key in database
 
-    public WebAuthorsSynonym() {
-    }
-
-    public void setId_web_authors_synonyms(int id_authors_synonyms) {
-        this.id_web_authors_synonyms = id_authors_synonyms;
-    }
-
-    public String getAuthor_name() {
-        return author_name;
-    }
-
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
-    }
-
-    public String getWeb_reference_wiki() {
-        return web_reference_wiki;
-    }
-
-    public void setWeb_reference_wiki(String web_reference_wiki) {
-        this.web_reference_wiki = web_reference_wiki;
-    }
-
-    public String getPage_language() {
-        return page_language;
-    }
-
-    public void setPage_language(String page_language) {
-        this.page_language = page_language;
-    }
-
-    public WebAuthor getWebAuthor() {
-        return webAuthor;
-    }
-
-    public void setWebAuthor(WebAuthor webAuthor) {
-        this.webAuthor = webAuthor;
-    }
-
-    @Override
-    public int getId() {
-        return id_web_authors_synonyms;
-    }
-
-    @Override
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    @Override
-    public String getReviewed() {
-        return reviewed;
-    }
-
-    public void setReviewed(String reviewed) {
-        this.reviewed = reviewed;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,13 +62,14 @@ public class WebAuthorsSynonym implements AsModelRepresentable {
 
     @Override
     public int hashCode() {
+
         return (web_reference_wiki == null) ? 0 : web_reference_wiki.hashCode();
     }
 
     @Override
     public String toString() {
         return "WebAuthorsSynonym{" +
-                "id_authors_synonyms=" + id_web_authors_synonyms +
+                "id_authors_synonyms=" + id +
                 ", author_name='" + author_name + '\'' +
                 ", web_reference_wiki='" + web_reference_wiki + '\'' +
                 ", page_language='" + page_language + '\'' +

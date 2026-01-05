@@ -15,16 +15,25 @@ Artefact <-------
                                                             |CategoriesSynonym (Set)
                                                             |Thema (One)
 All classes are mapped to database tables. The database is filled by data from free source.
-All tables are connected by foreign keys with important exceptions: 
+All tables are connected by foreign keys with important exceptions:
 * ArtefactsLocation and Artefact are not connected by foreign key.
 * ArtefactCategory is announced as Transient in order to minimize time for getting artefacts.
-That was done in order to minimize time for searching artefacts by location. Be sure by removing and creating artefacts, that you are removing or creating artefacts locations too. 
-ArtefactsLocation-table is partitioned by longitude.
+  That was done in order to minimize time for searching artefacts by location. Be sure by removing and creating artefacts, that you are removing or creating artefacts locations too.
+  ArtefactsLocation-table is partitioned by longitude.
 
 ## Version History
 
-**Version 2.0.2** 29.06.2026
-* fixed bug with null as web_reference for webAuthor and it synonyms
+**Version 2.1.2-jakarta** 24.09.2025
+* libraries were refreshed
+* User-Agent was changed to
+  LookAroundArchitecture/2.5.3 (https://play.google.com/store/apps/details?id=myropolskyi.android.locations&pcampaignid=web_share), contact: Hennadii.Myropolskyi@outlook.com
+
+**Version 2.1.1-jakarta** 14.09.2025
+* set for Wiki-Resume conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+
+**Version 2.1.0-jakarta** 22.03.2025
+* java11 -> java17
+* 01.05.2025: hashcode for web_reference_wiki in web-author was corrected
 
 **Version 2.0.1** 21.09.2024
 * new class AuthorRepresentation. Libraries were refreshed
