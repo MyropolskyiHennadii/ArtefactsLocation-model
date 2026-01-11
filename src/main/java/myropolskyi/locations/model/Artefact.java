@@ -34,6 +34,8 @@ public class Artefact implements AsModelRepresentable {
     @Column
     private boolean is_outside_wiki;
     @Column
+    private String description;/*if it is not wiki, add here description*/
+    @Column
     @JsonIgnore
     private String modified;//date-time of last modification
     @Column
