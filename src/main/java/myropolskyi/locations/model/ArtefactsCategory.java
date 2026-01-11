@@ -20,7 +20,7 @@ public class ArtefactsCategory implements AsModelRepresentable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    @Column(name = "id_artefacts_authors", nullable = false)
+    @Column(name = "id_artefacts_categories", nullable = false)
     private int id;
     @Column
     @JsonIgnore
