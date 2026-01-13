@@ -97,21 +97,21 @@ public class Artefact implements AsModelRepresentable {
 
     @Transient
     @JsonIgnore
-    private boolean includeDescriptionInJson = false;
+    private boolean includeWikiOutside = false;
 
     @Override
     public void setIncludeWikiOutsideFieldsInJson(boolean include) {
-        this.includeDescriptionInJson = include;
+        this.includeWikiOutside = include;
     }
 
     @JsonGetter("description")
     public String getDescriptionForJson() {
-        return includeDescriptionInJson ? description : null;
+        return includeWikiOutside ? description : null;
     }
 
     @JsonGetter("is_outside_wiki")
     public Boolean getIsOutsideWikiForJson() {
-        return includeDescriptionInJson ? is_outside_wiki : null;
+        return includeWikiOutside ? is_outside_wiki : null;
     }
 
     @JsonIgnore

@@ -46,16 +46,16 @@ public class ArtefactsImage implements AsModelRepresentable {
 
     @Transient
     @JsonIgnore
-    private boolean includeImageCopyrightInJson = false;
+    private boolean includeWikiOutside = false;
 
     @Override
     public void setIncludeWikiOutsideFieldsInJson(boolean include) {
-        this.includeImageCopyrightInJson = include;
+        this.includeWikiOutside = include;
     }
 
     @JsonGetter("image_copyright")
     public String getImageCopyrightForJson() {
-        return includeImageCopyrightInJson ? image_copyright : null;
+        return includeWikiOutside ? image_copyright : null;
     }
 
     @JsonIgnore
