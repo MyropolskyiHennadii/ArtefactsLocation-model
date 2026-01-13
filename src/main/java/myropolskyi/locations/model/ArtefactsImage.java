@@ -1,6 +1,7 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class ArtefactsImage implements AsModelRepresentable {
     @Column
     private String path_to_image;
     @Column
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private String image_copyright;
 
     @Column
@@ -41,6 +43,25 @@ public class ArtefactsImage implements AsModelRepresentable {
     @JoinColumn(name = "id_artefacts")
     @JsonBackReference(value = "artefacts_image")//important to prevent infinite loop of references
     private Artefact artefact;//foreign key in database
+
+    @Transient
+    @JsonIgnore
+    private boolean includeImageCopyrightInJson = false;
+
+    @Override
+    public void setIncludeWikiOutsideFieldsInJson(boolean include) {
+        this.includeImageCopyrightInJson = include;
+    }
+
+    @JsonGetter("image_copyright")
+    public String getImageCopyrightForJson() {
+        return includeImageCopyrightInJson ? image_copyright : null;
+    }
+
+    @JsonIgnore
+    public String getImage_copyright() {
+        return image_copyright;
+    }
 
     /*this constructor we need to create artefact_image from native (not hibernate) query*/
     public ArtefactsImage(String path_to_image, Artefact artefact) {

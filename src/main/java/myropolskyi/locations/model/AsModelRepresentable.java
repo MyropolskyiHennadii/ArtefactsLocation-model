@@ -7,4 +7,9 @@ public interface AsModelRepresentable {
     String getModified();
     String getCreated();
     String getReviewed();
+
+    // Method to control inclusion of new fields in JSON for backward compatibility
+    default void setIncludeWikiOutsideFieldsInJson(boolean include) {
+        // Default implementation does nothing - override in classes that have new fields
+    }
 }
