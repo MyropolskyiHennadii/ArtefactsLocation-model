@@ -32,10 +32,10 @@ public class Artefact implements AsModelRepresentable {
     @Column
     private String page_language;//language of wiki-page
     @Column
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonIgnore
     private boolean is_outside_wiki;
     @Column
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonIgnore
     private String description;/*if it is not wiki, add here description*/
     @Column
     @JsonIgnore
@@ -105,11 +105,13 @@ public class Artefact implements AsModelRepresentable {
     }
 
     @JsonGetter("description")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getDescriptionForJson() {
         return includeWikiOutside ? description : null;
     }
 
     @JsonGetter("is_outside_wiki")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getIsOutsideWikiForJson() {
         return includeWikiOutside ? is_outside_wiki : null;
     }
@@ -119,9 +121,17 @@ public class Artefact implements AsModelRepresentable {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @JsonIgnore
     public boolean isIs_outside_wiki() {
         return is_outside_wiki;
+    }
+
+    public void setIs_outside_wiki(boolean is_outside_wiki) {
+        this.is_outside_wiki = is_outside_wiki;
     }
 
 
