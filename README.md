@@ -23,7 +23,7 @@ All tables are connected by foreign keys with important exceptions:
 
 ## Version History
 
-**Version 2.2.0** 05.01.2026
+**Version 2.2.0** 18.01.2026
 * libraries were refreshed
 * new fields in image (copyright) and artefact (is_outside_wiki)
 

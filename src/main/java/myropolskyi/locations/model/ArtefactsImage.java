@@ -1,10 +1,6 @@
 package myropolskyi.locations.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -65,6 +61,7 @@ public class ArtefactsImage implements AsModelRepresentable {
         return image_copyright;
     }
 
+    @JsonSetter("image_copyright")
     public void setImage_copyright(String image_copyright) {
         this.image_copyright = image_copyright;
     }

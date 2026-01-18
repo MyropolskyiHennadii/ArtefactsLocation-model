@@ -121,6 +121,7 @@ public class Artefact implements AsModelRepresentable {
         return description;
     }
 
+    @JsonSetter("description")
     public void setDescription(String description) {
         this.description = description;
     }
@@ -130,6 +131,7 @@ public class Artefact implements AsModelRepresentable {
         return is_outside_wiki;
     }
 
+    @JsonSetter("is_outside_wiki")
     public void setIs_outside_wiki(boolean is_outside_wiki) {
         this.is_outside_wiki = is_outside_wiki;
     }
