@@ -1,7 +1,6 @@
 package myropolskyi.locations.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,11 +32,6 @@ public class JsonArtefactsWrapper {
         this.error = error;
         this.categories = categories;
         this.artefacts = artefacts;
-    }
-
-    @JsonSetter("categories")
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
     }
 
 }

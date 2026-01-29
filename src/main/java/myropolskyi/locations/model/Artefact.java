@@ -153,7 +153,7 @@ public class Artefact implements AsModelRepresentable {
 
     @JsonSetter("categories")
     public void setMainCategoriesId(Integer[] inputArray) {
-        Arrays.asList(inputArray).stream().forEach(a -> mainCategoriesId.add(a));
+        Collections.addAll(mainCategoriesId, inputArray);
     }
 
     /**

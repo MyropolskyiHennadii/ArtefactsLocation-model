@@ -87,9 +87,9 @@ public class ModelStaticMethods {
      */
     public static String getResumeFromWiki(Artefact artefact) throws IOException {
         /*it depends on domain... de, en, so on*/
-        String domainName = artefact.getWeb_reference_wiki().replaceAll("http(s)?://|www\\.|/.*", "");
+        String domainName = artefact.getWeb_reference_wiki().replaceAll("http(s)?://|www\\\\.|/.*", "");
         String strUrl = "http://" + domainName + "/w/api.php?action=query&prop=extracts&format=json&titles="
-                + URLEncoder.encode(artefact.getArtefacts_name(), StandardCharsets.UTF_8.toString());
+                + URLEncoder.encode(artefact.getArtefacts_name(), StandardCharsets.UTF_8);
         return getResultFromWikiAPI(strUrl);
     }
 
@@ -103,9 +103,9 @@ public class ModelStaticMethods {
      */
     public static String getResumeFromWiki(String wikiPage, String artefactName) throws IOException {
         /*it depends on domain... de, en, so on*/
-        String domainName = wikiPage.replaceAll("http(s)?://|www\\.|/.*", "");
+        String domainName = wikiPage.replaceAll("http(s)?://|www\\\\.|/.*", "");
         String strUrl = "http://" + domainName + "/w/api.php?action=query&prop=extracts&format=json&titles="
-                + URLEncoder.encode(artefactName, StandardCharsets.UTF_8.toString());
+                + URLEncoder.encode(artefactName, StandardCharsets.UTF_8);
         return getResultFromWikiAPI(strUrl);
     }
 
@@ -186,9 +186,7 @@ public class ModelStaticMethods {
             });
         } else if (jsonNode.isArray()) {
             ArrayNode arrayField = (ArrayNode) jsonNode;
-            arrayField.forEach(node -> {
-                getAllKeysUsingJsonNodeFields(node, keys, keyValuePaar);
-            });
+            arrayField.forEach(node -> getAllKeysUsingJsonNodeFields(node, keys, keyValuePaar));
         }
     }
 }
