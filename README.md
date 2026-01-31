@@ -23,7 +23,7 @@ All tables are connected by foreign keys with important exceptions:
 
 ## Version History
 
-**Version 2.2.1** 29.01.2026
+**Version 2.2.1** 31.01.2026
 * java17 -> java21
 
 **Version 2.2.0** 18.01.2026
