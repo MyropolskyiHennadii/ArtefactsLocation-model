@@ -14,8 +14,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>21</java.version>
 
-        <fasterxml.annotations.version>2.20</fasterxml.annotations.version>
-        <fasterxml.databind.version>2.20.1</fasterxml.databind.version>
+        <fasterxml.annotations.version>2.21</fasterxml.annotations.version>
+        <fasterxml.databind.version>2.21.0</fasterxml.databind.version>
         <hibernate.version>7.1.1.Final</hibernate.version>
         <org.apache.logging.log4j2.version>2.25.3</org.apache.logging.log4j2.version>
         <org.projectlombok.version>1.18.42</org.projectlombok.version>

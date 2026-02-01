@@ -20,6 +20,7 @@ public class JsonArtefactsWrapper {
     private String thema;
     private String region;
     private String error;
+    private Announcement announcement;
     private List<Category> categories;
     private List<Artefact> artefacts;
     private List<WebAuthor> webAuthors;
