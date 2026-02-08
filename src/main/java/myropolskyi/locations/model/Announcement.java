@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 /**
  * Announcement message for app updates or notifications
  */
@@ -17,5 +19,6 @@ public class Announcement {
     private String messageId;
 
     @JsonProperty("message")
-    private String message;
+    /*this is the map in order to make messages in different languages*/
+    private Map<String, String> message;
 }

@@ -24,7 +24,7 @@ All tables are connected by foreign keys with important exceptions:
 ## Version History
 
 **Version 2.2.2** ??.??.2026
-* new class Announcement for JsonArtefactWrapper
+* new class Announcement for JsonArtefactWrapper: it is used my sending message to smartphone-client 
 
 **Version 2.2.1** 31.01.2026
 * java17 -> java21
