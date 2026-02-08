@@ -23,7 +23,7 @@ All tables are connected by foreign keys with important exceptions:
 
 ## Version History
 
-**Version 2.2.2** ??.??.2026
+**Version 2.2.2** 08.02.2026
 * new class Announcement for JsonArtefactWrapper: it is used my sending message to smartphone-client 
 
 **Version 2.2.1** 31.01.2026
