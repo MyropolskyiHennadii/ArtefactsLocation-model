@@ -1,74 +1,105 @@
-# ArtefactsLocations-model
+# ArtefactsLocation-model
 
-Artefact is a concept of a real article (object), which can be described by its geo-coordinates (certainly), link to its valuable description (certainly), category (minimum 1, certainly), subject (certainly), webAuthor(s) (not necessarily), history/events (not necessarily), image (not necessarily), synonyms in different languages (not necessarily).
+A Java 21 Hibernate ORM model library for managing architectural and cultural heritage artefacts with geolocation data.
 
-This project contains main classes and methods to work with such artefacts and their properties.
-Artefact <-------
+## Overview
 
-                |ArtefactsAuthor (Set)
-                |ArtefactsEvent (Set)
-                |ArteafctsImage (One)
-                |ArtefactsLocation (One)
-                |ArtefactsSynonym (Set)
-                |ArtefactsCategory (Set) <--------
-                                            |Category<-----
-                                                            |CategoriesSynonym (Set)
-                                                            |Thema (One)
-All classes are mapped to database tables. The database is filled by data from free source.
-All tables are connected by foreign keys with important exceptions:
-* ArtefactsLocation and Artefact are not connected by foreign key.
-* ArtefactCategory is announced as Transient in order to minimize time for getting artefacts.
-  That was done in order to minimize time for searching artefacts by location. Be sure by removing and creating artefacts, that you are removing or creating artefacts locations too.
-  ArtefactsLocation-table is partitioned by longitude.
+This project provides a comprehensive data model for representing real-world architectural objects (artefacts) with their geographical locations, historical information, categorization, and multilingual support. It's designed to work with location-based applications that showcase cultural and architectural heritage.
+
+## Features
+
+- **Geolocation Support**: Store and query artefacts by geographical coordinates (longitude/latitude)
+- **Multilingual**: Support for artefact and category names in multiple languages via synonyms
+- **Rich Metadata**: Track authors, historical events, images, and Wikipedia references
+- **Flexible Categorization**: Multiple categories per artefact with subject-based organization
+- **JSON Serialization**: Full Jackson support for REST API integration
+- **Optimized Queries**: Partitioned tables and transient fields for performance
+- **Hibernate ORM**: JPA/Hibernate entities ready for database persistence
+
+## Data Model
+
+### Core Entities
+
+```
+Artefact (Main Entity)
+├── ArtefactsLocation (1:1) - Geographical coordinates
+├── ArtefactsImage (1:1) - Image reference and copyright
+├── ArtefactsAuthor (1:N) - Authors/architects (optionally references WebAuthor via id_web_authors)
+├── ArtefactsEvent (1:N) - Historical events (construction, destruction, etc.)
+├── ArtefactsSynonym (1:N) - Names in different languages
+└── ArtefactsCategory (1:N) - Style/temporal classifications
+    └── Category
+        ├── CategoriesSynonym (1:N) - Category names in different languages
+        └── Subject (N:1) - Thematic grouping (e.g., Architecture)
+
+WebAuthor (Strictly defined authors with Wikipedia pages)
+├── WebAuthorsSynonym (1:N) - Author names in different languages
+└── ArtefactsAuthor (1:N) - Referenced by artefacts when author is well-defined
+```
+
+### Key Classes
+
+- **Artefact**: Main entity representing an architectural object with name, Wikipedia reference, and language
+- **ArtefactsLocation**: GPS coordinates (partitioned by longitude for performance)
+- **ArtefactsAuthor**: Flexible author attribution with optional reference to WebAuthor via `id_web_authors` field
+- **WebAuthor**: Well-defined authors with Wikipedia pages and multilingual synonyms
+- **Category**: Classification system (architectural styles, temporal periods, etc.)
+- **Subject**: High-level thematic grouping (e.g., Architecture, Sculpture)
+
+## Technical Details
+
+### Requirements
+
+- Java 21
+- Hibernate 7.1.1+
+- Jackson 2.20+
+- Lombok 1.18.42+
+
+### Database Design
+
+- All entities are mapped to database tables via JPA annotations
+- **Important**: `ArtefactsLocation` and `Artefact` are NOT connected by foreign key for performance
+- `ArtefactsCategory` is marked as `@Transient` in Artefact to optimize location-based queries
+- `artefacts_locations` table is partitioned by `int_longitude` (floor of longitude)
+
+### JSON Serialization
+
+The model includes sophisticated JSON handling:
+- Conditional field inclusion based on `includeWikiOutside` flag
+- Custom `@JsonGetter`/`@JsonSetter` for backward compatibility
+- Circular reference prevention via `@JsonManagedReference`/`@JsonBackReference`
+- Compact JSON output (e.g., categories as integer arrays)
+
+### Utility Methods
+
+**ModelStaticMethods** provides:
+- JSON file parsing to artefact lists
+- Wikipedia API integration for extracting article summaries
+- Reverse geocoding support
+
+
+Add to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>myropolskyi.locations</groupId>
+    <artifactId>ArtefactsLocation-model</artifactId>
+    <version>2.2.2</version>
+</dependency>
+```
 
 ## Version History
 
-**Version 2.2.2** 08.02.2026
-* new class Announcement for JsonArtefactWrapper: it is used my sending message to smartphone-client 
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-**Version 2.2.1** 31.01.2026
-* java17 -> java21
+## License
 
-**Version 2.2.0** 18.01.2026
-* libraries were refreshed
-* new fields in image (copyright) and artefact (is_outside_wiki)
+This project is open source. Data is sourced from free/open sources (primarily Wikipedia).
 
-**Version 2.1.2-jakarta** 24.09.2025
-* libraries were refreshed
-* User-Agent was changed to
-  LookAroundArchitecture/2.5.3 (https://play.google.com/store/apps/details?id=myropolskyi.android.locations&pcampaignid=web_share), contact: Hennadii.Myropolskyi@outlook.com
+## Related Projects
 
-**Version 2.1.1-jakarta** 14.09.2025
-* set for Wiki-Resume conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+This model is used by the **LookAroundArchitecture** mobile application for Android.
 
-**Version 2.1.0-jakarta** 22.03.2025
-* java11 -> java17
-* 01.05.2025: hashcode for web_reference_wiki in web-author was corrected
+## Contact
 
-**Version 2.0.1** 21.09.2024
-* new class AuthorRepresentation. Libraries were refreshed
-
-**Version 2.0.0** 20.04.2024
-* new Classes: Authors, AuthorsSynonyms
-* org.slf4j
-
-
-**Version 1.2.4** 07.04.2024
-* logj42 -> 2.23.1, fasterxml -> 2.17.0, hibernate -> 6.4.4.Final, mavencompiler.version -> 3.13.0
-
-**Version 1.2.3** 23.12.2023
-* Setter id for authors, events, images and so on: for optimizing queries
-
-**Version 1.2.2** 26.11.2023
-* New fields in ArtefactsLocation: for data from reverse geocoding https://api.bigdatacloud.net/data/reverse-geocode-client
-
-**Version 1.2.1** 19.10.2023
-* Fields modified, created, reviewed were added to model and to database. Fields updated, deleted were removed.
-* new Artefacts field: artefactsInfo, map for simplifying use artefacts fields in android-app.
-
-**Version 1.2.0** 27.08.2023
-* Java8 -> java11, hibernate 5 -> 6, other libraries.
-* Class Thema was renamed to Subject.
-
-**Version 1.1.4** **(05.05.2023)**
-* Method getResumeFromWiki(String wikiPage, String artefactName) was added for exact page, not artefact
+For questions or suggestions, contact: Hennadii.Myropolskyi@outlook.com
