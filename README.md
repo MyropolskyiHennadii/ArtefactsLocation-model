@@ -46,6 +46,13 @@ WebAuthor (Strictly defined authors with Wikipedia pages)
 - **Category**: Classification system (architectural styles, temporal periods, etc.)
 - **Subject**: High-level thematic grouping (e.g., Architecture, Sculpture)
 
+## Database
+
+The database schema is defined by this model. SQL dumps with 200,000+ architectural objects are available:
+
+**[ArtefactsLocation-data](https://github.com/MyropolskyiHennadii/ArtefactsLocation-data/tree/main)** - Download the complete database
+
+
 ## Technical Details
 
 ### Requirements
