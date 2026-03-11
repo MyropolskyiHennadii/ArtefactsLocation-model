@@ -102,4 +102,4 @@ This model is used by the **LookAroundArchitecture** mobile application for Andr
 
 ## Contact
 
-For questions or suggestions, contact: Hennadii.Myropolskyi@outlook.com
+For questions or suggestions, contact: miropolskij@gmail.com
