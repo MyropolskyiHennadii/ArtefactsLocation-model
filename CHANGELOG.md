@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2026-09-30
+* Java25, libraries refreshed
+
 ## [2.2.2] - 2026-02-08
 * New class Announcement for JsonArtefactWrapper: it is used my sending message to smartphone-client
 
